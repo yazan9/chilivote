@@ -10,32 +10,28 @@
       </ul>
     </div>
   <% end %>
-
+  <h6>New to Chilivote?</h6> 
+  <h1>Sign up!</h1>
   <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
+    <%= f.text_field :first_name , placeholder: "Fist Name"%>
   </div>
   <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
+    <%= f.text_field :last_name , placeholder: "Last Name"%>
   </div>
   <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
+    <%= f.text_field :email , placeholder: "Email"%>
   </div>
   <div class="field">
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
+    <%= f.password_field :password , placeholder: "Password"%>
   </div>
   <div class="field">
-    <%= f.label :password_confirmation, "Password Confirmation" %><br>
-    <%= f.password_field :password_confirmation %>
+    <%= f.password_field :password_confirmation , placeholder: "Confirm Password" %>
   </div>
   <div class="field">
-    <%= f.label :gender %><br>
-    <%= f.check_box :gender %>
+    <%= f.label :gender %>
+    <%= f.select :gender, [['Male', 1],['Female', 0]] %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Sign Up!', :class=> 'btn btn-success'%>
   </div>
 <% end %>
