@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       # Sign the user in and redirect to the user's show page.
       sign_in user
       #render 'users/' + user.id.to_s
-      redirect_to '/'
+      redirect_back_or user
     else
       flash.now[:error] = 'Invalid email/password combination' # Not quite right!
       render 'new'
