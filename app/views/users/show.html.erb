@@ -15,7 +15,7 @@
 
 <p>
   <strong>Gender:</strong>
-  <%= @user.gender %>
+  <%= @user.gender ? 'Male' : 'Female' %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
