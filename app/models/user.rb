@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :posts, dependent: :destroy
   before_save { self.email = email.downcase }
   before_create :create_remember_token
   validates :first_name, presence: true, length: { maximum: 30 }

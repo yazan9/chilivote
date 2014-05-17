@@ -1,0 +1,138 @@
+
+
+<%= form_for(@category, :html => {:onsubmit => "return validate_user_form_and_submit();"}) do |f| %>
+  <% if @category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+      <% @category.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <div id="category_name_error" name="category_name_error" class="category_name_error"></div>
+    <%= f.text_field :name, placeholder: "Category Name", :validate => { :presence => true} %>
+  </div>
+  <div class="field">
+	<div id="category_description_error" name="category_description_error" class="category_description_error" style="color='red'"></div>
+    <%= f.text_area :description, placeholder: "Category Description" %>
+
+  </div>
+  <div class="field">
+    <%= f.label :active %>
+    <%= f.check_box :active %>
+  </div>
+  <div class="field">
+  	<span class="image_error"></span>
+  	<div id="preview" name="preview" class="preview">
+    <%= cl_image_upload_tag(:image_id,
+                        :crop => :fit, :width => 1000, :height => 1000,
+                        :allowed_formats => ['JPG', 'PNG','GIF', 'BMP'],
+                        :transformation => {:format => 'JPG'}
+                       ) %>
+	</div>
+	<span class="status"></span>
+  </div>
+  
+  	
+  
+  <%= cloudinary_js_config %> 
+  <script>
+	 $(document).ready(function() {
+    
+    $(".cloudinary-fileupload")
+      .fileupload({ 
+        // Uncomment the following lines to enable client side image resizing and valiation.
+        // Make sure cloudinary/processing is included the js file
+        //disableImageResize: false,
+        //imageMaxWidth: 800,
+        //imageMaxHeight: 600,
+        acceptFileTypes: /(\.|\/)(gif|jpe?g|png|bmp)$/i,
+        maxFileSize: 5000000, // 5MB
+        dropZone: "#direct_upload",
+        start: function (e) {
+          	$(".status").text("Starting upload...");
+			$("input[type=submit]").attr("disabled","disabled");
+			$("input[type=submit]").attr("value","please wait");
+
+
+        },
+        progress: function (e, data) {
+          $(".status").text("Uploading... " + Math.round((data.loaded * 100.0) / data.total) + "%");
+          
+          //$(".status").css('width', Math.round((data.loaded * 100.0) / data.total) + '%'); 
+        },
+        fail: function (e, data) {
+          $(".status").text("Upload failed");
+        }
+      })
+      .off("cloudinarydone").on("cloudinarydone", function (e, data) {
+        //$("#photo_bytes").val(data.result.bytes);
+        $(".status").text("");
+        $('.preview').html(
+       $.cloudinary.image(data.result.public_id, 
+           { format: data.result.format, version: data.result.version, 
+             crop: 'scale', width: 200 }));
+    //          $('.progress_bar').html('');    
+       $('.image_public_id').val(data.result.public_id);
+		$("input[type=submit]").removeAttr("disabled");
+		$("input[type=submit]").attr("value","Add Category");
+
+
+      //  view_upload_details(data.result);
+      });
+    });
+      
+      function validate_user_form_and_submit()
+      {
+      	
+      	var name_submission_flag = false;
+      	var description_submission_flag = false;
+		if(jQuery.trim($("#category_name").val()).length > 0)
+		{
+      		$(".category_name_error").text("");
+      		name_submission_flag = true;
+      	}
+      	else
+      	{
+      		$(".category_name_error").text("You have to specify a name for this category");
+      		name_submission_flag = false;
+      	}
+      	
+      	if(jQuery.trim($("#category_description").val()).length > 0)
+		{
+      		$(".category_description_error").text("");
+      		description_submission_flag = true;
+      	}
+      	else
+      	{
+      		$(".category_description_error").text("You have to specify a descrpiton for this category");
+      		description_submission_flag = false;
+      	}
+      	
+      	var x=document.getElementsByName("image_id").length;
+      	if (x>0)
+	   		$(".image_error").text("");
+	   	else
+	   		$(".image_error").text("You have to upload an image");
+     	
+     	if (name_submission_flag == true && description_submission_flag == true && x > 0)
+     	{
+     		return true;
+     	}
+     	
+     	else 
+     	{
+     		return false;
+     	}
+     	
+      }
+	</script>
+  <div class="actions">
+    <%= f.submit 'Add Category', :class=> 'btn btn-success' %>
+  </div>
+<% end %>

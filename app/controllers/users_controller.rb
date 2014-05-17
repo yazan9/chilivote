@@ -65,6 +65,8 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -92,4 +94,6 @@ class UsersController < ApplicationController
     def admin_user
       redirect_to '/' unless current_user.admin?
     end
+    
+    
 end

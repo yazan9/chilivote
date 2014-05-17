@@ -45,6 +45,9 @@ h2 {
   font-weight: normal;
 }
 
+h3 {
+  color: #7D9523
+}
 p {
   font-size: 1.1em;
   line-height: 1.7em;
@@ -70,6 +73,19 @@ p {
 #logo:hover {
   color: #fff;
   text-decoration: none;
+}
+
+/* error messages */
+.category_description_error{
+  color: red;
+}
+
+.category_name_error{
+  color:red;
+}
+
+.image_error{
+  color:red;
 }
 
 /* navbar */

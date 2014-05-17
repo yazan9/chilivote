@@ -41,6 +41,8 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 #This gem is used for twitter bases css
 gem 'bootstrap-sass', '2.3.2.0'
 
+#Cloudinary gem
+gem 'cloudinary'
 # Use unicorn as the app server
 # gem 'unicorn'
 
