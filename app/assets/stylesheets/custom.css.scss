@@ -88,6 +88,15 @@ p {
   color:red;
 }
 
+.select_file_button{
+     background: url("http://res.cloudinary.com/hgqr8qyb1/image/upload/v1400329626/upload_image_guyf75.png") no-repeat;
+}
+
+.preview input {
+   filter: alpha(opacity=0);
+   opacity: 0;
+}
+
 /* navbar */
 
 .navbar-inverse .navbar-inner {

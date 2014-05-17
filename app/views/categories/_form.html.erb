@@ -29,11 +29,13 @@
   <div class="field">
   	<span class="image_error"></span>
   	<div id="preview" name="preview" class="preview">
-    <%= cl_image_upload_tag(:image_id,
+  	 <div class="select_file_button">
+  	 	<%= cl_image_upload_tag(:image_id,
                         :crop => :fit, :width => 1000, :height => 1000,
                         :allowed_formats => ['JPG', 'PNG','GIF', 'BMP'],
                         :transformation => {:format => 'JPG'}
                        ) %>
+    </div>
 	</div>
 	<span class="status"></span>
   </div>
