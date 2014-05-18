@@ -1,0 +1,21 @@
+<h2>This month we are voting for ...</h2>
+
+	<ul class="thumbnails">
+
+	<% @categories.each do |category| %>
+	
+	<li class="span3 text-center thumbnail_custom">
+    <a href="#" class="thumbnail">
+    	<%= cl_image_tag "cgbtix5dejkto5ncul34"%>
+    </a>
+    <h5><%=category.name%></h5>
+    <span class="muted text-center">
+    	<%=category.description%>
+    </span>
+    <hr/>
+  	</li>
+	
+	<%end%>
+</ul>
+
+

@@ -14,6 +14,10 @@ class CategoriesController < ApplicationController
   # GET /categories/1.json
   def show
   end
+  
+  def list_categories
+   @categories = Category.find_all_by_active(true, :limit => 8);
+  end
 
   # GET /categories/new
   def new

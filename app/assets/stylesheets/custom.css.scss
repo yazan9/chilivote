@@ -75,6 +75,7 @@ p {
   text-decoration: none;
 }
 
+/* categories*/
 /* error messages */
 .category_description_error{
   color: red;
@@ -91,10 +92,14 @@ p {
 .select_file_button{
      background: url("http://res.cloudinary.com/hgqr8qyb1/image/upload/v1400329626/upload_image_guyf75.png") no-repeat;
 }
-
+ 
 .preview input {
    filter: alpha(opacity=0);
    opacity: 0;
+}
+
+.thumbnail_custom{
+  
 }
 
 /* navbar */
