@@ -1,7 +1,10 @@
 	<header class="navbar navbar-fixed-top navbar-inverse">
       <div class="navbar-inner">
         <div class="container">
-          <%= link_to "Chilivote", '#', id: "logo" %>
+        	<div class="row">
+        		<div class="span2">
+        		<a href='/'><%= cl_image_tag "http://res.cloudinary.com/hgqr8qyb1/image/upload/v1400928629/ChiliVote_en6ujw.png", :width=>129, :height => 31 %> </a>
+        		</div>
           <nav>
             <ul class="nav pull-right">
               <li><%= link_to "Home",    '#' %></li>
@@ -9,12 +12,19 @@
               <%if signed_in?%>
               	<li id="fat-menu" class="dropdown">
               		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                		Account <b class="caret"></b>
+                		<%= current_user.first_name + ' ' + current_user.last_name%> <b class="caret"></b>
               		</a>
               	<ul class="dropdown-menu">
                 	<li><%= link_to "Profile", current_user %></li>
                 	<li><%= link_to "Settings", '#' %></li>
+                	<%if current_user.admin?%>
                 	<li class="divider"></li>
+                	<li><%= link_to "Users", '/users/' %></li>
+                	<li><%= link_to "Categories", '/categories/' %></li>
+                	<li><%= link_to "Posts", '/posts/' %></li>
+
+                	<%end%>
+	               	<li class="divider"></li>
                 	<li><%= link_to "Sign out", signout_path, method: "delete" %></li>
               	</ul>
             	</li>
@@ -23,6 +33,7 @@
           		<% end %>
             </ul>
           </nav>
+          </div>
         </div>
       </div>
     </header>

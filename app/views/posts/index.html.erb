@@ -3,10 +3,11 @@
 <table>
   <thead>
     <tr>
-      <th>User</th>
+      <th>Owner</th>
+      <th>Category</th>
+      <th>Active</th>
+      <th>Image</th>
       <th>Votes</th>
-      <th>Parent</th>
-      <th>Img url</th>
       <th></th>
       <th></th>
       <th></th>
@@ -16,10 +17,11 @@
   <tbody>
     <% @posts.each do |post| %>
       <tr>
-        <td><%= post.user_id %></td>
-        <td><%= post.votes %></td>
-        <td><%= post.parent_id %></td>
-        <td><%= post.img_url %></td>
+        <td><%= post.user_id %> <%=post.user.first_name%> <%= post.user.last_name%> == </td>
+        <td><%= post.category.name %> == </td>
+        <td><%= post.active %> == </td>
+        <td><%= cl_image_tag post.image_id, :width => 50, :height => 50  %></td>
+        <td><%= post.votes.count %> == </td>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>

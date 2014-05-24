@@ -1,24 +1,36 @@
-<p id="notice"><%= notice %></p>
+<div class="row" style="height:400px">
+	<div class="span2"></div>
+	<div class="span8 center" id="image_div">
+		<%= cl_image_tag @post.image_id, :height => 400, :width => 600, :crop => :fit %>
+	</div>
+	<div class="span2"></div>
+	
+</div>
+<div class="row center">
+	<strong>votes: </strong><%=@post.votes.count%><br/>
+	<strong><h6>Uploaded By: <%=@post.user.first_name + ' ' + @post.user.last_name%></h6></strong>
+</div>
+<hr/>
+<div class="row">
+	<div class="span2"></div>
+	<div class="span6" id="like_form">
+		<%= render partial: "like_form"%>
+	</div>
+	<div id="navigation_buttons">
+		<%= render partial: 'navigation_buttons'%>
+	</div>
+	<div class="span2"></div>
+</div>
 
+<div class="row">
+	<div class="span2"></div>
+	<div class="span6">
+		<%= render partial: "upload_button_form"%>
+	</div>
+	<div class="span2">
+	</div>
+	<div class="span2"></div>
+</div>
 <p>
-  <strong>User:</strong>
-  <%= @post.user_id %>
-</p>
 
-<p>
-  <strong>Votes:</strong>
-  <%= @post.votes %>
-</p>
-
-<p>
-  <strong>Parent:</strong>
-  <%= @post.parent_id %>
-</p>
-
-<p>
-  <strong>Img url:</strong>
-  <%= @post.img_url %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>

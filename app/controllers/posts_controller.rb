@@ -1,6 +1,11 @@
 class PostsController < ApplicationController
   include SessionsHelper
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :signed_in_user, only: [:create, :new]
+  before_action :admin_user, only: [:index]
+  rescue_from ActiveRecord::RecordNotFound do
+    redirect_to '/'
+  end
 
   # GET /posts
   # GET /posts.json
@@ -25,8 +30,16 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    #@post = Post.new(post_params)
-    @post = current_user.posts.build
+    @post = Post.new
+    @post.category_id = params[:post][:category_id]
+    if params[:image_id].present?
+      preloaded = Cloudinary::PreloadedFile.new(params[:image_id])         
+      raise "Invalid upload signature" if !preloaded.valid?
+      @post.image_id = preloaded.identifier
+    end
+    @post.active = true
+    @post.user_id = current_user.id
+    #@post = current_user.posts.build
 
     respond_to do |format|
       if @post.save
@@ -62,6 +75,33 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  #attention: this function takes category_id as a parameter
+  def view_posts
+    #@posts = Post.find_by_category_id_and_active(params[:id], true)
+    return redirect_to '/' if params[:id].nil?
+    @posts = Category.find(params[:id]).posts
+  end
+  
+  def next
+    @post = Post.find(params[:next_photo])
+    puts @post.image_id
+    respond_to do |format|
+      format.js { render :layout=>false }
+    end
+  end
+  
+  def previous
+    @post = Post.find(params[:previous_photo])
+    puts @post.image_id
+    respond_to do |format|
+      format.js { render :layout=>false }
+    end
+  end
+  
+  def vote
+    
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -72,5 +112,21 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       #params.require(:post)
+    end
+    
+    def signed_in_user
+      unless signed_in?
+        store_location
+        redirect_to signin_url, notice: "Please sign in."
+      end
+    end
+    
+     def admin_user
+        if !signed_in?
+        store_location
+        redirect_to signin_url, notice: "Please sign in."
+        else
+        redirect_to '/' unless current_user.admin?
+        end
     end
 end

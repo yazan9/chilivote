@@ -1,0 +1,7 @@
+<% if signed_in? && current_user.voted?(@post)%>
+	<%= render partial: 'disabled_like_button'%>
+<%elsif signed_in? && !current_user.voted?(@post)%>
+	<%= render partial: 'enabled_like_button'%>
+<%else%>
+	<%= render partial: 'dummy_like_button'%>
+<%end%>

@@ -31,7 +31,7 @@
   	<div id="preview" name="preview" class="preview">
   	 <div class="select_file_button">
   	 	<%= cl_image_upload_tag(:image_id,
-                        :crop => :fit, :width => 1000, :height => 1000,
+                        :crop => :fit, :width => 210, :height => 125,
                         :allowed_formats => ['JPG', 'PNG','GIF', 'BMP'],
                         :transformation => {:format => 'JPG'}
                        ) %>
@@ -83,6 +83,7 @@
        $('.image_public_id').val(data.result.public_id);
 		$("input[type=submit]").removeAttr("disabled");
 		$("input[type=submit]").attr("value","Add Category");
+   		$(".image_error").text("");
 
 
       //  view_upload_details(data.result);

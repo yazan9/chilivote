@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
   include SessionsHelper
   before_action :set_category, only: [:show, :edit, :update, :destroy]
-  before_action :admin_user, only: [:create, :new, :edit, :update, :destroy]
+  before_action :admin_user, only: [:create, :new, :edit, :update, :destroy, :index]
 
 
   # GET /categories
@@ -17,8 +17,9 @@ class CategoriesController < ApplicationController
   
   def list_categories
    @categories = Category.find_all_by_active(true, :limit => 8);
+   @categories_counter = 0;
   end
-
+  
   # GET /categories/new
   def new
     @category = Category.new
@@ -83,7 +84,19 @@ class CategoriesController < ApplicationController
       params.require(:category).permit(:name, :description, :active, :image_id)
     end
     
-    def admin_user
-      redirect_to '/' unless current_user.admin?
+    def signed_in_user
+      unless signed_in?
+        store_location
+        redirect_to signin_url, notice: "Please sign in."
+      end
+    end
+    
+     def admin_user
+        if !signed_in?
+        store_location
+        redirect_to signin_url, notice: "Please sign in."
+        else
+        redirect_to '/' unless current_user.admin?
+        end
     end
 end

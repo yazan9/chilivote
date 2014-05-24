@@ -1,11 +1,7 @@
-<%= form_for(@post) do |f| %>
-<h3>Upload a new image and let others vote!</h3>  
-<%=current_user.first_name%>
-<%=current_user.posts.any?%>
+<%= form_for(@post, :html => {:onsubmit => "return validate_user_form_and_submit();"}) do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
       <ul>
       <% @post.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -13,14 +9,112 @@
       </ul>
     </div>
   <% end %>
+
+	<h2>Upload a Photo</h2>
+  <div class="field">
+    <div id="category_select_error" name="category_select_error" class="category_select_error" style="color:red"></div>
+    <%= f.collection_select(:category_id, Category.find_all_by_active(true), :id, :show_name, {:include_blank => 'Please Select Category'})%>
+    
+  </div>
   
-<%= cl_image_upload_tag(:image_id,
-                        :crop => :fit, :width => 150, :height => 100,
+  <div class="field">
+  	<span class="image_error"></span>
+  	<div id="preview" name="preview" class="preview">
+  	 <div class="select_file_button">
+  	 	<%= cl_image_upload_tag(:image_id,
+                        :crop => :fit, :width => 600, :height => 400,
                         :allowed_formats => ['JPG', 'PNG','GIF', 'BMP'],
                         :transformation => {:format => 'JPG'}
                        ) %>
+    </div>
+	</div>
+	<span class="status"></span>
+  </div>
+  
+  	
+  
+  <%= cloudinary_js_config %> 
+  <script>
+	 $(document).ready(function() {
+    
+    $(".cloudinary-fileupload")
+      .fileupload({ 
+        // Uncomment the following lines to enable client side image resizing and valiation.
+        // Make sure cloudinary/processing is included the js file
+        //disableImageResize: false,
+        //imageMaxWidth: 800,
+        //imageMaxHeight: 600,
+        acceptFileTypes: /(\.|\/)(gif|jpe?g|png|bmp)$/i,
+        maxFileSize: 5000000, // 5MB
+        dropZone: "#direct_upload",
+        start: function (e) {
+          	$(".status").text("Starting upload...");
+			$("input[type=submit]").attr("disabled","disabled");
+			$("input[type=submit]").attr("value","please wait");
 
+
+        },
+        progress: function (e, data) {
+          $(".status").text("Uploading... " + Math.round((data.loaded * 100.0) / data.total) + "%");
+          
+          //$(".status").css('width', Math.round((data.loaded * 100.0) / data.total) + '%'); 
+        },
+        fail: function (e, data) {
+          $(".status").text("Upload failed");
+        }
+      })
+      .off("cloudinarydone").on("cloudinarydone", function (e, data) {
+        //$("#photo_bytes").val(data.result.bytes);
+        $(".status").text("");
+        $('.preview').html(
+       $.cloudinary.image(data.result.public_id, 
+           { format: data.result.format, version: data.result.version, 
+             crop: 'scale', width: 200 }));
+    //          $('.progress_bar').html('');    
+       $('.image_public_id').val(data.result.public_id);
+		$("input[type=submit]").removeAttr("disabled");
+		$("input[type=submit]").attr("value","Add Photo");
+   		$(".image_error").text("");
+
+
+      //  view_upload_details(data.result);
+      });
+    });
+      
+      function validate_user_form_and_submit()
+      {      	
+      	var category_submission_flag = false;
+		if(document.getElementById('post_category_id').selectedIndex > 0)
+		{
+			category_submission_flag = true;
+			$(".category_select_error").text("");
+		}
+		else
+		{
+			category_submission_flag = false;
+			$(".category_select_error").text("You have to select a category");
+		}
+		
+		      	
+      	var x=document.getElementsByName("image_id").length;
+      	if (x>0)
+	   		$(".image_error").text("");
+	   	else
+	   		$(".image_error").text("You have to upload an image");
+     	
+     	if (category_submission_flag == true && x > 0)
+     	{
+     		return true;
+     	}
+     	
+     	else 
+     	{
+     		return false;
+     	}
+     	
+      }
+	</script>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Add Photo', :class=> 'btn btn-success' %>
   </div>
 <% end %>

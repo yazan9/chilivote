@@ -5,9 +5,19 @@ Chilivote::Application.routes.draw do
     end
   end
 
-  resources :posts
+  resources :posts do
+    collection do
+      get :view_posts
+      get :next
+      get :previous
+    end
+  end
 
-  resources :users
+  resources :users do
+    get :vote
+  end
+  
+  resources :votes, only: [:create, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
   get "welcome/index"
   # The priority is based upon order of creation: first created -> highest priority.
@@ -20,9 +30,11 @@ Chilivote::Application.routes.draw do
   match '/signout', to: 'sessions#destroy',     via: 'delete'
   
    # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  root 'categories#list_categories'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
+  
+  get 'posts/view_posts/:id' => 'posts#view_posts'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

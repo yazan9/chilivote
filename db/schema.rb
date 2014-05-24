@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140514192256) do
+ActiveRecord::Schema.define(version: 20140523184636) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -32,8 +32,11 @@ ActiveRecord::Schema.define(version: 20140514192256) do
     t.string   "image_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active",      default: false
   end
 
+  add_index "posts", ["active"], name: "index_posts_on_active"
+  add_index "posts", ["category_id"], name: "index_posts_on_category_id"
   add_index "posts", ["user_id"], name: "index_posts_on_user_id"
 
   create_table "users", force: true do |t|
@@ -50,5 +53,18 @@ ActiveRecord::Schema.define(version: 20140514192256) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+
+  create_table "votes", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "category_id"
+    t.integer  "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["category_id"], name: "index_votes_on_category_id"
+  add_index "votes", ["post_id"], name: "index_votes_on_post_id"
+  add_index "votes", ["user_id", "post_id"], name: "index_votes_on_user_id_and_post_id", unique: true
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id"
 
 end

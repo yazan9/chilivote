@@ -1,0 +1,7 @@
+<%= form_for(current_user.votes.build(post_id: @post.id, category_id: @post.category_id), remote: true) do |f| %>
+	<div>
+		<%= f.hidden_field :post_id %>
+		<%= f.hidden_field :category_id %>
+	</div>
+  <%= f.submit "Like", class: "btn btn-success" %>
+<% end %>

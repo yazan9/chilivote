@@ -1,21 +1,25 @@
+<div class="alert alert-info">Attention: this website is in testing mode, and will be up and functional very soon!</div>
+
 <h2>This month we are voting for ...</h2>
 
 	<ul class="thumbnails">
-
+		<table>
 	<% @categories.each do |category| %>
-	
+	<% @categories_counter += 1%>
 	<li class="span3 text-center thumbnail_custom">
-    <a href="#" class="thumbnail">
+    <a href="<%=category.posts.first ? 'posts/' + category.posts.first.id.to_s : '/'  %>" class="thumbnail">
     	<%= cl_image_tag category.image_id %>
     </a>
     <h5><%=category.name%></h5>
     <span class="muted text-center">
     	<%=category.description%>
+    	<%=@categories_counter%>
     </span>
     <hr/>
   	</li>
 	
 	<%end%>
+	</table>
 </ul>
 
 

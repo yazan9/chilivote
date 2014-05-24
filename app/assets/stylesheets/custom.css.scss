@@ -98,14 +98,11 @@ p {
    opacity: 0;
 }
 
-.thumbnail_custom{
-  
-}
 
 /* navbar */
 
 .navbar-inverse .navbar-inner {
-  background-color: #1b1b1b;
+  background-color: #B1110E;
   background-image: -moz-linear-gradient(top, #222222, #111111);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#222222), to(#111111));
   background-image: -webkit-linear-gradient(top, #222222, #111111);
@@ -114,6 +111,30 @@ p {
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF222222', endColorstr='#FF111111', GradientType=0);
   border-color: #B1110E;
+}
+
+.navbar-inner a:hover{
+  background-color: #B1110E;
+}
+
+.navbar-inner a:focus{
+  outline: none;
+}
+
+
+.navbar4444 .navbar-fixed-top4444 .navbar-inverse4444 .navbar-inner4444{
+  border-color: #B1110E;
+  background-color: #B1110E; /* fallback color, place your own */
+  /* Gradients for modern browsers, replace as you see fit */
+  background-image: -moz-linear-gradient(top, #B1110E, #B1110E);
+  background-image: -ms-linear-gradient(top, #B1110E, #B1110E);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#B1110E), to(#B1110E));
+  background-image: -webkit-linear-gradient(top, #B1110E, #B1110E);
+  background-image: -o-linear-gradient(top, #B1110E, #B1110E);
+  background-image: linear-gradient(top, #B1110E, #B1110E);
+  background-repeat: repeat-x;
+  /* IE8-9 gradient filter */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#B1110E', endColorstr='#B1110E', GradientType=0);
 }
 /* footer */
 
