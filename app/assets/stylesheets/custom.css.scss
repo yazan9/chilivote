@@ -103,13 +103,13 @@ p {
 
 .navbar-inverse .navbar-inner {
   background-color: #B1110E;
-  background-image: -moz-linear-gradient(top, #222222, #111111);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#222222), to(#111111));
-  background-image: -webkit-linear-gradient(top, #222222, #111111);
-  background-image: -o-linear-gradient(top, #222222, #111111);
+  background-image: -moz-linear-gradient(top, #B1110E, #B1110E);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#B1110E), to(#B1110E));
+  background-image: -webkit-linear-gradient(top, #B1110E, #B1110E);
+  background-image: -o-linear-gradient(top, #B1110E, #B1110E);
   background-image: linear-gradient(to bottom, #B1110E, #B1110E);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF222222', endColorstr='#FF111111', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#B1110E', endColorstr='#B1110E', GradientType=0);
   border-color: #B1110E;
 }
 
