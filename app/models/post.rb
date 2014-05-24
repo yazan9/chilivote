@@ -5,10 +5,10 @@ class Post < ActiveRecord::Base
   #validates :user_id, :parent_id, :img_url, presence: true
   
   def previous_post
-    Post.where(["id < ?", id]).where(["category_id == ? ", category_id]).last
+    Post.where(["id < ?", id]).where(["category_id = ? ", category_id]).last
   end
   
   def next_post
-    Post.where(["id > ?", id]).where(["category_id == ? ", category_id]).first
+    Post.where(["id > ?", id]).where(["category_id = ? ", category_id]).first
   end
 end
