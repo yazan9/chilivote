@@ -7,7 +7,7 @@
 	
 </div>
 <div class="row center">
-	<strong>votes: </strong><%=@post.votes.count%><br/>
+	<div id="votes_div"><%= render partial: "votes_count" %></div>
 	<strong><h6>Uploaded By: <%=@post.user.first_name + ' ' + @post.user.last_name%></h6></strong>
 </div>
 <hr/>

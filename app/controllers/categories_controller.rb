@@ -17,7 +17,7 @@ class CategoriesController < ApplicationController
   
   def list_categories
    @categories = Category.find_all_by_active(true, :limit => 8);
-   @categories_counter = 0;
+   @categories_counter = 1;
   end
   
   # GET /categories/new

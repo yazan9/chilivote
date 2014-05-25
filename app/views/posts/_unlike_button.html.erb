@@ -1,0 +1,7 @@
+<%= form_for(current_user.votes.find_by(post_id: @post.id, category_id: @post.category_id), remote: true, html: {method: :delete}) do |f| %>
+	<div>
+		<%= f.hidden_field :post_id %>
+		<%= f.hidden_field :category_id %>
+	</div>
+  <%= f.submit "Unlike", class: "btn btn-success" %>
+<% end %>
