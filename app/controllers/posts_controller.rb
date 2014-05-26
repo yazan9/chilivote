@@ -10,6 +10,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    #params[:mode] = 1. show all, 2. show active, 3. show inactive
     @posts = Post.all
   end
 

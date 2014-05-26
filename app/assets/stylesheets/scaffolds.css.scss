@@ -18,7 +18,7 @@ pre {
   font-size: 11px;
 }
 
-a {
+old_a{
   color: #000;
   &:visited {
     color: #666;
@@ -27,6 +27,24 @@ a {
     color: #fff;
     background-color: #000;
   }
+}
+
+a{
+  color: #7d9523;
+  &:visited {
+    color: #7d9523;
+  }
+  &:hover {
+    color: #7d9523;
+    background-color: none;
+    text-decoration: none;
+  }
+}
+
+.admin_links{
+  text-color: black;
+  color: black;
+  text-decoration: underline;
 }
 
 div {

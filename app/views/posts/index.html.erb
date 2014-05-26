@@ -1,9 +1,15 @@
 <h1>Listing posts</h1>
 
-<table>
+<%= link_to "show_all", {:controller => "posts", :action => "index", :mode => 1} ,:class => "admin_links", remote: true, :method => :get%> ¦
+<%= link_to "show_active", {:controller => "posts", :action => "index", :mode => 2} ,:class => "admin_links", remote: true, :method => :get%> ¦
+<%= link_to "show_inactive", {:controller => "posts", :action => "index", :mode => 3} ,:class => "admin_links", remote: true, :method => :get%> ¦
+<br/><br/>
+<table border="1">
   <thead>
     <tr>
-      <th>Owner</th>
+    	<th>Owner Id</th>
+      <th>Owner name</th>
+      <th>Post Id</th>
       <th>Category</th>
       <th>Active</th>
       <th>Image</th>
@@ -17,13 +23,15 @@
   <tbody>
     <% @posts.each do |post| %>
       <tr>
-        <td><%= post.user_id %> <%=post.user.first_name%> <%= post.user.last_name%> == </td>
-        <td><%= post.category.name %> == </td>
-        <td><%= post.active %> == </td>
-        <td><%= cl_image_tag post.image_id, :width => 50, :height => 50  %></td>
-        <td><%= post.votes.count %> == </td>
+        <td><%= post.user_id %> </td>
+        <td><%=post.user.first_name%> <%= post.user.last_name%></td>
+        <td><%=post.id%></td>
+        <td><%= post.category.name %></td>
+        <td><%= post.active %></td>
+        <td><%= cl_image_tag post.image_id, :width => 100, :height => 100  %></td>
+        <td><%= post.votes.count %></td>
         <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Edit', '#'%></td><%#<td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
