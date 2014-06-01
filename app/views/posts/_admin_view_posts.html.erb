@@ -1,0 +1,45 @@
+<%= will_paginate%>
+
+<table border="1">
+  <thead>
+    <tr>
+    	<th>Owner Id</th>
+      <th>Owner name</th>
+      <th>Post Id</th>
+      <th>Category</th>
+      <th>Active</th>
+      <th>Image</th>
+      <th>Votes</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.user_id %> </td>
+        <td><%=post.user.first_name%> <%= post.user.last_name%></td>
+        <td><%=post.id%></td>
+        <td><%= post.category.name %></td>
+        <td><div id="post_status<%=post.id%>"><%= render partial: "post_active_status", :locals => {:post => post} %></div></td>
+        <td><%= cl_image_tag post.image_id, :width => 100, :height => 100  %></td>
+        <td><%= post.votes.count %></td>
+        <td><%= link_to 'Show', post %></td>
+        <td><%= link_to 'Edit', '#'%></td><%#<td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><div id="activation_button<%=post.id%>">
+        	<% if !post.active %>
+				<%= link_to "Activate", {:controller => "posts", :action => "activate", :id => post.id} ,:class => "admin_links", :remote => true, :method => :get%>
+			<%else%>
+				<%= link_to "Deactivate", {:controller => "posts", :action => "deactivate", :id => post.id} ,:class => "admin_links", :remote => true, :method => :get%>
+			<%end%></div>
+		</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate %>

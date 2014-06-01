@@ -10,6 +10,8 @@ Chilivote::Application.routes.draw do
       get :view_posts
       get :next
       get :previous
+      get :activate
+      get :deactivate
     end
   end
 

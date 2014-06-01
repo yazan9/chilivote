@@ -1,0 +1,2 @@
+$("#activation_button<%=@post.id%>").html("<%= escape_javascript render partial: 'activation_toggle', :locals => {:post => @post}%>");
+$("#post_status<%=@post.id%>").html("<%= escape_javascript render partial: 'post_active_status', :locals => {:post=> @post}%>");

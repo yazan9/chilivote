@@ -1,0 +1,5 @@
+<% if !post.active %>
+	<%= link_to "Activate", {:controller => "posts", :action => "activate", :id => post.id} ,:class => "admin_links", :remote => true, :method => :get%>
+<%else%>
+	<%= link_to "Deactivate", {:controller => "posts", :action => "deactivate", :id => post.id} ,:class => "admin_links", :remote => true, :method => :get%>
+<%end%>

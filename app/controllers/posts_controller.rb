@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   include SessionsHelper
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :signed_in_user, only: [:create, :new]
-  before_action :admin_user, only: [:index]
+  before_action :admin_user, only: [:index, :activate, :deactivate]
   rescue_from ActiveRecord::RecordNotFound do
     redirect_to '/'
   end
@@ -11,7 +11,38 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     #params[:mode] = 1. show all, 2. show active, 3. show inactive
-    @posts = Post.all
+    case params[:mode]
+    when '1'
+      @posts = Post.paginate page: params[:page], :per_page => 10
+    when '2'
+      @posts = Post.paginate page: params[:page], :per_page => 10, :conditions => ["active = ?", true]
+    when '3'
+      @posts = Post.paginate page: params[:page], :per_page => 10, :conditions => ["active = ?", false]
+    else
+      @posts = Post.paginate page: params[:page], :per_page => 10
+    end
+  end
+  
+  def activate
+    @post = Post.find(params[:id])
+    @post.active = true
+    @post.save
+    
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+  
+  def deactivate
+    @post = Post.find(params[:id])
+    @post.active = false
+    @post.save
+    
+    respond_to do |format|
+      format.html
+      format.js 
+    end
   end
 
   # GET /posts/1
