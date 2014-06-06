@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :signed_in_user, only: [:index, :edit, :update, :destroy]
-  before_action :correct_user,   only: [:edit, :update]
+  before_action :correct_user,   only: [:edit, :update, :add_avatar]
   before_action :admin_user, only:[:destroy, :index]
 
 
@@ -66,6 +66,19 @@ class UsersController < ApplicationController
     end
   end
   
+  def add_avatar
+    @user = User.find(params[:id])
+    @user.profile_image = params[:image_id]
+    respond_to do |format|
+      if @user.save
+        format.html {render :nothing => true, :status => 200, :content_type => 'text/html'}
+        format.json {render :nothing => true, :status => 200, :content_type => 'text/html'}
+      else
+        format.html {render :nothing => true, :status => 200, :content_type => 'text/html'}
+        format.json {render :nothing => true, :status => 200, :content_type => 'text/html'}
+      end
+    end
+  end
   
 
   private
@@ -76,7 +89,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :gender, :password, :password_confirmation)
+      params.require(:user).permit(:first_name, :last_name, :email, :gender, :password, :password_confirmation, :image_id)
     end
     
     def signed_in_user

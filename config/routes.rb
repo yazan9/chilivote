@@ -17,6 +17,7 @@ Chilivote::Application.routes.draw do
 
   resources :users do
     get :vote
+    get :add_avatar
   end
   
   resources :votes, only: [:create, :destroy]
@@ -37,6 +38,7 @@ Chilivote::Application.routes.draw do
   #   get 'products/:id' => 'catalog#view'
   
   get 'posts/view_posts/:id' => 'posts#view_posts'
+  get 'users/add_avatar/:id' => 'users#add_avatar'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

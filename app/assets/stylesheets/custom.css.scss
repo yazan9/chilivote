@@ -98,6 +98,11 @@ p {
    opacity: 0;
 }
 
+.select_file_button input{
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+
 
 /* navbar */
 
@@ -166,3 +171,123 @@ footer ul li {
   float: left;
   margin-left: 10px;
 }
+
+/* css for old Uploader review:might be removed*/
+.imgHover {
+    display: inline;
+    position: relative;
+}
+.imgHover .hover {
+    display: none;
+    position: absolute;
+    right:0;
+    z-index: 2;
+    width: 100%;
+}
+.imgHover .hover a{
+  color: gray;
+}
+#box
+{
+        width: 50%;
+        height: 50%;
+        background: #FFF;
+        border: gray solid 1px;
+        text-align: center;
+        position: absolute;
+        /*-left: -75px;*/
+        /*margin-top: -75px;*/
+        left: 25%;
+        top: 25%;
+        z-index: 3000;
+        display: none;
+}
+
+#screen
+{
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: #000;
+        z-index: 2999;
+}
+.close_button{
+  text-align:right;
+}
+/*end old uploader*/
+
+/* to compensate for the bootsrap polaroid 10 pixels are added for the width and height of the profile picture*/
+#profile_image_container{
+  width: 178px;
+  height: 178px;
+  position:relative;
+}
+#profile_image_div{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top:0;
+  left:0;
+}
+#opaque_div{
+  background-color:black;
+  width: 168px;
+  height: 45px;
+  position: absolute;
+  top: 128px;
+  left: 0;
+  z-index: 10;
+  margin: 5px;
+  margin-top:0;
+  opacity: 0.7;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+  cursor: pointer;
+  cursor: hand;
+
+}
+#slider_camera_and_text_div{
+  position: absolute;
+  width: 168px;
+  height: 45px;
+  top: 130px;
+  left: 0;
+  color: white;
+  font-weight: bold;
+  z-index: 20;
+  margin: 5px;
+  margin-top:0;
+  cursor:pointer;
+  cursor: hand;
+}
+#opaque_slider_div{
+  display:none;
+  cursor:pointer;
+  cursor: hand;
+}
+#uploader_form{
+  display:inline-block;
+  overflow:hidden;
+  width: 168px;
+  height: 45px;
+  position: absolute;
+  top: 128px;
+  left: 0;
+  z-index: 30;
+  margin: 5px;
+  margin-top:0;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  cursor: pointer;
+  cursor: hand;
+}
+#my_uploader{
+  font-size:50px;
+  width:100%;
+  height: 100%;
+  cursor: pointer;
+  cursor: hand;
+}
+//fix for chrome pointer on file input field
+::-webkit-file-upload-button { cursor:pointer; }
+
+/*end css for uploader*/
