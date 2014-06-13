@@ -1,6 +1,6 @@
 <div class="row">
 <div class="span3 text-center">
-	<% if current_user?(@user)%>
+	<% if @is_current_user%>
 	<div id="profile_image_container">
 		<div id="profile_image_div">
 			<%= cl_image_tag @user.profile_image ? @user.profile_image : Chilivote::Application.config.default_profile_image , :width=>168, :height => 168, :crop => :fit, :class => "img-polaroid"%>
@@ -34,28 +34,6 @@
 <%= render partial: "js_for_uploader"%>	
 
 <div class="span9">
-<p>
-  <strong>First name:</strong>
-  <%= @user.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @user.last_name %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Gender:</strong>
-  <%= @user.gender ? 'Male' : 'Female' %>
-</p>
-
-<% if current_user?(@user)%>
-<%= link_to 'Edit', edit_user_path(@user) %>
-<%end%>
+<%= render partial: "profile_main"%>
 </div>
 </div>

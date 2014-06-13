@@ -1,0 +1,14 @@
+	<%if !@friendship.nil?%>
+		<%case @friendship.status%>
+			<%when 0%>
+				<%= "<p><i class='icon-ok'></i> <strong> Friend request sent</strong></p>".html_safe %>
+			<%when 2%>
+				<%= button_to ({:controller => 'friendship', :action => 'unfriend', :id => @user.id}), {:class=>"btn btn-primary", :remote => true} do %>
+					<i class='icon-white icon-remove'></i> Unfriend
+				<%end%>
+		<%end%>
+	<%else%>
+		<%= button_to ({:controller => 'friendship', :action => 'create', :id => @user.id}), {:class=>"btn btn-success", :remote => true} do %>
+			<i class='icon-white icon-plus'></i> Add Friend
+		<%end%>
+	<%end%>

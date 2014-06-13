@@ -1,0 +1,33 @@
+<%if @is_signed_in && !@is_current_user%>
+<div id="friendship_button">
+	<%=render partial: "friendship_button"%>
+</div>
+<% elsif @is_signed_in && @is_current_user%>
+	
+<% elsif !@is_signed_in%>
+	
+<%end%>
+
+<p>
+  <strong>First name:</strong>
+  <%= @user.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @user.last_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @user.gender ? 'Male' : 'Female' %>
+</p>
+
+<% if @is_current_user %>
+<%= link_to 'Edit', edit_user_path(@user) %>
+<%end%>

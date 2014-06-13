@@ -20,6 +20,13 @@ Chilivote::Application.routes.draw do
     get :add_avatar
   end
   
+  resources :friendship do
+    post :create
+    post :unfriend
+    post :accept
+    post :decline
+  end
+  
   resources :votes, only: [:create, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
   get "welcome/index"
@@ -39,7 +46,10 @@ Chilivote::Application.routes.draw do
   
   get 'posts/view_posts/:id' => 'posts#view_posts'
   get 'users/add_avatar/:id' => 'users#add_avatar'
-
+  post 'friendship/create/:id' => 'friendship#create'
+  post 'friendship/unfriend/:id' => 'friendship#unfriend'
+  post 'friendship/accept/:id' => 'friendship#accept'
+  post 'friendship/decline/:id' => 'friendship#decline'
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 

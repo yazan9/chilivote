@@ -291,3 +291,13 @@ footer ul li {
 ::-webkit-file-upload-button { cursor:pointer; }
 
 /*end css for uploader*/
+
+/* css for avatar */
+.avatar{
+  padding-left: 1px;
+  padding-right: 1px;
+  text-align: center;
+}
+.avatar a:hover{
+  background-color:white;
+}

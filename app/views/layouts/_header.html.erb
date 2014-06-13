@@ -5,10 +5,27 @@
         		<div class="span2" style="margin-top: 6px">
         		<a href='/'><%= cl_image_tag "http://res.cloudinary.com/hgqr8qyb1/image/upload/v1400960064/Chilivote_big_msml8f.png", :width=>184, :height => 35 %> </a>
         		</div>
-          <nav>
+        		
+        		
+        		<nav>
+            		<ul class="nav">
+             			<%if signed_in?%>
+              				<li id="fat-menu" class="dropdown">
+              					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                					<i class="icon-white icon-user"></i>
+              					</a>
+              					<ul class="dropdown-menu">
+                					<li><%= render partial: "users/friend_requests"%></li>	
+				              	</ul>
+            				</li>
+            			<%end%>
+            		</ul>
+				</nav>
+        		
+				
+        		
+			<nav>
             <ul class="nav pull-right">
-              <li><%= link_to "Home",    '/' %></li>
-              <li><%= link_to "Help",    '#' %></li>
               <%if signed_in?%>
               	<li id="fat-menu" class="dropdown">
               		<a href="#" class="dropdown-toggle" data-toggle="dropdown">

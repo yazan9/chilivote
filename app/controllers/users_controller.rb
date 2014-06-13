@@ -13,7 +13,12 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
+  #variable @user is automatically initialized
   def show
+    @is_current_user = current_user?(@user)
+    @is_signed_in = signed_in?
+    @logged_in_user = current_user
+    @friendship = Friendship.find_by_user_id_and_friend_id(@logged_in_user, @user)
   end
 
   # GET /users/new

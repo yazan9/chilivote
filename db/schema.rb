@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140601165900) do
+ActiveRecord::Schema.define(version: 20140609201044) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -24,6 +24,14 @@ ActiveRecord::Schema.define(version: 20140601165900) do
 
   add_index "categories", ["active"], name: "index_categories_on_active"
   add_index "categories", ["name"], name: "index_categories_on_name", unique: true
+
+  create_table "friendships", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.integer  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "posts", force: true do |t|
     t.integer  "user_id"
