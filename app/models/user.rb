@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :friends, :through => :friendships, :conditions => "status = 2" #accepted friends
   has_many :requested_friends, :through => :friendships, :source => :friend, :conditions => "status = 1" #the ones who requested a friendship with this user
   has_many :pending_friends, :through => :friendships, :source => :friend, :conditions => "status = 0" #the ones for whom this user asked for a friendship
+  has_many :cvotes, dependent: :destroy
   before_save { self.email = email.downcase }
   before_create :create_remember_token
   validates :first_name, presence: true, length: { maximum: 30 }

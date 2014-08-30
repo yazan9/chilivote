@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140609201044) do
+ActiveRecord::Schema.define(version: 20140620132540) do
+
+  create_table "answers", force: true do |t|
+    t.string   "name"
+    t.integer  "cvote_id"
+    t.string   "image_id"
+    t.integer  "likes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -24,6 +33,22 @@ ActiveRecord::Schema.define(version: 20140609201044) do
 
   add_index "categories", ["active"], name: "index_categories_on_active"
   add_index "categories", ["name"], name: "index_categories_on_name", unique: true
+
+  create_table "cvote_trackers", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "cvote_id"
+    t.integer  "answer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "cvotes", force: true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "expiry_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "friendships", force: true do |t|
     t.integer  "user_id"

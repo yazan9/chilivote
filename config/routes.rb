@@ -18,6 +18,7 @@ Chilivote::Application.routes.draw do
   resources :users do
     get :vote
     get :add_avatar
+    get :list_friends
   end
   
   resources :friendship do
@@ -27,8 +28,16 @@ Chilivote::Application.routes.draw do
     post :decline
   end
   
+  resources :cvote do
+    collection do
+      get :manage_answers
+      get :start_over
+    end
+  end
+  
   resources :votes, only: [:create, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
+  resources :cvotes
   get "welcome/index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -38,6 +47,7 @@ Chilivote::Application.routes.draw do
   match '/signup', to: 'users#new', via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',     via: 'delete'
+  match '/friends', to: 'users#list_friends', via: 'get'
   
    # You can have the root of your site routed with "root"
   root 'categories#list_categories'
@@ -50,6 +60,7 @@ Chilivote::Application.routes.draw do
   post 'friendship/unfriend/:id' => 'friendship#unfriend'
   post 'friendship/accept/:id' => 'friendship#accept'
   post 'friendship/decline/:id' => 'friendship#decline'
+  get 'cvote/manage_answers/:image_id' => 'cvote#manage_answers'
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 

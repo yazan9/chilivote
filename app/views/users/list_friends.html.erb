@@ -1,0 +1,19 @@
+<div class="row">
+<div class="span12">
+<table width="100%">
+	<%@friends.each_slice(2) do |slice|%>
+		<tr>
+			<% slice.each do |friend|%>
+				<td>
+					<%= avatar_image_big(friend)%>
+					<strong>
+					<%=link_to friend.first_name + " " + friend.last_name, :contoller => 'user', :action => 'show', :id => friend.id%>
+					</strong>
+					<br/><br/>
+				</td>	
+			<%end%>
+		</tr>
+	<%end%>
+</table>
+</div>
+</div>

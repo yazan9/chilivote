@@ -53,6 +53,13 @@ p {
   line-height: 1.7em;
 }
 
+a {
+  color:#333;
+}
+a:hover {
+  color:#333;
+}
+
 /* Main Page */
 
 
@@ -292,6 +299,58 @@ footer ul li {
 
 /*end css for uploader*/
 
+/*uploader for votes*/
+.fileinput-button{
+  position:absolute;
+  z-index:99;
+}
+#uploader_add_answer{
+  opacity:0;
+  position:absolute;
+  z-index:100;
+  top:0px;
+  left:0px;
+  width:100px;
+  height:30px;
+}
+
+
+.uploader_form_for_votes{
+  //display:inline-block;
+  //overflow:hidden;
+  position: relative;
+  width:168px;
+  //height:168px;
+  //top: 0px;
+  //left: 0;
+  //z-index: 30;
+  //margin: 0px;
+  //margin-top:0;
+  //opacity: 0;
+  //-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  //cursor: pointer;
+  //cursor: hand;
+}
+
+.vote_photo{
+  width:168px;
+  //min-height:168px;
+  position:absolute;
+  top:0px;
+  opacity:0;
+  z-index:100;
+}
+
+.upload_photo_text{
+  position:absolute;
+  top: 0px;
+  //width:168px;
+  //min-height:168px;
+  z-index:99;
+  margin-top:5px;
+}
+
+
 /* css for avatar */
 .avatar{
   padding-left: 1px;
@@ -301,3 +360,36 @@ footer ul li {
 .avatar a:hover{
   background-color:white;
 }
+/* end css for avatar*/
+
+/* form margin fix */
+.alert form{
+  margin:0;
+}
+/*end*/
+
+/* friends box */
+.friends_box_right{
+  margin-left:-1px; 
+  border-left:1px solid #eee;
+  min-height:168px;
+}
+
+.avatar_box{
+  margin-bottom: 5px;
+  font-weight:bold;
+  font-size:0.9em;
+}
+
+.avatar_box a{
+  color:#333;
+}
+
+.avatar_box a:hover{
+  color:#333;
+}
+
+.user_name_in_avatar{
+  margin-left: 5px;
+}
+/* end friends box */

@@ -1,39 +1,15 @@
 <div class="row">
-<div class="span3 text-center">
-	<% if @is_current_user%>
-	<div id="profile_image_container">
-		<div id="profile_image_div">
-			<%= cl_image_tag @user.profile_image ? @user.profile_image : Chilivote::Application.config.default_profile_image , :width=>168, :height => 168, :crop => :fit, :class => "img-polaroid"%>
-		</div>
-		
-		<div id="opaque_slider_div">
-			<div id="opaque_div"></div>
-			<div id="slider_camera_and_text_div">
-				<%=cl_image_tag "v1401985862/ErjpFSQWdpX_zgzaux.png"%>
-				Update Profile Picture
-			</div>
-		</div>
-		<div id="uploader_form">
-			<%= form_for (@user) do |u|%>
-				<div class="field">
-  	 				<%= cl_image_upload_tag(:image_id,
-  	 					:crop => :fill, :width => 168, :height => 168,
-                        :allowed_formats => ['JPG', 'PNG','GIF', 'BMP'],
-                        :transformation => {:format => 'JPG'},
-                        :eager => {:width => 40, :height => 40, :crop => :thumb},
-                        :html => {:id => "my_uploader"}) %>
-  	 			</div>
-        	<%end%>
-    	</div>
+	<div class="span3 text-center">
+		<%= render partial: "profile_image"%>
 	</div>
-	<%else%>
-	  <%= cl_image_tag @user.profile_image ? @user.profile_image : Chilivote::Application.config.default_profile_image , :width=>168, :height => 168, :crop => :fit, :class => "img-polaroid"%>
-	<%end%>
-</div>
-<%= cloudinary_js_config %> 
-<%= render partial: "js_for_uploader"%>	
+	<%= cloudinary_js_config %> 
+	<%= render partial: "js_for_uploader"%>	
 
-<div class="span9">
-<%= render partial: "profile_main"%>
-</div>
+	<div class="span6">
+		<%= render partial: "profile_main"%>
+	</div>
+
+	<div class="span3 friends_box_right">
+		<%= render partial: "friends_box"%>
+	</div>
 </div>

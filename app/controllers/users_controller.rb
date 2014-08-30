@@ -19,6 +19,12 @@ class UsersController < ApplicationController
     @is_signed_in = signed_in?
     @logged_in_user = current_user
     @friendship = Friendship.find_by_user_id_and_friend_id(@logged_in_user, @user)
+    
+    if @is_signed_in
+      @friends = @logged_in_user.friends
+    else
+      @friends = nil
+    end
   end
 
   # GET /users/new
@@ -82,6 +88,15 @@ class UsersController < ApplicationController
         format.html {render :nothing => true, :status => 200, :content_type => 'text/html'}
         format.json {render :nothing => true, :status => 200, :content_type => 'text/html'}
       end
+    end
+  end
+  
+  def list_friends
+    if signed_in?
+      @user=current_user
+      @friends = @user.friends
+    else
+      redirect_to root
     end
   end
   

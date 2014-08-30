@@ -1,0 +1,80 @@
+<div class="row">
+	<div class="span12">
+		<h4>Create a new Chilivote!</h4>
+		<%=form_for(@cvote, :url => url_for(:contoller => 'cvote', :action => 'create')) do |f|%>
+			<%= f.text_field :name, placeholder: 'Enter your question here' %> 
+			<br/></br/>
+			<div id="expiry_date_div">
+				<label for="expiry_date">Your new Chilivote expires after:</label>
+    			<% [ '1 day', '2 days', '3 days', '1 week', '1 month', 'Forever' ].each do |exp| %>
+      			<br>
+      			<%= radio_button_tag 'expiry_date', exp %>
+      				<%= exp.humanize %>
+    			<% end %>
+    		</div>
+    		<br>
+
+	</div>
+</div>
+
+
+<div class="row" id="vote_answers">
+	<div class="span2">
+	<span class="btn btn-success fileinput-button">
+		<i class="glyphicon glyphicon-plus"></i>
+		<span>Add Answers...</span>
+		<%= cl_image_upload_tag(:image_id,
+  	 					:crop => :fill, :width => 168, :height => 168,
+                        :allowed_formats => ['JPG', 'PNG','GIF', 'BMP'],
+                        :transformation => {:format => 'JPG'},
+                        :html => {:id => "uploader_add_answer"}) %>
+	</span>
+	</div>
+</div>
+<br><br><br>
+<div class="row">
+	<div class="span2">
+	  <%= f.submit "Create My Chilivote", :class=>"btn btn-primary"%>
+	</div>
+	<div class="span2">
+	  <%=link_to "Start Over", {:controller => :cvote, :action => :start_over},{:class =>"btn btn-warning text-white", :style=>"color:white"}%>
+	</div>
+</div>
+
+<%end%>
+<br><br>
+<div id="progress_div"></div>
+<div class="row">
+	<div class="span10" id="answers_div">
+		
+	</div>
+</div>
+<%= cloudinary_js_config %> 
+<script>
+	$(document).ready(function() {
+    $(".cloudinary-fileupload")
+      .cloudinary_fileupload({ 
+        acceptFileTypes: /(\.|\/)(gif|jpe?g|png|bmp)$/i,
+        maxFileSize: 10000000, // 5MB
+        dropZone: "#direct_upload",
+        start: function (e) {
+          $("#progress_div").html("<img src='http://res.cloudinary.com/hgqr8qyb1/image/upload/v1401996984/progress-dots_nld5sg.gif'>")
+        },
+        
+        progress: function (e, data) {},
+        fail: function (e, data) {
+          $("#progress_div").text("Upload failed");
+        }
+      })
+      .off("cloudinarydone").on("cloudinarydone", function (e, data) {
+      	$("#progress_div").html("")
+        $("#answers_div").append( 
+       $.cloudinary.image(data.result.public_id, 
+           { format: data.result.format, version: data.result.version, 
+             crop: 'fit', width: 168, height: 168}).addClass('img-polaroid pull-left') );
+       $('.image_public_id').val(data.result.public_id);
+       $.ajax("/cvote/manage_answers/" + data.result.public_id);
+      //view_upload_de tails(data.result);
+      });
+    });
+</script>

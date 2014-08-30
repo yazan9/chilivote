@@ -21,9 +21,14 @@
             			<%end%>
             		</ul>
 				</nav>
-        		
-				
-        		
+				<% if signed_in?%>
+     				<div class="span2" style="height:30px; padding-top:10px;color:white;margin-left:0px">
+     					<strong><a style="color:white;" href='/users/list_friends/'>Friends</a></strong>
+     				</div>
+     				<div class="span2" style="height:30px; padding-top:10px;color:white;margin-left:-50px">
+     					<strong><a style="color:white;" href='/cvote/'>My Chilivotes</a></strong>
+     				</div> 		
+     			<%end%>	
 			<nav>
             <ul class="nav pull-right">
               <%if signed_in?%>
