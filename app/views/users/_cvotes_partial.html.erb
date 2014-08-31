@@ -1,0 +1,22 @@
+<br>
+<h5 style="color:#7d9523">
+<%= @user.first_name.titleize + " " + @user.last_name.titleize%> currently has <%= @cvotes.count%> Chilivotes open
+</h5>
+<br>
+<%if @cvotes.count != 0%>
+  <%@cvotes.each do |user_vote|%>
+    <h6><%= user_vote.name %></h6>
+    <ul class="thumbnails">
+      <% user_vote.answers.each do |answer|%>
+      <li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">
+        <%= cl_image_tag answer.image_id %>
+        <span class="muted text-center">
+    	  Votes: <%=answer.likes%>
+        </span>
+      </li>
+      <%end%>
+    </ul>
+  <hr>
+  <%end%>
+<%end%>
+

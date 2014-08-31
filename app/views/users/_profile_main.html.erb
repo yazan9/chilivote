@@ -27,6 +27,9 @@
   <strong>Gender:</strong>
   <%= @user.gender ? 'Male' : 'Female' %>
 </p>
+<%if !@is_current_user%>
+	<%= render partial: "cvotes_partial"%>
+<%end%>
 
 <% if @is_current_user %>
 <%= link_to 'Edit', edit_user_path(@user) %>

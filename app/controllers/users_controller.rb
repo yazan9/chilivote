@@ -19,6 +19,7 @@ class UsersController < ApplicationController
     @is_signed_in = signed_in?
     @logged_in_user = current_user
     @friendship = Friendship.find_by_user_id_and_friend_id(@logged_in_user, @user)
+    @cvotes = @user.cvotes
     
     if @is_signed_in
       @friends = @logged_in_user.friends
