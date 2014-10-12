@@ -34,7 +34,7 @@ class CvoteController < ApplicationController
     end
     
     [:answer1, :answer2, :answer3, :answer4].each { |k| session.delete(k) }
-        
+            
     respond_to do |format|
       if @cvote.save
         format.html { redirect_to action: 'new', notice: 'Your new Chilivote has been created !' }
