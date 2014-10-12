@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="span12">
 		<h4>Create a new Chilivote!</h4>
-		<%=form_for(@cvote, :url => url_for(:contoller => 'cvote', :action => 'create')) do |f|%>
+		<%=form_for(@cvote, :url => url_for(:controller => 'cvote', :action => 'create')) do |f|%>
 			<%= f.text_field :name, placeholder: 'Enter your question here' %> 
 			<br/></br/>
 			<div id="expiry_date_div">
