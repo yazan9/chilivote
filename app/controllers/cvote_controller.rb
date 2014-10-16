@@ -37,10 +37,10 @@ class CvoteController < ApplicationController
             
     respond_to do |format|
       if @cvote.save
-        format.html { redirect_to action: 'new', notice: 'Your new Chilivote has been created !' }
+        format.html { redirect_to action: 'index', notice: 'Your new Chilivote has been created !' }
         format.json { }
       else
-        format.html { redirect_to action: 'new' }
+        format.html { redirect_to action: 'index' }
         format.json { }
       end
     end
@@ -70,7 +70,20 @@ class CvoteController < ApplicationController
   def index
     @user_votes = current_user.cvotes
   end
-
+  
+  def submit_cvote
+    cvt = CvoteTracker.new
+    cvt.user_id = current_user.id
+    cvt.cvote_id = params[:cvote_id]
+    cvt.answer_id = params[:answer_id]
+    @answers = Answer.find_all_by_cvote_id(params[:cvote_id])
+    @selected_answer = params[:answer_id]
+    cvt.save   
+    
+    respond_to do |format|
+      format.js { render :layout=>false }
+    end
+  end
 
 private
   def signed_in_user

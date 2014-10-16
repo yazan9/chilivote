@@ -1,0 +1,5 @@
+<%@answers.each do |answer|%>
+	$("#button_<%=answer.id%>").html("");
+<%end%>
+$("#button_<%=@selected_answer%>").html("<br/><i class='icon-ok'></i>");
+

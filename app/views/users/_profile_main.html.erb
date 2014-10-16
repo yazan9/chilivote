@@ -32,5 +32,6 @@
 <%end%>
 
 <% if @is_current_user %>
-<%= link_to 'Edit', edit_user_path(@user) %>
+	<%= render partial: "my_friends_cvotes"%>
+	<%= link_to 'Edit', edit_user_path(@user) %>
 <%end%>

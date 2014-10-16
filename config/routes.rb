@@ -32,6 +32,7 @@ Chilivote::Application.routes.draw do
     collection do
       get :manage_answers
       get :start_over
+      get :submit_cvote
     end
   end
   
