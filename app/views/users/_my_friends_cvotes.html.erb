@@ -1,3 +1,5 @@
+<%= link_to "Create a new Chilivote ...", '/cvote/new' , {:style=> "text-decoration:underline"}%>
+
 <%@logged_in_user.friends.each do |friend|%>
   <%friend.cvotes.each do |cvote|%>
   	<h6><%= cvote.name %></h6>
