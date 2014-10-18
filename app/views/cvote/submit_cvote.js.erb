@@ -2,4 +2,6 @@
 	$("#button_<%=answer.id%>").html("");
 <%end%>
 $("#button_<%=@selected_answer%>").html("<br/><i class='icon-ok'></i>");
+$("#votes_for_answer_<%=@selected_answer%>").html("<%= @voted_answer.likes%>");
+
 

@@ -78,7 +78,12 @@ class CvoteController < ApplicationController
     cvt.answer_id = params[:answer_id]
     @answers = Answer.find_all_by_cvote_id(params[:cvote_id])
     @selected_answer = params[:answer_id]
-    cvt.save   
+    
+    @voted_answer = Answer.find_by_id(@selected_answer)
+    @voted_answer.likes == nil ? @voted_answer.likes = 1 : @voted_answer.likes = @voted_answer.likes + 1
+        
+    cvt.save
+    @voted_answer.save   
     
     respond_to do |format|
       format.js { render :layout=>false }

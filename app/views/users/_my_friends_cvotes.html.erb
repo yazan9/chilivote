@@ -7,7 +7,7 @@
     			<li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">
         			<%= cl_image_tag answer.image_id %>
         			<span class="muted text-center">
-    	  				Votes: <%=answer.likes%>
+    	  				Votes: <span id="votes_for_answer_<%=answer.id%>"><%=answer.likes == nil ? 0 : answer.likes %></span>
         			</span>
         			<span class="text-center">
         				<% if @logged_in_user.cvoted?(cvote)%>

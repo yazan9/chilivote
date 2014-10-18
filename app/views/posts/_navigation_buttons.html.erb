@@ -1,6 +1,7 @@
 <div class="span1">
-	<%=button_to "Previous", {:controller => "posts", :action => "previous", :previous_photo => @post.previous_post} , :class=>"btn btn-primary", remote: true, :method => :get%>
+	<%#=button_to "Previous", {:controller => "posts", :action => "previous", :previous_photo => @post.previous_post} , :class=>"btn btn-primary", remote: true, :method => :get%>
+	<%=button_to "Previous", {:controller => "posts", :action => "previous", :previous_photo => @post.previous_post(params[:view_by]), :view_by => params[:view_by]} , :class=>"btn btn-primary", remote: true, :method => :get%>
 </div>
 <div class="span1 text-right">
-	<%=button_to "Next", {:controller => "posts", :action => "next", :next_photo => @post.next_post}, :class=>"btn btn-primary", remote: true, :method => :get %>
+	<%=button_to "Next", {:controller => "posts", :action => "next", :next_photo => @post.next_post(params[:view_by]), :view_by => params[:view_by]}, :class=>"btn btn-primary", remote: true, :method => :get %>
 </div>
