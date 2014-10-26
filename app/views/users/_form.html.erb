@@ -31,6 +31,18 @@
     <%= f.label :gender %>
     <%= f.select :gender, [['Male', 1],['Female', 0]] %>
   </div>
+  <div class="field">
+  	<%= f.label :date_of_birth %>
+	<%= f.date_select :dob%>
+  </div>
+  
+  <div class="field">
+  	<%= f.label :country %>
+	<%= f.collection_select :country_id, Country.all, :id, :name %>
+  </div>
+  
+
+  
   <div class="actions">
     <%= f.submit 'Sign Up!', :class=> 'btn btn-success'%>
   </div>

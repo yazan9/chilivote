@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140620132540) do
+ActiveRecord::Schema.define(version: 20141026191635) do
 
   create_table "answers", force: true do |t|
     t.string   "name"
@@ -33,6 +33,13 @@ ActiveRecord::Schema.define(version: 20140620132540) do
 
   add_index "categories", ["active"], name: "index_categories_on_active"
   add_index "categories", ["name"], name: "index_categories_on_name", unique: true
+
+  create_table "countries", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "iso_two_letter_code"
+  end
 
   create_table "cvote_trackers", force: true do |t|
     t.integer  "user_id"
@@ -83,6 +90,8 @@ ActiveRecord::Schema.define(version: 20140620132540) do
     t.string   "remember_token"
     t.boolean  "admin",           default: false
     t.string   "profile_image"
+    t.date     "dob"
+    t.integer  "country_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
