@@ -3,6 +3,8 @@
 <%@logged_in_user.friends.each do |friend|%>
   <%friend.cvotes.each do |cvote|%>
   	<h6><%= cvote.name %></h6>
+  	<small>Submitted By: <%= link_to cvote.user.first_name + " " + cvote.user.last_name, "/users/" + cvote.user.id.to_s %></small>
+  	<small>- <%= time_ago_in_words cvote.created_at%> ago</small>
     	<ul class="thumbnails">
     		<%voted = false%>
     		<% cvote.answers.each do |answer|%>

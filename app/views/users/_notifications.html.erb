@@ -1,0 +1,16 @@
+<div class = "span4" style="margin-left:0px;padding:2px;">
+<small>
+<% current_user.notifications.each do |notification|%>
+	<% case notification.notification_type when 1%>
+		<%= user_avatar_one_line(notification.user).html_safe%> liked your <%= link_to "photo", "/posts/" + notification.target_id.to_s%>
+	<% when 2 %>
+		<%= user_avatar_one_line(notification.user).html_safe%> accepted your friend request
+	<% when 3%>
+		<%= user_avatar_one_line(notification.user).html_safe%> created a new <%= link_to "chilivote", "/users/"+notification.user_friend.to_s%>
+	<% when 4%>
+		<%= user_avatar_one_line(notification.user).html_safe%> voted on your <%= link_to "chilivote", "/users/" + current_user.to_s%>
+	<%end%>
+	<hr>
+<%end%>
+</small>
+</div>

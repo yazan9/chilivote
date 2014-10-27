@@ -34,9 +34,21 @@ class CvoteController < ApplicationController
     end
     
     [:answer1, :answer2, :answer3, :answer4].each { |k| session.delete(k) }
+    
+      
+    
             
     respond_to do |format|
       if @cvote.save
+        #add a notification to my friends
+        current_user.friends.each do |my_friend|
+          n = Notification.new
+          n.notification_type = 3
+          n.user_me = my_friend.id
+          n.user_friend = current_user.id
+          n.target_id = @cvote.id
+          n.save
+        end
         format.html { redirect_to action: 'index', notice: 'Your new Chilivote has been created !' }
         format.json { }
       else
@@ -83,7 +95,15 @@ class CvoteController < ApplicationController
     @voted_answer.likes == nil ? @voted_answer.likes = 1 : @voted_answer.likes = @voted_answer.likes + 1
         
     cvt.save
-    @voted_answer.save   
+    @voted_answer.save
+    
+    #create the notification
+    n = Notification.new
+    n.notification_type = 4
+    n.user_me = Cvote.find(params[:cvote_id]).user.id
+    n.user_friend = current_user.id
+    n.target_id = params[:cvote_id]
+    n.save   
     
     respond_to do |format|
       format.js { render :layout=>false }

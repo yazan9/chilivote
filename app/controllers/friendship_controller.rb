@@ -29,6 +29,14 @@ class FriendshipController < ApplicationController
   def accept
     if @user.requested_friends.include?(@friend)
       Friendship.accept(@user, @friend)
+      
+      n = Notification.new
+      n.notification_type = 2
+      n.user_me = @friend.id
+      n.user_friend = @user.id
+      n.target_id = nil
+      n.save 
+      
     end
     
     respond_to do |format|

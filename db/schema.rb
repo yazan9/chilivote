@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141026191635) do
+ActiveRecord::Schema.define(version: 20141026211023) do
 
   create_table "answers", force: true do |t|
     t.string   "name"
@@ -61,6 +61,15 @@ ActiveRecord::Schema.define(version: 20141026191635) do
     t.integer  "user_id"
     t.integer  "friend_id"
     t.integer  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "notifications", force: true do |t|
+    t.integer  "notification_type"
+    t.integer  "user_me"
+    t.integer  "user_friend"
+    t.integer  "target_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

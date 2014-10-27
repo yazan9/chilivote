@@ -26,9 +26,24 @@
      					<strong><a style="color:white;" href='/friends/'>Friends</a></strong>
      				</div>
      				<div class="span2" style="height:30px; padding-top:10px;color:white;margin-left:-50px">
-     					<strong><a style="color:white;" href="/users/<%=current_user.id%>">My Chilivotes</a></strong>
-     				</div> 		
-     			<%end%>	
+     					<strong><a style="color:white;" href="/users/<%=current_user.id%>">My Chilivotes</a></strong>				
+  					</div> 		
+     			
+     			<nav>
+            			<ul class="nav">
+              				<li id="fat-menu" class="dropdown">
+              					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+     								<span class="badge badge-warning"><%= current_user.notifications.count%></span>
+              					</a>
+              					<ul class="dropdown-menu">
+                					<li><%= render partial: "users/notifications"%></li>	
+				              	</ul>
+            				</li>
+            		</ul>
+				</nav>
+     			<%end%>
+     			
+     				
 			<nav>
             <ul class="nav pull-right">
               <%if signed_in?%>
