@@ -8,7 +8,7 @@
 	<% when 3%>
 		<%= user_avatar_one_line(notification.user).html_safe%> created a new <%= link_to "chilivote", "/users/"+notification.user_friend.to_s%>
 	<% when 4%>
-		<%= user_avatar_one_line(notification.user).html_safe%> voted on your <%= link_to "chilivote", "/users/" + current_user.to_s%>
+		<%= user_avatar_one_line(notification.user).html_safe%> voted on your <%= link_to "chilivote", "/users/" + current_user.id.to_s%>
 	<%end%>
 	<hr>
 <%end%>
