@@ -12,20 +12,19 @@ class CvoteController < ApplicationController
     @cvote = Cvote.new
     @cvote.name = params[:cvote][:name]
     @cvote.user_id = current_user.id
-    
     #scan the expiy date
-    if[:expiry_date].to_s == "1 day"
-      @cvote.exiry_date = 1.day.from_now
-    elsif [:expiry_date] == "2 days"
-      @cvote.exiry_date = 2.days.from_now
-    elsif [:expiry_date] == "3 days"
-      @cvote.exiry_date = 3.days.from_now
-    elsif [:expiry_date] == "1 week"
-      @cvote.exiry_date = 1.week.from_now
-    elsif [:expiry_date] == "1 month"
-      @cvote.exiry_date = 1.month.from_now
-    elsif [:expiry_date] == "Forever"
-      @cvote.exiry_date = 10.years.from_now
+    if params[:expiry_date] == "1 day"
+      @cvote.expiry_date = 1.day.from_now
+    elsif params[:expiry_date] == "2 days"
+      @cvote.expiry_date = 2.days.from_now
+    elsif params[:expiry_date] == "3 days"
+      @cvote.expiry_date = 3.days.from_now
+    elsif params[:expiry_date] == "1 week"
+      @cvote.expiry_date = 1.week.from_now
+    elsif params[:expiry_date] == "1 month"
+      @cvote.expiry_date = 1.month.from_now
+    elsif params[:expiry_date] == "Forever"
+      @cvote.expiry_date = 10.years.from_now
     end
     
     if session[:answer1]
@@ -64,7 +63,7 @@ class CvoteController < ApplicationController
           n.target_id = @cvote.id
           n.save
         end
-        format.html { redirect_to "/users/" + current_user.id.to_s, notice: 'Your new Chilivote has been created !' }
+        format.html { redirect_to "/users/" + current_user.id.to_s + "?mode=self", notice: 'Your new Chilivote has been created !' }
         format.json { }
       else
         format.html { redirect_to action: 'index' }
