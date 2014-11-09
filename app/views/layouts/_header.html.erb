@@ -12,7 +12,11 @@
              			<%if signed_in?%>
               				<li id="fat-menu" class="dropdown">
               					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                					<i class="icon-white icon-user"></i>
+                					<% if current_user.requested_friends.empty?%>
+                						<i class="icon-user"></i>
+                					<%else%>
+                						<i class="icon-white icon-user"></i>
+                					<%end%>
               					</a>
               					<ul class="dropdown-menu">
                 					<li><%= render partial: "users/friend_requests"%></li>	
@@ -32,12 +36,14 @@
      			<nav>
             			<ul class="nav">
               				<li id="fat-menu" class="dropdown">
-              					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-     								<span class="badge badge-warning"><%= current_user.notifications.count%></span>
+              					<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="notifications_button">
+     								<div id="notifications_counter"><span class="badge badge-warning"><%= current_user.notifications.count%></span></div>
               					</a>
+              					
               					<ul class="dropdown-menu">
-                					<li><%= render partial: "users/notifications"%></li>	
+                					<li><div id="my_notifications"><%= render partial: "users/notifications"%></div></li>	
 				              	</ul>
+				              	
             				</li>
             		</ul>
 				</nav>
@@ -52,7 +58,7 @@
                 		<%= current_user.first_name + ' ' + current_user.last_name%> <b class="caret"></b>
               		</a>
               	<ul class="dropdown-menu">
-                	<li><%= link_to "Profile", current_user %></li>
+                	<li><%= link_to "Profile", "/users/" + current_user.id.to_s + "?mode=self" %></li>
                 	<li><%= link_to "Settings", '#' %></li>
                 	<%if current_user.admin?%>
                 	<li class="divider"></li>
@@ -74,3 +80,20 @@
         </div>
       </div>
     </header>
+    
+<script type="text/javascript">
+function handle_notifications_click() {
+    //document.write("Clicked");
+    $.ajax("/users/clear_notifications/");
+    return false;
+}
+</script>
+
+<script type = "text/javascript" >
+var link1 = document.getElementById("notifications_button");
+if (typeof window.addEventListener != "undefined") {
+    link1.addEventListener("click",handle_notifications_click,false);
+} else {
+    link1.attachEvent("onclick",handle_notifications_click);
+}
+</script>

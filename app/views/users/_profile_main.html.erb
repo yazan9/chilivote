@@ -31,7 +31,10 @@
 	<%= render partial: "cvotes_partial"%>
 <%end%>
 
-<% if @is_current_user %>
+<% if @is_current_user && params[:mode] != "self"%>
 	<%= render partial: "my_friends_cvotes"%>
-	<%= link_to 'Edit', edit_user_path(@user) %>
+<%end%>
+
+<% if @is_current_user && params[:mode] == "self"%>
+	<%= render partial: "my_own_cvotes"%>
 <%end%>

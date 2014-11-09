@@ -1,6 +1,9 @@
 <div class = "span4" style="margin-left:0px;padding:2px;">
 <small>
-<% current_user.notifications.each do |notification|%>
+<%if current_user.notifications.count == 0%>
+	<centre><%= "You have no new notifications"%></centre>
+<%else%>
+<% current_user.notifications.order(created_at: :desc).each do |notification|%>
 	<% case notification.notification_type when 1%>
 		<%= user_avatar_one_line(notification.user).html_safe%> liked your <%= link_to "photo", "/posts/" + notification.target_id.to_s%>
 	<% when 2 %>
@@ -11,6 +14,7 @@
 		<%= user_avatar_one_line(notification.user).html_safe%> voted on your <%= link_to "chilivote", "/users/" + current_user.id.to_s%>
 	<%end%>
 	<hr>
+<%end%>
 <%end%>
 </small>
 </div>

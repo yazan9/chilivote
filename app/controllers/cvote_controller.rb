@@ -13,6 +13,21 @@ class CvoteController < ApplicationController
     @cvote.name = params[:cvote][:name]
     @cvote.user_id = current_user.id
     
+    #scan the expiy date
+    if[:params][:expiry_date] == "1 day"
+      @cvote.exiry_date = 1.day.from_now
+    elsif [:params][:expiry_date] == "2 days"
+      @cvote.exiry_date = 2.days.from_now
+    elsif [:params][:expiry_date] == "3 days"
+      @cvote.exiry_date = 3.days.from_now
+    elsif [:params][:expiry_date] == "1 week"
+      @cvote.exiry_date = 1.week.from_now
+    elsif [:params][:expiry_date] == "1 month"
+      @cvote.exiry_date = 1.month.from_now
+    elsif [:params][:expiry_date] == "Forever"
+      @cvote.exiry_date = 10.years.from_now
+    end
+    
     if session[:answer1]
       @answer1 = @cvote.answers.build
       @answer1.image_id = session[:answer1]

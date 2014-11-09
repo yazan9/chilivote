@@ -6,7 +6,7 @@
   		<%= submit_tag("Search", {:class=>"btn btn-success"}) %>
 	<% end %>
 <table width="100%">
-	<%@friends.each_slice(2) do |slice|%>
+	<%@search_results.each_slice(2) do |slice|%>
 		<tr>
 			<% slice.each do |friend|%>
 				<td>

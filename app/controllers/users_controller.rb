@@ -19,10 +19,21 @@ class UsersController < ApplicationController
     @is_signed_in = signed_in?
     @logged_in_user = current_user
     @friendship = Friendship.find_by_user_id_and_friend_id(@logged_in_user, @user)
-    @cvotes = @user.cvotes
+    @cvotes = @user.cvotes.where("expiry_date > ?", DateTime.now).order(created_at: :desc)
+    
+    if params[:mode] == "self" && @is_signed_in
+      @my_own_cvotes = @logged_in_user.cvotes.order(created_at: :desc)
+    end
     
     if @is_signed_in
       @friends = @logged_in_user.friends
+      @my_friends_cvotes = Array.new
+      @friends.each do |friend|
+        friend.cvotes.where("expiry_date > ?", DateTime.now).each do |cvote|
+          @my_friends_cvotes << cvote
+        end
+      end
+      @my_friends_cvotes = @my_friends_cvotes.sort_by { |obj| obj.created_at }.reverse!
     else
       @friends = nil
     end
@@ -99,6 +110,22 @@ class UsersController < ApplicationController
     else
       redirect_to root
     end
+  end
+  
+  def clear_notifications
+    @notifications = Notification.where(user_me: current_user.id)
+    @notifications.each do |notification|
+      notification.destroy
+    end
+    
+    respond_to do |format|
+        format.js
+    end
+  end
+  
+  def search
+    @q = "%" + params[:q] + "%"
+    @search_results =   User.find(:all, :conditions => ['first_name LIKE ? OR last_name LIKE ?', @q, @q])    
   end
   
 

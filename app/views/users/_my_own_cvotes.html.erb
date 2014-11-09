@@ -1,0 +1,17 @@
+<%= link_to "Create a new Chilivote ...", '/cvote/new' , {:style=> "text-decoration:underline"}%>
+
+<%@my_own_cvotes.each do |cvote|%>
+  <h6><%= cvote.name %></h6>
+  	<small>Submitted: <%= time_ago_in_words cvote.created_at%> ago</small>
+    	<ul class="thumbnails">
+    		<% cvote.answers.each do |answer|%>
+    			<li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">
+        			<%= cl_image_tag answer.image_id %>
+        			<span class="muted text-center">
+    	  				Votes: <span id="votes_for_answer_<%=answer.id%>"><%=answer.likes == nil ? 0 : answer.likes %></span>
+        			</span>
+    			</li>
+    		<%end%>
+    	</ul>	
+    	<hr>
+<%end%>

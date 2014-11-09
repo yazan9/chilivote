@@ -1,10 +1,10 @@
 <%= link_to "Create a new Chilivote ...", '/cvote/new' , {:style=> "text-decoration:underline"}%>
 
-<%@logged_in_user.friends.each do |friend|%>
-  <%friend.cvotes.each do |cvote|%>
+  <% @my_friends_cvotes.each do |cvote|%>
   	<h6><%= cvote.name %></h6>
-  	<small>Submitted By: <%= link_to cvote.user.first_name + " " + cvote.user.last_name, "/users/" + cvote.user.id.to_s %></small>
+  	<small>Submitted By: <%= user_avatar_one_line_small(cvote.user).html_safe %></small>
   	<small>- <%= time_ago_in_words cvote.created_at%> ago</small>
+  	<br/></br/>
     	<ul class="thumbnails">
     		<%voted = false%>
     		<% cvote.answers.each do |answer|%>
@@ -31,5 +31,5 @@
     			</li>
     		<%end%>
     	</ul>	
+    	<hr/>
   <%end%>
-<%end%>
