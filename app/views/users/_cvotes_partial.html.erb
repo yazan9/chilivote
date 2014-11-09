@@ -6,6 +6,7 @@
 <%if @cvotes.count != 0%>
   <%@cvotes.each do |cvote|%>
     <h6><%= cvote.name %></h6>
+    <small>Sumitted: <%= time_ago_in_words cvote.created_at%> ago</small>
     <ul class="thumbnails">
       <%voted = false%>
       <% cvote.answers.each do |answer|%>

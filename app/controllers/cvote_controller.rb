@@ -14,17 +14,17 @@ class CvoteController < ApplicationController
     @cvote.user_id = current_user.id
     
     #scan the expiy date
-    if[:params][:expiry_date] == "1 day"
+    if[:expiry_date].to_s == "1 day"
       @cvote.exiry_date = 1.day.from_now
-    elsif [:params][:expiry_date] == "2 days"
+    elsif [:expiry_date] == "2 days"
       @cvote.exiry_date = 2.days.from_now
-    elsif [:params][:expiry_date] == "3 days"
+    elsif [:expiry_date] == "3 days"
       @cvote.exiry_date = 3.days.from_now
-    elsif [:params][:expiry_date] == "1 week"
+    elsif [:expiry_date] == "1 week"
       @cvote.exiry_date = 1.week.from_now
-    elsif [:params][:expiry_date] == "1 month"
+    elsif [:expiry_date] == "1 month"
       @cvote.exiry_date = 1.month.from_now
-    elsif [:params][:expiry_date] == "Forever"
+    elsif [:expiry_date] == "Forever"
       @cvote.exiry_date = 10.years.from_now
     end
     
@@ -64,7 +64,7 @@ class CvoteController < ApplicationController
           n.target_id = @cvote.id
           n.save
         end
-        format.html { redirect_to action: 'index', notice: 'Your new Chilivote has been created !' }
+        format.html { redirect_to "/users/" + current_user.id.to_s, notice: 'Your new Chilivote has been created !' }
         format.json { }
       else
         format.html { redirect_to action: 'index' }
