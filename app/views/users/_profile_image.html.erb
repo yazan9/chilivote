@@ -27,3 +27,8 @@
 	<%else%>
 	  <%= cl_image_tag @user.profile_image ? @user.profile_image : Chilivote::Application.config.default_profile_image , :width=>168, :height => 168, :crop => :fit, :class => "img-polaroid"%>
 	<%end%>
+
+<br/></br/>
+<div class="pull-left" class="">
+<%= link_to "New Chilivote !", '/cvote/new' , {:class=>"btn btn-success text-white", :style=>"color:white"}%>
+</div>

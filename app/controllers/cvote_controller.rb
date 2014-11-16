@@ -25,6 +25,8 @@ class CvoteController < ApplicationController
       @cvote.expiry_date = 1.month.from_now
     elsif params[:expiry_date] == "Forever"
       @cvote.expiry_date = 10.years.from_now
+    else
+      @cvote.expiry_date = 10.years.from_now
     end
     
     if session[:answer1]
@@ -63,7 +65,7 @@ class CvoteController < ApplicationController
           n.target_id = @cvote.id
           n.save
         end
-        format.html { redirect_to "/users/" + current_user.id.to_s + "?mode=self", notice: 'Your new Chilivote has been created !' }
+        format.html { redirect_to "/users/" + current_user.id.to_s, notice: 'Your new Chilivote has been created !' }
         format.json { }
       else
         format.html { redirect_to action: 'index' }

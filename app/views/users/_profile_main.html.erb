@@ -8,25 +8,30 @@
 	
 <%end%>
 
-<p>
-  <strong>First name:</strong>
-  <%= @user.first_name %>
-</p>
+<%if params[:mode]=="self"%>
+	<p>
+  	<strong>First name:</strong>
+  	<%= @user.first_name %>
+	</p>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @user.last_name %>
-</p>
+	<p>
+  	<strong>Last name:</strong>
+  	<%= @user.last_name %>
+	</p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+	<p>
+  	<strong>Email:</strong>
+  	<%= @user.email %>
+	</p>
 
-<p>
-  <strong>Gender:</strong>
-  <%= @user.gender ? 'Male' : 'Female' %>
-</p>
+	<p>
+  	<strong>Gender:</strong>
+  	<%= @user.gender ? 'Male' : 'Female' %>
+	</p>
+<%else%>
+	<h2><b><%= (@user.first_name + " " + @user.last_name).titleize%></b></h2>
+<%end%>
+
 <%if !@is_current_user%>
 	<%= render partial: "cvotes_partial"%>
 <%end%>

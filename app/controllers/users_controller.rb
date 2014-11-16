@@ -33,6 +33,11 @@ class UsersController < ApplicationController
           @my_friends_cvotes << cvote
         end
       end
+      
+      @logged_in_user.cvotes.each do |cvote|
+        @my_friends_cvotes << cvote
+      end
+      
       @my_friends_cvotes = @my_friends_cvotes.sort_by { |obj| obj.created_at }.reverse!
     else
       @friends = nil
@@ -125,7 +130,7 @@ class UsersController < ApplicationController
   
   def search
     @q = "%" + params[:q] + "%"
-    @search_results =   User.find(:all, :conditions => ['first_name LIKE ? OR last_name LIKE ?', @q, @q])    
+    @search_results =   User.find(:all, :conditions => ['lower(first_name) LIKE ? OR lower(last_name) LIKE ?', @q.downcase, @q.downcase])    
   end
   
 

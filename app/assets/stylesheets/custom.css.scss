@@ -393,3 +393,21 @@ footer ul li {
   margin-left: 5px;
 }
 /* end friends box */
+
+#notification_element{
+  cursor:pointer;
+  z-index:3000;
+}
+
+#notification_element:hover{
+  background-color: #d3d3d3;
+}
+
+#wallpaper_container{
+  background: url("http://res.cloudinary.com/hgqr8qyb1/image/upload/v1416143619/wall_paper_a7irfl.jpg");
+   -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+

@@ -1,4 +1,3 @@
-<%= link_to "Create a new Chilivote ...", '/cvote/new' , {:style=> "text-decoration:underline"}%>
 
   <% @my_friends_cvotes.each do |cvote|%>
   	<h6><%= cvote.name %></h6>
@@ -13,6 +12,7 @@
         			<span class="muted text-center">
     	  				Votes: <span id="votes_for_answer_<%=answer.id%>"><%=answer.likes == nil ? 0 : answer.likes %></span>
         			</span>
+        			<% if @logged_in_user.id != cvote.user_id%>
         			<span class="text-center">
         				<% if @logged_in_user.cvoted?(cvote)%>
         					<%voted = true%>
@@ -28,6 +28,7 @@
 							<%end%>	
         				<%end%>
         			</span>
+        			<%end%>
     			</li>
     		<%end%>
     	</ul>	
