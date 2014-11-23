@@ -18,6 +18,10 @@ class CategoriesController < ApplicationController
   def list_categories
    @categories = Category.find_all_by_active(true, :limit => 8);
    @categories_counter = 1;
+   
+   @admin_user = User.find_by_email("admin@chilivote.com")
+   @life_vote = @admin_user.cvotes.first
+   @logged_in_user = current_user
   end
   
   # GET /categories/new

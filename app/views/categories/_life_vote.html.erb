@@ -1,0 +1,32 @@
+
+  	<h6><%= @life_vote.name %></h6>
+  	<br/></br/>
+    	<ul class="thumbnails">
+    		<%voted = false%>
+    		<% @life_vote.answers.each do |answer|%>
+    			<li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">
+        			<%= cl_image_tag answer.image_id %>
+        			<span class="muted text-center">
+    	  				Votes: <span id="votes_for_answer_<%=answer.id%>"><%=answer.likes == nil ? 0 : answer.likes %></span>
+        			</span>
+        			<% if @logged_in_user.id != @life_vote.user_id%>
+        			<span class="text-center">
+        				<% if @logged_in_user.cvoted?(@life_vote)%>
+        					<%voted = true%>
+        				<%end%>
+        				<%if @logged_in_user.cvoted?(@life_vote) && CvoteTracker.find_by_user_id_and_cvote_id(@logged_in_user.id, @life_vote.id).answer == answer%>        				  
+        				  <br/><i class="icon-ok"></i>
+        				  <% voted = true%>	
+        				<%else%>
+        					<% if voted == false%>
+        						<span id="button_<%=answer.id%>">
+									<%=button_to "Vote", {:controller => "cvote", :action => "submit_cvote", :cvote_id => @life_vote.id, :answer_id => answer.id} , :class=>"btn btn-success", remote: true, :method => :get%>
+								</span>
+							<%end%>	
+        				<%end%>
+        			</span>
+        			<%end%>
+    			</li>
+    		<%end%>
+    	</ul>	
+    	<hr/>

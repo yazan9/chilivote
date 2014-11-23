@@ -30,3 +30,9 @@
 </ul>
 </div>
 </div>
+
+
+<% if !@logged_in_user.nil?%>
+<span class="label label-info">Poll Vote of the month</span>
+<%=render partial: "life_vote"%>
+<%end%>

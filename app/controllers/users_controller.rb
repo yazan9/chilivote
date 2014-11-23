@@ -47,6 +47,9 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    if !current_user.nil?
+      redirect_to "/users/" + current_user.id.to_s
+    end
   end
 
   # GET /users/1/edit
