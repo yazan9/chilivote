@@ -151,14 +151,14 @@ class PostsController < ApplicationController
     
     def signed_in_user
       unless signed_in?
-        store_location
+        #store_location
         redirect_to signin_url, notice: "Please sign in."
       end
     end
     
      def admin_user
         if !signed_in?
-        store_location
+        #store_location
         redirect_to signin_url, notice: "Please sign in."
         else
         redirect_to '/' unless current_user.admin?
