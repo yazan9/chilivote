@@ -20,7 +20,7 @@ class CategoriesController < ApplicationController
    @categories_counter = 1;
    
    @admin_user = User.find_by_email("admin@chilivote.com")
-   @life_vote = @admin_user.cvotes.first
+   @life_votes = @admin_user.cvotes.order(created_at: :desc).limit(3)
    @logged_in_user = current_user
   end
   

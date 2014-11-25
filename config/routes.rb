@@ -56,8 +56,8 @@ Chilivote::Application.routes.draw do
   match '/friends', to: 'users#list_friends', via: 'get'
   
    # You can have the root of your site routed with "root"
-  root 'categories#list_categories'
-  #root 'users#new'
+  #root 'categories#list_categories'
+  root 'users#new'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
   
