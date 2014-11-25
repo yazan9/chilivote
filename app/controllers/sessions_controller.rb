@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       sign_in user
       #render 'users/' + user.id.to_s
       #redirect_back_or user
-      redirect_to '/'
+      redirect_to '/categories/list_categories/'
     else
       flash.now[:error] = 'Invalid email/password combination' # Not quite right!
       render 'new'
