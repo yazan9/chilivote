@@ -11,7 +11,7 @@
 	<% @categories.each do |category| %>
 	
 	<li class="span3 text-center thumbnail_custom" style="margin-bottom: 0">
-    <a href="<%=category.posts.first ? 'posts/' + category.posts.first.id.to_s : '/'  %>" class="thumbnail">
+    <a href="<%=category.posts.first ? '/posts/' + category.posts.first.id.to_s : '/'  %>" class="thumbnail">
     	<%= cl_image_tag category.image_id %>
     </a>
     <h5><%=category.name%></h5>
