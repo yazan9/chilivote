@@ -5,15 +5,15 @@
 <%else%>
 <% current_user.notifications.order(created_at: :desc).each do |notification|%>
 	<% case notification.notification_type when 1%>
-		<div id="notification_element" onclick="location.href='<%='/posts/'+notification.target_id.to_s%>';"><%= user_avatar_one_line_no_link(notification.user).html_safe%> liked your photo</div>
+		<div <%=!notification.viewed ? "class=not_seen" : ''%> id="notification_element" onclick="location.href='<%='/posts/'+notification.target_id.to_s%>';"><%= user_avatar_one_line_no_link(notification.user).html_safe%> liked your photo</div>
 	<% when 2 %>
-		<div id = "notification_element"><%= user_avatar_one_line(notification.user).html_safe%> accepted your friend request</div>
+		<div <%=!notification.viewed ? "class=not_seen" : ''%> id = "notification_element"><%= user_avatar_one_line(notification.user).html_safe%> accepted your friend request</div>
 	<% when 3%>
-		<div id = "notification_element" onclick="location.href='<%='/users/'+notification.user_friend.to_s%>';"><%= user_avatar_one_line_no_link(notification.user).html_safe%> created a new Chilivote</div>
+		<div <%=!notification.viewed ? "class=not_seen" : ''%> id = "notification_element" onclick="location.href='<%='/users/'+notification.user_friend.to_s + "#cvote_" + notification.target_id.to_s%>'; $.ajax('/users/clear_notifications?id=<%=notification.id%>');"><%= user_avatar_one_line_no_link(notification.user).html_safe%> created a new Chilivote</div>
 	<% when 4%>
-		<div id = "notification_element" onclick="location.href='<%='/users/'+current_user.id.to_s%>';"><%= user_avatar_one_line_no_link(notification.user).html_safe%> voted on your Chilivote</div>
+		<div <%=!notification.viewed ? "class=not_seen" : ''%> id = "notification_element" onclick="location.href='<%='/users/'+current_user.id.to_s%>';"><%= user_avatar_one_line_no_link(notification.user).html_safe%> voted on your Chilivote</div>
 	<%end%>
-	<hr>
+	
 <%end%>
 <%end%>
 </small>

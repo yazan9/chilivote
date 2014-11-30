@@ -121,9 +121,24 @@ class UsersController < ApplicationController
   end
   
   def clear_notifications
+   # @notifications = Notification.where(user_me: current_user.id)
+    #@notifications.each do |notification|
+      #notification.destroy
+    #end
+    
+    @notification = Notification.find(params[:id])
+    if current_user.id != @notification.user_me
+      redirect_to '/' and return
+    end
+    
+    @notification.viewed = true
+    @notification.save
+    
     @notifications = Notification.where(user_me: current_user.id)
     @notifications.each do |notification|
-      notification.destroy
+      if (Time.now - notification.created_at)/1.day > 7
+        notification.destroy
+      end
     end
     
     respond_to do |format|

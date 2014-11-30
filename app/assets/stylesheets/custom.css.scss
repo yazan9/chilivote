@@ -397,6 +397,9 @@ footer ul li {
 #notification_element{
   cursor:pointer;
   z-index:3000;
+  padding-bottom: 2px;
+  padding-top: 2px;
+  border-bottom: 1px solid #e9e9e9;
 }
 
 #notification_element:hover{
@@ -417,3 +420,6 @@ footer ul li {
   z-index: -3000;
 }
 
+.not_seen{
+  background-color:#f6f6f6;
+}

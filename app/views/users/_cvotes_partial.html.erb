@@ -5,6 +5,7 @@
 <br>
 <%if @cvotes.count != 0%>
   <%@cvotes.each do |cvote|%>
+  <div id="cvote_<%=cvote.id%>">
     <h6><%= cvote.name %></h6>
     <small>Sumitted: <%= time_ago_in_words cvote.created_at%> ago</small>
     <ul class="thumbnails">
@@ -35,6 +36,7 @@
   <%end%>
 </ul>
 <hr>
+</div>
 <%end%>
 <%end%>
 

@@ -1,2 +1,2 @@
-$("#notifications_counter").html("<span class='badge badge-warning'><%= current_user.notifications.count%></span>");
+$("#notifications_counter").html("<span class='badge badge-warning'><%= current_user.notifications.where(viewed: 'f').count%></span>");
 
