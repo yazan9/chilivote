@@ -1,4 +1,8 @@
 Chilivote::Application.routes.draw do
+  
+  get 'auth/:provider/callback', to: 'sessions#create_from_fb'
+  get 'auth/failure', to: redirect('/')
+  
   resources :categories do
     collection do
       get :list_categories

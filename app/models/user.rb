@@ -49,6 +49,42 @@ class User < ActiveRecord::Base
   def cunvote!(cvote)
     
   end
+  
+  def self.from_omniauth(auth)
+    where(auth.slice(:email)).first_or_initialize.tap do |user|
+    #user.provider = auth.provider
+    #user.uid = auth.uid
+    #user.name = auth.info.name
+    #user.username = auth.info.nickname
+    #user.image = auth.info.image
+    
+    user = User.find_by_email(auth.info.email)
+
+    if user.nil?
+      #Rails.logger.info(auth)
+      user = User.new   
+      user.first_name = auth.info.first_name
+      user.last_name = auth.info.last_name
+      user.profile_image = auth.info.image + "?type=large" 
+      user.email = auth.info.email
+      if auth.info.gender == "male"
+        user.gender = true
+      else
+        user.gender = false
+      end
+      user.admin = "false"
+      user.password = "from_facebook"
+      user.password_confirmation = "from_facebook"
+      user.save!
+    end
+    
+    #user.bio = auth.info.extra.raw_info.bio
+    #user.oauth_token = auth.credentials.token
+    #user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+    #user.save!
+    return user
+    end
+  end
 
   private
 
