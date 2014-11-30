@@ -29,6 +29,10 @@ class CvoteController < ApplicationController
       @cvote.expiry_date = 10.years.from_now
     end
     
+    if !session[:answer1] or !session[:answer2]
+      redirect_to "/cvote/start_over", notice: 'You have to submit two answers at least' and return
+    end
+    
     if session[:answer1]
       @answer1 = @cvote.answers.build
       @answer1.image_id = session[:answer1]
@@ -68,7 +72,7 @@ class CvoteController < ApplicationController
         format.html { redirect_to "/users/" + current_user.id.to_s, notice: 'Your new Chilivote has been created !' }
         format.json { }
       else
-        format.html { redirect_to action: 'index' }
+        format.html { render action: 'new', notice: "Please enter a title for your new Chilivote" }
         format.json { }
       end
     end
