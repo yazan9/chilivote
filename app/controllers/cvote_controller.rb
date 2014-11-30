@@ -125,6 +125,17 @@ class CvoteController < ApplicationController
       format.js { render :layout=>false }
     end
   end
+  
+  def remove_cvote
+    @cvote = Cvote.find(params[:id])
+    if current_user.id != @cvote.user_id
+      redirect_to '/'
+    end
+    @cvote.destroy
+    respond_to do |format|
+      format.js { render :layout=>false }
+    end
+  end
 
 private
   def signed_in_user

@@ -1,6 +1,10 @@
 
   <% @my_friends_cvotes.each do |cvote|%>
+  <div id="cvote_<%=cvote.id%>">
   	<h6><%= cvote.name %></h6>
+  	<%if cvote.user_id == @logged_in_user.id%>
+  		<%= link_to "<i class='icon-remove pull-right'></i>".html_safe, {:controller=>"cvote", :action=> "remove_cvote", :id => cvote.id, remote: true, :method => :get}%>
+  	<%end%>
   	<small>Submitted By: <%= user_avatar_one_line_small(cvote.user).html_safe %></small>
   	<small>- <%= time_ago_in_words cvote.created_at%> ago</small>
   	<br/></br/>
@@ -33,4 +37,5 @@
     		<%end%>
     	</ul>	
     	<hr/>
+    </div>
   <%end%>
