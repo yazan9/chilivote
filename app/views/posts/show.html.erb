@@ -2,9 +2,6 @@
 	<span <%= "style = font-weight:bold" if params[:view_by] == "recent" %>>
 		<%= link_to "Most Recent", "/posts/" + (Post.where(:category_id => @post.category_id).order("id DESC").first).id.to_s + "?view_by=recent"%> |
 	</span>
-	<span <%= "style = font-weight:bold" if params[:view_by] == "voted" %>>
-		<%= link_to "Most Voted" %> |
-	</span>
 	<span <%= "style = font-weight:bold" if params[:view_by] == "random" %>>
 		<%= link_to "Random", "/posts/" + (Post.where(:category_id => @post.category_id).limit(1).order("RANDOM()").first).id.to_s + "?view_by=random" %>
 	</span>
@@ -15,7 +12,13 @@
 	<div class="span8 center" id="image_div">
 		<%= cl_image_tag @post.image_id, :height => 400, :width => 600, :crop => :fit %>
 	</div>
-	<div class="span2"></div>
+	<div class="span2">
+		<span class="label label-success">Most Voted</span><br/></br/>
+		<% @most_voted.each do |most_voted|%>
+			<%= link_to (cl_image_tag Post.find(most_voted[0]).image_id , :height=> 60, :width => 90, :crop => :fill), "/posts/" + most_voted[0].to_s %>
+			<br/><br/>
+		<%end%>
+	</div>
 	
 </div>
 <div class="row center">

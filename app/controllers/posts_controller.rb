@@ -48,6 +48,8 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    #@most_voted = Post.order('category_id=#{@post.category_id} and ').limit(2)
+    @most_voted = Vote.limit(5).where(:category_id => @post.category_id).order("count_all desc").count(group: :post_id)
   end
 
   # GET /posts/new
