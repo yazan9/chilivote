@@ -32,7 +32,7 @@
 	<h2><b><%= (@user.first_name + " " + @user.last_name).titleize%></b></h2>
 <%end%>
 
-<%if !@is_current_user%>
+<%if !@is_current_user && current_user.friends.include?(@user)%>
 	<%= render partial: "cvotes_partial"%>
 <%end%>
 

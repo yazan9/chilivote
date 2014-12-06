@@ -6,3 +6,4 @@ end
 # 2: someone accepted my friend request
 # 3: my friend created a chilivote
 # 4: my friend voted on my chilivote
+# 5: my friend uploaded a photo in categories

@@ -77,6 +77,14 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        current_user.friends.each do |my_friend|
+          n = Notification.new
+          n.notification_type = 5
+          n.user_me = my_friend.id
+          n.user_friend = current_user.id
+          n.target_id = @post.id
+          n.save
+        end
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render action: 'show', status: :created, location: @post }
       else

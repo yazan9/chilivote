@@ -6,7 +6,7 @@
     	<ul class="thumbnails">
     		<%voted = false%>
     		<% life_vote.answers.each do |answer|%>
-    			<li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">
+    			<li class="span2 text-center thumbnail_custom" style="margin-bottom: 0;width:100px">
         			<%= cl_image_tag answer.image_id %>
         			<span class="muted text-center">
     	  				Votes: <span id="votes_for_answer_<%=answer.id%>"><%=answer.likes == nil ? 0 : answer.likes %></span>
