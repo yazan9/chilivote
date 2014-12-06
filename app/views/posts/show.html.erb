@@ -15,7 +15,10 @@
 	<div class="span2">
 		<span class="label label-success">Most Voted</span><br/></br/>
 		<% @most_voted.each do |most_voted|%>
-			<%= link_to (cl_image_tag Post.find(most_voted[0]).image_id , :height=> 60, :width => 90, :crop => :fill), "/posts/" + most_voted[0].to_s %>
+			<span>			
+				<%= link_to (cl_image_tag Post.find(most_voted[0]).image_id , :height=> 60, :width => 90, :crop => :fill), "/posts/" + most_voted[0].to_s %>
+				<span class="badge badge-info"><%= most_voted[1] %></span>
+			</span>
 			<br/><br/>
 		<%end%>
 	</div>
