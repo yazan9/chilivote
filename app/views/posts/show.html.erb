@@ -23,7 +23,7 @@
 </div>
 <div class="row center">
 	<div id="votes_div"><%= render partial: "votes_count" %></div>
-	<strong><h6>Uploaded By: <%= link_to(@post.user.first_name + ' ' + @post.user.last_name, {:controller => :users, :action => :show, :id => @post.user.id}) %></h6></strong>
+	<div id="owner_div"><strong><h6>Uploaded By: <%= link_to(@post.user.first_name + ' ' + @post.user.last_name, {:controller => :users, :action => :show, :id => @post.user.id}) %></h6></strong></div>
 </div>
 <hr/>
 <div class="row">
