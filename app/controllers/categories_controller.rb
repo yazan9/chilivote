@@ -16,6 +16,9 @@ class CategoriesController < ApplicationController
   end
   
   def list_categories
+   if !signed_in? 
+     redirect_to "/"
+   end
    @categories = Category.find_all_by_active(true, :limit => 8);
    @categories_counter = 1;
    

@@ -46,6 +46,15 @@ Chilivote::Application.routes.draw do
     end
   end
   
+  resources :welcome do
+    collection do
+      get :about
+      get :news
+      get :help
+      get :contact
+    end
+  end
+  
   resources :votes, only: [:create, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
   resources :cvotes
