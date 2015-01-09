@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :pending_friends, :through => :friendships, :source => :friend, :conditions => "status = 0" #the ones for whom this user asked for a friendship
   has_many :cvotes, dependent: :destroy
   has_many :cvote_trackers, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :notifications, :foreign_key => :user_me, dependent: :destroy
   belongs_to :country
   before_save { self.email = email.downcase }

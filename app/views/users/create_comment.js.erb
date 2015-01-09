@@ -1,0 +1,1 @@
+$("#comments<%=@cvote_id.to_s%>").html("<%=escape_javascript render partial: 'comments', :locals=>{:cvote=> (Cvote.find @cvote_id), :user=> current_user}%>");

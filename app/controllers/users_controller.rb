@@ -151,6 +151,24 @@ class UsersController < ApplicationController
     @search_results =   User.find(:all, :conditions => ['lower(first_name) LIKE ? OR lower(last_name) LIKE ?', @q.downcase, @q.downcase])    
   end
   
+  def create_comment
+    @comment = Comment.new
+    @cvote_id = params[:cid]
+    @comment.cvote_id = params[:cid]
+    puts "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm"
+    puts params[:cid]
+    puts params[:text]
+    @comment.user_id = current_user.id
+    @comment.text = params[:text]
+    @comment.save!
+    
+    respond_to do |format|
+        format.js
+                format.html {render :nothing => true, :status => 200, :content_type => 'text/html'}
+
+    end
+  end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
