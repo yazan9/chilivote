@@ -1,0 +1,7 @@
+<%@cvote_trackers.each do |tracker|%>
+	<small><%= tracker.user.first_name%></small>
+	<br>
+<%end%>
+<%if @cvote_trackers.count == 0%>
+<small>No votes yet</small>
+<%end%>

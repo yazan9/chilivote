@@ -23,6 +23,7 @@ Chilivote::Application.routes.draw do
   get 'users/search' => 'users#search'
   get 'users/create_comment' => 'users#create_comment'
   post 'users/create_comment' => 'users#create_comment'
+  get 'users/list_voters' => 'users#list_voters'
 
   resources :users do
     get :vote
@@ -31,6 +32,7 @@ Chilivote::Application.routes.draw do
     get :clear_notifications
     get :search
     get :create_comment
+    get :list_voters
   end
   
   resources :friendship do

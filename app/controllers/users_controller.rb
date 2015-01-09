@@ -155,9 +155,6 @@ class UsersController < ApplicationController
     @comment = Comment.new
     @cvote_id = params[:cid]
     @comment.cvote_id = params[:cid]
-    puts "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm"
-    puts params[:cid]
-    puts params[:text]
     @comment.user_id = current_user.id
     @comment.text = params[:text]
     @comment.save!
@@ -166,6 +163,15 @@ class UsersController < ApplicationController
         format.js
                 format.html {render :nothing => true, :status => 200, :content_type => 'text/html'}
 
+    end
+  end
+  
+  def list_voters
+    
+    respond_to do |format|
+      @cvote_trackers = CvoteTracker.find_all_by_answer_id params[:answer_id]
+        format.js
+        format.html {render :nothing => true, :status => 200, :content_type => 'text/html'}
     end
   end
   

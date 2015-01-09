@@ -1,7 +1,8 @@
-
+<%= render partial: "facebook_share_button"%>
+<div id="voters_div" class="voters_div" style="position:absolute;display:none;background-color:black;color:white;padding:5px;"><small>Loading...</small></div>
   <% @my_friends_cvotes.each do |cvote|%>
   <div id="cvote_<%=cvote.id%>">
-  	<h6><%= cvote.name %></h6>
+  	<span><h6><%= cvote.name %></h6></span>
   	<%if cvote.user_id == @logged_in_user.id%>
   		<%= link_to "<i class='icon-remove pull-right'></i>".html_safe, {:controller=>"cvote", :action=> "remove_cvote", :id => cvote.id, remote: true, :method => :get}%>
   	<%end%>
@@ -14,7 +15,7 @@
     			<li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">
         			<%= cl_image_tag answer.image_id %>
         			<span class="muted text-center">
-    	  				Votes: <span id="votes_for_answer_<%=answer.id%>"><%=answer.likes == nil ? 0 : answer.likes %></span>
+    	  				Votes: <span class="some_trigger" id="votes_for_answer_<%=answer.id%>" data-url="<%= url_for(action: 'list_voters', answer_id: answer.id) %>"><%=answer.likes == nil ? 0 : answer.likes %></span>
         			</span>
         			<% if @logged_in_user.id != cvote.user_id%>
         			<span class="text-center">
@@ -35,7 +36,33 @@
         			<%end%>
     			</li>
     		<%end%>
-    	</ul>	
+    	</ul>   	
+    	<%if cvote.user_id == @logged_in_user.id%>
+  			<div class="fb-share-button" data-href="http://www.chilivote.com" data-layout="button"></div>
+  		<%end%>
     	<hr/>
     </div>
   <%end%>
+
+<script>
+//$(document).ready(function(){
+//  $('.some_trigger').hover(function(){
+//  	$("#voters_div").css({top: event.clientY, left: event.clientX}).show();
+//    $.ajax($(this).data('url'));
+//  }, function() {
+//    $("#voters_div").hide();
+//});
+//});
+
+$(document).ready(function(){
+  $('.some_trigger').hover(function(e){
+ var top = e.pageY+'px';
+ var left = e.pageX+'px';   
+ $.ajax($(this).data('url'));
+ $('#voters_div').css({position:'absolute',top:top,left:left}).show();    
+  }, function() {
+    $("#voters_div").hide();
+});
+});
+
+</script>
