@@ -37,7 +37,8 @@
         			<%end%>
     			</li>
     		<%end%>
-    	</ul>   	
+    	</ul> 
+    	<%= render partial: "comments", :locals => {:cvote => cvote}%>  	
     	<%if cvote.user_id == @logged_in_user.id%>
   			<div class="fb-share-button" data-href="http://www.chilivote.com" data-layout="button">j</div>
   		<%end%>
