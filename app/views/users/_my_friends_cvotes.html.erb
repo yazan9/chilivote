@@ -1,4 +1,5 @@
 <%= render partial: "facebook_share_button"%>
+
 <div id="voters_div" class="voters_div" style="position:absolute;display:none;background-color:black;color:white;padding:5px;"><small>Loading...</small></div>
   <% @my_friends_cvotes.each do |cvote|%>
   <div id="cvote_<%=cvote.id%>">
@@ -38,7 +39,7 @@
     		<%end%>
     	</ul>   	
     	<%if cvote.user_id == @logged_in_user.id%>
-  			<div class="fb-share-button" data-href="http://www.chilivote.com" data-layout="button"></div>
+  			<div class="fb-share-button" data-href="http://www.chilivote.com" data-layout="button">j</div>
   		<%end%>
     	<hr/>
     </div>
@@ -54,15 +55,18 @@
 //});
 //});
 
-$(document).ready(function(){
-  $('.some_trigger').hover(function(e){
+
+$(document).ready(setTimeout(function(){
+ $('.some_trigger').hover(function(e){
  var top = e.pageY+'px';
  var left = e.pageX+'px';   
  $.ajax($(this).data('url'));
  $('#voters_div').css({position:'absolute',top:top,left:left}).show();    
   }, function() {
     $("#voters_div").hide();
+    $("#voters_div").html("Loading ...");
 });
-});
+}),3000);
 
 </script>
+
