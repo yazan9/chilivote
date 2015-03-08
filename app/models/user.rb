@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   has_many :cvote_trackers, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :notifications, :foreign_key => :user_me, dependent: :destroy
+  has_many :polls, dependent: :destroy
+  has_many :pvotes, dependent: :destroy
+  has_many :vote_options, through: :pvotes
   belongs_to :country
   before_save { self.email = email.downcase }
   before_create :create_remember_token
@@ -85,6 +88,10 @@ class User < ActiveRecord::Base
     #user.save!
     return user
     end
+  end
+  
+  def voted_for?(poll)
+    vote_options.any? {|v| v.poll == poll }
   end
 
   private

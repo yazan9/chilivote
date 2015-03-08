@@ -1,0 +1,2 @@
+module PvotesHelper
+end

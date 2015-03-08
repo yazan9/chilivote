@@ -32,11 +32,16 @@ class UsersController < ApplicationController
         friend.cvotes.where("expiry_date > ?", DateTime.now).each do |cvote|
           @my_friends_cvotes << cvote
         end
+        #adding code for friends questions
+        friend.polls.each do |poll|
+          @my_friends_cvotes << poll
+        end
       end
       
       @logged_in_user.cvotes.each do |cvote|
         @my_friends_cvotes << cvote
       end
+      
       
       @my_friends_cvotes = @my_friends_cvotes.sort_by { |obj| obj.created_at }.reverse!
     else

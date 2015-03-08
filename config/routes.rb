@@ -60,6 +60,10 @@ Chilivote::Application.routes.draw do
     end
   end
   
+  resources :polls
+  resources :pvotes, only: [:create]
+
+  
   resources :votes, only: [:create, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
   resources :cvotes

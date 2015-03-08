@@ -1,0 +1,11 @@
+<div class="nested-fields">
+  <div class="form-group">
+    <strong>Answer</strong>
+    <%= f.text_field :title, class: 'form-control', required: true %><br>
+    <label class="checkbox">
+    <%= f.check_box :correct_answer, :onchange => "ttt(this);" %> <small>Correct Answer</small>
+    </label>
+  </div>
+  <%= link_to_remove_association "- remove option", f, {:style=> 'color:#23527c;'} %><br><hr>
+</div>
+

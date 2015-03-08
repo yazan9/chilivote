@@ -1,0 +1,18 @@
+<%= link_to "Ask new Question !", '/polls/new' , {:class=>"btn btn-success text-white", :style=>"color:white"}%>
+<br><br>
+<% @polls.each do |poll| %>
+  <div class="well">
+  	<small>Submitted - <%= time_ago_in_words poll.created_at%> ago</small><br>
+  	<small>Votes : <%=poll.pvotes.count.to_s%></small>
+    <h2><%= poll.topic %></h2>
+  	<%poll.vote_options.each do |vote_option|%>
+  		<%=vote_option.correct_answer ? "<i class='icon-ok'></i>".html_safe : "<i class='icon-minus'></i>".html_safe%> <%=vote_option.title%><br>
+  	<%end%>
+ <br>
+    <div class="btn-group">
+      <%= link_to 'Delete', poll_path(poll),
+                  method: :delete,
+                  class: 'btn btn-danger', data: {confirm: 'Are you sure?'} %>
+    </div>
+  </div>
+<% end %>

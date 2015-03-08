@@ -1,0 +1,70 @@
+<%= flash[:errors]%>
+<%= form_for @poll do |f| %>
+<div class = "row"> 
+  <div class = "span12">
+  <div class="">
+	<h5>We all have many friends, but are all of them true? Find out how well they know you !</h5>
+    <h6>Topic</h6>
+    <%= f.text_area :topic, rows: 2, required: true, class: 'form-control pull-left' %>
+  </div>
+  </div>
+ </div>
+  	
+ 	<div class="row">
+ 		<div class="span12">
+ 
+  <div class="panel panel-default">
+    <div class="panel-heading"><h6>Options</h6></div>
+    <div class="panel-body">
+      <%= f.fields_for :vote_options do |options_form| %>
+        <%= render 'vote_option_fields', f: options_form %>
+      <% end %>
+ 
+      <div class="links">
+        <%= link_to_add_association '+ add option', f, :vote_options , {:style=> 'color:#23527c;'}%>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  <div class="row">
+  	<div class="span12">
+
+  <br/><%= f.submit 'Create', class: 'btn btn-primary btn-lg pull-left', :onclick => "return validate();" %>
+<% end %>
+</div>
+</div>
+
+<script>
+  function ttt(inquestion)
+  {
+  	var anyBoxesChecked = false;
+  	//alert ("test");
+  	var initial_value = ($(inquestion).prop('checked'));
+  	 $("input:checkbox").each(function() {
+     //alert($(this).is(":checked"));
+     $(this).prop('checked', false);
+   });
+   if (initial_value == true){
+   	$(inquestion).prop('checked', true);
+   }
+   
+  };
+  
+  function validate(){
+    var anyBoxesChecked = false;
+    $("input:checkbox").each(function() {
+    	anyBoxesChecked = $(this).prop('checked');
+    	if (anyBoxesChecked == true){
+    		return false;
+    	}
+    });
+    if (anyBoxesChecked == false){
+    	alert ("You have to choose correct answer");
+    	return false;
+    }
+    return true;
+  };
+  
+</script>
+

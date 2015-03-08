@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141214200741) do
+ActiveRecord::Schema.define(version: 20150308105909) do
 
   create_table "answers", force: true do |t|
     t.string   "name"
@@ -83,6 +83,15 @@ ActiveRecord::Schema.define(version: 20141214200741) do
     t.boolean  "viewed",            default: false
   end
 
+  create_table "polls", force: true do |t|
+    t.text     "topic"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "polls", ["user_id"], name: "index_polls_on_user_id"
+
   create_table "posts", force: true do |t|
     t.integer  "user_id"
     t.integer  "category_id"
@@ -96,6 +105,19 @@ ActiveRecord::Schema.define(version: 20141214200741) do
   add_index "posts", ["active"], name: "index_posts_on_active"
   add_index "posts", ["category_id"], name: "index_posts_on_category_id"
   add_index "posts", ["user_id"], name: "index_posts_on_user_id"
+
+  create_table "pvotes", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "vote_option_id"
+    t.integer  "poll_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "pvotes", ["poll_id"], name: "index_pvotes_on_poll_id"
+  add_index "pvotes", ["user_id"], name: "index_pvotes_on_user_id"
+  add_index "pvotes", ["vote_option_id", "user_id"], name: "index_pvotes_on_vote_option_id_and_user_id", unique: true
+  add_index "pvotes", ["vote_option_id"], name: "index_pvotes_on_vote_option_id"
 
   create_table "users", force: true do |t|
     t.string   "first_name"
@@ -114,6 +136,16 @@ ActiveRecord::Schema.define(version: 20141214200741) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+
+  create_table "vote_options", force: true do |t|
+    t.string   "title"
+    t.integer  "poll_id"
+    t.boolean  "correct_answer", default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "vote_options", ["poll_id"], name: "index_vote_options_on_poll_id"
 
   create_table "votes", force: true do |t|
     t.integer  "user_id"

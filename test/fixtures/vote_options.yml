@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  poll_id: 
+  correct_answer: 
+  default: 
+
+two:
+  title: MyString
+  poll_id: 
+  correct_answer: 
+  default: 

@@ -2,6 +2,10 @@
 
 <div id="voters_div" class="voters_div" style="position:absolute;display:none;background-color:black;color:white;padding:5px;"><small>Loading...</small></div>
   <% @my_friends_cvotes.each do |cvote|%>
+  <%if cvote.instance_of? Poll%>
+    <%=render partial: "/polls/poll_body_small", :locals => {:poll => cvote}%>
+    <%next%>
+  <%end%>
   <div id="cvote_<%=cvote.id%>">
   	<span><h6><%= cvote.name %></h6></span>
   	<%if cvote.user_id == @logged_in_user.id%>

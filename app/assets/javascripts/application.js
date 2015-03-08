@@ -17,3 +17,5 @@
 //= require turbolinks
 //= require_tree .
 //= require cloudinary
+//= require cocoon
+//= require jquery.turbolinks
