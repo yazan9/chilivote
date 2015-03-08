@@ -1,4 +1,4 @@
-<div class="well" id="poll_<%=poll.id%>" style="margin-right:5px">
-    <h2><%= poll.topic %></h2>
+<div class="well well-small" id="poll_<%=poll.id%>" style="margin-right:5px">
+    <h6><%= poll.topic %></h6>
     <%= render partial: "/polls/voting_form", :locals => {:poll => poll}%>
 </div>
