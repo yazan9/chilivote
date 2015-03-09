@@ -7,6 +7,7 @@
   <% else %>
   
     <%= render partial: 'polls/vote_option', :locals=>{:poll => poll}, collection: poll.vote_options, as: :option %>
+    <br>
     <%= submit_tag 'Vote', class: 'btn btn-lg btn-primary' %>
   <% end %>
 <% end %>

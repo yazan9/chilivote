@@ -1,10 +1,12 @@
+<div class = "row">
+<div class = "span9">
 <%= link_to "Ask new Question !", '/polls/new' , {:class=>"btn btn-success text-white", :style=>"color:white"}%>
 <br><br>
 <% @polls.each do |poll| %>
-  <div class="well">
+  <div class="well" style="background-color: white; margin-right:5px;">
   	<small>Submitted - <%= time_ago_in_words poll.created_at%> ago</small><br>
   	<small>Votes : <%=poll.pvotes.count.to_s%></small>
-    <h2><%= poll.topic %></h2>
+    <h6><%= poll.topic %></h6>
   	<%poll.vote_options.each do |vote_option|%>
   		<%=vote_option.correct_answer ? "<i class='icon-ok'></i>".html_safe : "<i class='icon-minus'></i>".html_safe%> <%=vote_option.title%><br>
   	<%end%>
@@ -16,3 +18,8 @@
     </div>
   </div>
 <% end %>
+</div>
+<div class="span3">
+	<%= render partial: "best_friends_box"%>
+</div>
+</div>

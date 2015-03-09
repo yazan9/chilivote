@@ -8,3 +8,4 @@ end
 # 4: my friend voted on my chilivote
 # 5: my friend uploaded a photo in categories
 # 6: my friend created a question
+# 7: my friend voted on my question

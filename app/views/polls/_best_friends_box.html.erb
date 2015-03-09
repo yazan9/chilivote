@@ -1,0 +1,8 @@
+<h4>Your Best Friends</h4>
+<%@best_friends_sorted.each do |best_friend|%>
+<div class = "alert">
+	<%=user_avatar(User.find(best_friend[0])).html_safe %>
+	<small>with <%=best_friend[1]%> correct answers</small>
+</div>
+<%end%>
+

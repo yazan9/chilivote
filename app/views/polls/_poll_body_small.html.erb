@@ -1,4 +1,6 @@
-<div class="well well-small" id="poll_<%=poll.id%>" style="margin-right:5px">
+<div class="well well-small" id="poll_<%=poll.id%>" style="margin-right:5px;background-color: white">
+    <small>Submitted By: <%= user_avatar_one_line_small(User.find(poll.user_id)).html_safe %></small>
+  	<small>- <%= time_ago_in_words poll.created_at%> ago</small>
     <h6><%= poll.topic %></h6>
     <%= render partial: "/polls/voting_form", :locals => {:poll => poll}%>
 </div>

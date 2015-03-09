@@ -5,7 +5,53 @@ class PollsController < ApplicationController
   end
   
   def index
+    #Get my polls
     @polls = current_user.polls.order(created_at: :desc)
+    
+    # Get array of arrays of who answered what [user_id, vopte_option_id]
+    @who_participated = Array.new
+    @polls.each do |p|
+      p.pvotes.each do |pvote|
+        @who_participated<< [pvote.user_id, pvote.vote_option_id]
+      end
+    end
+    
+    #Get all answers from the vote_options table that correspond to the ids found above -- produces a hash
+    @all_answers = Array.new
+    @who_participated.each do |w|
+      @all_answers << VoteOption.find_by_id_and_correct_answer(w[1], true)
+    end
+    
+    #Add 0 or 1 depending on the answer whether wrong or right
+    cntr = 0
+     @who_participated.each do |w|
+      if @all_answers[cntr].nil?
+        w << 0
+      else
+        w << 1
+      end
+      cntr+=1
+    end
+    
+    @best_friends = Array.new
+    
+    #Compare
+    @who_participated.each do |p|
+      if p[2] == 1
+        @best_friends << p[0]
+      end
+    end
+    
+    #Count Occurances and sort
+    counts = Hash.new 0
+    @best_friends.each do |friend|
+      counts[friend] += 1
+    end
+    
+    @best_friends_sorted = counts.sort_by { |user_id, occurance| occurance }.reverse
+   
+    #logger = Logger.new('logfile.log')
+    #logger.info "MMMMMMMMMMMMMMMMM"
   end
  
   def create
