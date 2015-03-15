@@ -140,6 +140,17 @@ class CvoteController < ApplicationController
       format.js { render :layout=>false }
     end
   end
+  
+  def remove_comment
+    @comment = Comment.find(params[:id])
+    if current_user.id != @comment.user_id
+      redirect_to '/'
+    end
+    @comment.destroy
+    respond_to do |format|
+      format.js { render :layout=>false }
+    end
+  end
 
 private
   def signed_in_user

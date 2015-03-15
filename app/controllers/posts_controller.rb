@@ -50,6 +50,7 @@ class PostsController < ApplicationController
   def show
     #@most_voted = Post.order('category_id=#{@post.category_id} and ').limit(2)
     @most_voted = Vote.limit(5).where(:category_id => @post.category_id).order("count_all desc").count(group: :post_id)
+    @my_photos = Post.find_all_by_user_id_and_category_id(current_user.id, @post.category_id)
   end
 
   # GET /posts/new
@@ -111,9 +112,12 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
-    @post.destroy
+   @post.destroy
+   #logger = Logger.new('logfile.log')
+   #logger.info "MMMMMMMMMMMMMMM"
+   #logger.info(params[:back_to_page])
     respond_to do |format|
-      format.html { redirect_to posts_url }
+      format.html { redirect_to params[:back_to_page]}
       format.json { head :no_content }
     end
   end

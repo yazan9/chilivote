@@ -8,7 +8,22 @@
 </div>
 <br/>
 <div class="row" style="height:400px">
-	<div class="span2"></div>
+	<div class="span2">
+		<span class="label label-success">My Photos</span><br/></br/>
+		<% @my_photos.each do |my_photo|%>
+			<span>		
+				 <%= link_to "<i class='icon-remove'></i>".html_safe, post_path(my_photo, :back_to_page => request.original_url),
+                  method: :delete,
+                  data: {confirm: 'Are you sure?'} %>
+				<%= link_to (cl_image_tag my_photo.image_id , :height=> 60, :width => 90, :crop => :fill), "/posts/" + my_photo.id.to_s %>
+				<span class="badge badge-info"><%= my_photo.votes.count %></span>
+			</span>
+			<h6>Rank: <% @rank = Vote.where(:category_id => my_photo.category_id).order("count_all desc").count(group: :post_id).keys.index(my_photo.id)%>
+				<%= @rank.nil? ? "No Votes" : @rank+1%>
+			</h6>
+			<br/>
+		<%end%>
+	</div>
 	<div class="span8 center" id="image_div">
 		<%= cl_image_tag @post.image_id, :height => 400, :width => 600, :crop => :fit %>
 	</div>
