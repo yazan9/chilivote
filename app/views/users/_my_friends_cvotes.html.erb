@@ -6,7 +6,7 @@
     <%=render partial: "/polls/poll_body_small", :locals => {:poll => cvote}%>
     <%next%>
   <%end%>
-  <div id="cvote_<%=cvote.id%>">
+  <div id="cvote_<%=cvote.id%>" class="well well-small" style="margin-right:5px;background-color: white">
   	<span><h6><%= cvote.name %></h6></span>
   	<%if cvote.user_id == @logged_in_user.id%>
   		<%= link_to "<i class='icon-remove pull-right'></i>".html_safe, {:controller=>"cvote", :action=> "remove_cvote", :id => cvote.id, remote: true, :method => :get}%>
@@ -46,7 +46,7 @@
     	<%if cvote.user_id == @logged_in_user.id%>
   			<div class="fb-share-button" data-href="http://www.chilivote.com" data-layout="button">j</div>
   		<%end%>
-    	<hr/>
+    	
     </div>
   <%end%>
 

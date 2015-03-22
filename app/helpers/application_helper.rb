@@ -3,7 +3,7 @@ module ApplicationHelper
     @avatar = "<div class='avatar_box'>"
     @avatar += cl_image_tag user.profile_image ? (user.profile_image) : Chilivote::Application.config.default_profile_image , :width=>40, :height => 40, :crop => :thumb
     @avatar += "<span class='user_name_in_avatar'>"
-    @avatar += link_to user.first_name + " " + user.last_name, :contoller => 'user', :action => 'show', :id => user.id
+    @avatar += link_to user.first_name + " " + user.last_name, {:controller => 'users', :action => 'show', :id => user.id}
     @avatar += "</span>"
     @avatar += "</div>"
   end
@@ -12,7 +12,7 @@ module ApplicationHelper
     @avatar = "<span class='avatar_box'>"
     @avatar += cl_image_tag user.profile_image ? (user.profile_image) : Chilivote::Application.config.default_profile_image , :width=>40, :height => 40, :crop => :thumb
     @avatar += "<span class='user_name_in_avatar'>"
-    @avatar += link_to user.first_name + " " + user.last_name, :contoller => 'user', :action => 'show', :id => user.id
+    @avatar += link_to user.first_name + " " + user.last_name, {:controller => 'users', :action => 'show', :id => user.id}
     @avatar += "</span>"
     @avatar += "</span>"
   end
@@ -21,7 +21,7 @@ module ApplicationHelper
     @avatar = "<span class='avatar_box'>"
     @avatar += cl_image_tag user.profile_image ? (user.profile_image) : Chilivote::Application.config.default_profile_image , :width=>25, :height => 25, :crop => :thumb
     @avatar += "<span class='user_name_in_avatar'>"
-    @avatar += link_to user.first_name + " " + user.last_name, {:contoller => 'user', :action => 'show', :id => user.id}
+    @avatar += link_to user.first_name + " " + user.last_name, {:controller => 'users', :action => 'show', :id => user.id}
     @avatar += "</span>"
     @avatar += "</span>"
   end

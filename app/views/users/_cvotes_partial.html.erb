@@ -1,11 +1,11 @@
 <br>
-<h5 style="color:#7d9523">
-<%= @user.first_name.titleize + " " + @user.last_name.titleize%> currently has <%= @cvotes.count%> Chilivotes open
-</h5>
-<br>
-<%if @cvotes.count != 0%>
-  <%@cvotes.each do |cvote|%>
-  <div id="cvote_<%=cvote.id%>">
+<%if @my_friends_cvotes.count != 0%>
+  <%@my_friends_cvotes.each do |cvote|%>
+  <%if cvote.instance_of? Poll%>
+    <%=render partial: "/polls/poll_body_small", :locals => {:poll => cvote}%>
+    <%next%>
+  <%end%>
+  <div id="cvote_<%=cvote.id%>" class="well well-small" style="margin-right:5px;background-color: white">
     <h6><%= cvote.name %></h6>
     <small>Sumitted: <%= time_ago_in_words cvote.created_at%> ago</small>
     <ul class="thumbnails">
@@ -36,7 +36,7 @@
   <%end%>
 </ul>
 <%= render partial: "comments", :locals => {:cvote => cvote}%>
-<hr>
+
 </div>
 <%end%>
 <%end%>

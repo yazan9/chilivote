@@ -1,0 +1,1 @@
+$("#answers_for_poll_<%=@poll.id%>").html("<%= escape_javascript render partial: 'polls/show_answers', :locals=>{:poll_votes=> @poll_votes}%>");

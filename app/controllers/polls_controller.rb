@@ -83,6 +83,21 @@ class PollsController < ApplicationController
     end
     redirect_to polls_path
   end
+  
+  def show_answers
+    @poll = Poll.find(params[:poll_id])
+    @poll_votes = @poll.pvotes
+     respond_to do |format|
+        format.js
+    end
+  end
+  
+  def hide_answers
+    @poll_id = params[:poll_id]
+    respond_to do |format|
+        format.js
+    end
+  end
  
   private
  

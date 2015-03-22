@@ -44,9 +44,13 @@ class UsersController < ApplicationController
       
       
       @my_friends_cvotes = @my_friends_cvotes.sort_by { |obj| obj.created_at }.reverse!
+      
+     # @best_friend = get_best_friend(@logged_in_user.id)
     else
       @friends = nil
     end
+    
+    @best_friends = get_best_friends
   end
 
   # GET /users/new
@@ -180,6 +184,63 @@ class UsersController < ApplicationController
     end
   end
   
+    def best_friends
+      logger = Logger.new('logfile2.log')
+      logger.info "3434343434344"
+      #Get my polls
+      if params[:id] == current_user.id.to_s
+        @user = current_user
+        logger.info "here1"
+      else
+        @user = User.find(params[:id])
+        logger.info "here222222222222"
+        redirect_to '/' and return if !current_user.friends.include?(@user)
+      end
+    
+      @polls = @user.polls.order(created_at: :desc)
+    
+      # Get array of arrays of who answered what [user_id, vopte_option_id]
+      @who_participated = Array.new
+      @polls.each do |p|
+        p.pvotes.each do |pvote|
+          @who_participated<< [pvote.user_id, pvote.vote_option_id]
+        end
+      end
+    
+      #Get all answers from the vote_options table that correspond to the ids found above -- produces a hash
+      @all_answers = Array.new
+      @who_participated.each do |w|
+        @all_answers << VoteOption.find_by_id_and_correct_answer(w[1], true)
+      end
+    
+      #Add 0 or 1 depending on the answer whether wrong or right
+      cntr = 0
+      @who_participated.each do |w|
+        if @all_answers[cntr].nil?
+          w << 0
+        else
+          w << 1
+        end
+        cntr+=1
+      end
+    
+      @best_friends = Array.new
+    
+    #Compare
+      @who_participated.each do |p|
+        if p[2] == 1
+          @best_friends << p[0]
+        end
+      end
+    
+      #Count Occurances and sort
+      counts = Hash.new 0
+      @best_friends.each do |friend|
+        counts[friend] += 1
+      end
+    
+      @best_friends_sorted = counts.sort_by { |user_id, occurance| occurance }.reverse
+    end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -208,5 +269,60 @@ class UsersController < ApplicationController
       redirect_to '/' unless current_user.admin?
     end
     
+  
     
+    
+    def get_best_friends
+      #Get my polls
+      if params[:id] == current_user.id
+        @user = current_user
+      else
+        @user = User.find(params[:id])
+      end
+    
+      @polls = @user.polls.order(created_at: :desc)
+    
+      # Get array of arrays of who answered what [user_id, vopte_option_id]
+      @who_participated = Array.new
+      @polls.each do |p|
+        p.pvotes.each do |pvote|
+          @who_participated<< [pvote.user_id, pvote.vote_option_id]
+        end
+      end
+    
+      #Get all answers from the vote_options table that correspond to the ids found above -- produces a hash
+      @all_answers = Array.new
+      @who_participated.each do |w|
+        @all_answers << VoteOption.find_by_id_and_correct_answer(w[1], true)
+      end
+    
+      #Add 0 or 1 depending on the answer whether wrong or right
+      cntr = 0
+      @who_participated.each do |w|
+        if @all_answers[cntr].nil?
+          w << 0
+        else
+          w << 1
+        end
+        cntr+=1
+      end
+    
+      @best_friends = Array.new
+    
+    #Compare
+      @who_participated.each do |p|
+        if p[2] == 1
+          @best_friends << p[0]
+        end
+      end
+    
+      #Count Occurances and sort
+      counts = Hash.new 0
+      @best_friends.each do |friend|
+        counts[friend] += 1
+      end
+    
+      @best_friends_sorted = counts.sort_by { |user_id, occurance| occurance }.reverse.take(5)
+      return @best_friends_sorted
+    end  
 end

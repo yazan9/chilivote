@@ -16,6 +16,9 @@
                   method: :delete,
                   class: 'btn btn-danger', data: {confirm: 'Are you sure?'} %>
     </div>
+    <br><small> <%=link_to "Show answers", {:controller=> "polls", :action=> "show_answers", :poll_id=> poll.id}, remote: true, style:"color:#b1110e;"%></small>
+    	<small>	<%=link_to "Hide answers", {:controller=> "polls", :action=> "hide_answers", :poll_id=> poll.id}, remote: true, style:"color:#b1110e;margin-left:100px"%></small>
+    <div id="answers_for_poll_<%=poll.id%>"></div>
   </div>
 <% end %>
 </div>

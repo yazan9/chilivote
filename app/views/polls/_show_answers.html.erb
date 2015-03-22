@@ -1,0 +1,10 @@
+
+<table>
+<%poll_votes.each do |answer|%>
+<tr>
+	<td width="200px"><small><%=answer.user.first_name+" "+answer.user.last_name%></small></td>
+	<td><small><%=answer.vote_option.title%></small></td>
+</tr>
+<%end%>
+</table>
+

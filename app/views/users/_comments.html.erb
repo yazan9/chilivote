@@ -18,7 +18,7 @@
 	<%=form_tag("/users/create_comment", :remote => true) do%>
 	<span>
 	<%=user_avatar_one_line_small_photo(current_user).html_safe%>
-	<span>	<small><%= text_field_tag :text,nil, {:placeholder => "Comment ...", :style=>"width:90%; font-size:12px;margin-left:5px"}%></small></span>
+	<span>	<small><%= text_field_tag :text,nil, {:placeholder => "Comment ...", :style=>"width:85%; font-size:12px;margin-left:5px"}%></small></span>
 	</span>
 		<%=hidden_field_tag 'cid', cvote.id%> 
 	<%end%>

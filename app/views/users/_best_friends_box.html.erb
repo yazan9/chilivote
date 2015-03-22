@@ -1,0 +1,10 @@
+<div style="text-align: left">
+<h2><b>Top 5 Friends</b></h2>
+<%@best_friends.each do |best_friend|%>
+<div class = "alert">
+	<%=user_avatar(User.find(best_friend[0])).html_safe %>
+	<small>with <%=best_friend[1]%> correct answers</small>
+</div>
+<%end%>
+<%=link_to "more...", {:controller=>"users", :action => "best_friends", :id => params[:id]}, style: "color:#b1110e"%>
+</div>

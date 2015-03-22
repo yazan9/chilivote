@@ -29,7 +29,11 @@
     	</div>
 	</div>
 	<%else%>
-	  <%= cl_image_tag @user.profile_image ? @user.profile_image : Chilivote::Application.config.default_profile_image , :width=>168, :height => 168, :crop => :fit, :class => "img-polaroid"%>
+	<div id="profile_image_container">
+		<div id="profile_image_div">
+	  <%= cl_image_tag @user.profile_image ? @user.profile_image : Chilivote::Application.config.default_profile_image , :width=>168, :height => 168, :crop => :fill, :class => "img-polaroid"%>
+	 </div>
+	 </div>
 	<%end%>
 
 <br/></br/>
@@ -42,3 +46,5 @@
 <div class="pull-left" class="">
 <%= link_to "Popular Chilivotes", '/categories/list_categories/' , {:class=>"btn btn-success text-white", :style=>"color:white;width:130px"}%>
 </div>
+<br><br><br>
+<%= render partial: "best_friends_box"%>
