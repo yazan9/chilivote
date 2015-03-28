@@ -185,15 +185,15 @@ class UsersController < ApplicationController
   end
   
     def best_friends
-      logger = Logger.new('logfile2.log')
-      logger.info "3434343434344"
+      #logger = Logger.new('logfile2.log')
+      #logger.info "3434343434344"
       #Get my polls
       if params[:id] == current_user.id.to_s
         @user = current_user
-        logger.info "here1"
+        #logger.info "here1"
       else
         @user = User.find(params[:id])
-        logger.info "here222222222222"
+        #logger.info "here222222222222"
         redirect_to '/' and return if !current_user.friends.include?(@user)
       end
     

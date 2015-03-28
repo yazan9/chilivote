@@ -1,2 +1,16 @@
-asdalksjdlk
-<%=@best_friends_sorted.count%>
+<table width="100%">
+	<%@best_friends_sorted.each_slice(1) do |slice|%>
+		<tr>
+			<% slice.each do |friend|%>
+				<td>
+					<%user = User.find(friend[0])%>
+					<%=avatar_image_big(user).html_safe %>
+					<strong>
+					<%=link_to user.first_name + " " + user.last_name, :contoller => 'user', :action => 'show', :id => user.id%>
+					</strong>
+					<br/><br/>
+				</td>	
+			<%end%>
+		</tr>
+	<%end%>
+</table>

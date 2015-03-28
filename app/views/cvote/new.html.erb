@@ -1,3 +1,34 @@
+
+<%= cloudinary_js_config %> 
+<script>
+	$(document).ready(function() {
+    $(".cloudinary-fileupload")
+      .cloudinary_fileupload({ 
+        acceptFileTypes: /(\.|\/)(gif|jpe?g|png|bmp)$/i,
+        maxFileSize: 10000000, // 5MB
+        dropZone: "#direct_upload",
+        start: function (e) {
+          $("#progress_div").html("<img src='http://res.cloudinary.com/hgqr8qyb1/image/upload/v1401996984/progress-dots_nld5sg.gif'>")
+        },
+        
+        progress: function (e, data) {},
+        fail: function (e, data) {
+          $("#progress_div").text("Upload failed");
+        }
+      })
+      .off("cloudinarydone").on("cloudinarydone", function (e, data) {
+      	$("#progress_div").html("")
+        $("#answers_div").append( 
+       $.cloudinary.image(data.result.public_id, 
+           { format: data.result.format, version: data.result.version, 
+             crop: 'fit', width: 168, height: 168}).addClass('img-polaroid pull-left') );
+       $('.image_public_id').val(data.result.public_id);
+       $.ajax("/cvote/manage_answers/" + data.result.public_id);
+      //view_upload_de tails(data.result);
+      });
+    });
+</script>
+
 <%=form_for(@cvote, :url => url_for(:controller => 'cvote', :action => 'create')) do |f|%>
 <div class="row">
 	<div class="span12">
@@ -52,32 +83,3 @@
 		
 	</div>
 </div>
-<%= cloudinary_js_config %> 
-<script>
-	$(document).ready(function() {
-    $(".cloudinary-fileupload")
-      .cloudinary_fileupload({ 
-        acceptFileTypes: /(\.|\/)(gif|jpe?g|png|bmp)$/i,
-        maxFileSize: 10000000, // 5MB
-        dropZone: "#direct_upload",
-        start: function (e) {
-          $("#progress_div").html("<img src='http://res.cloudinary.com/hgqr8qyb1/image/upload/v1401996984/progress-dots_nld5sg.gif'>")
-        },
-        
-        progress: function (e, data) {},
-        fail: function (e, data) {
-          $("#progress_div").text("Upload failed");
-        }
-      })
-      .off("cloudinarydone").on("cloudinarydone", function (e, data) {
-      	$("#progress_div").html("")
-        $("#answers_div").append( 
-       $.cloudinary.image(data.result.public_id, 
-           { format: data.result.format, version: data.result.version, 
-             crop: 'fit', width: 168, height: 168}).addClass('img-polaroid pull-left') );
-       $('.image_public_id').val(data.result.public_id);
-       $.ajax("/cvote/manage_answers/" + data.result.public_id);
-      //view_upload_de tails(data.result);
-      });
-    });
-</script>

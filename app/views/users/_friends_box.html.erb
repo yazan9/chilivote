@@ -1,6 +1,7 @@
 <% if !@friends.nil?%>
 	<% @friends.each do |friend|%>
-		<%=user_avatar(friend).html_safe %>
+		<%=user_avatar_one_line_small(friend).html_safe %>
+		<br><br>
 	<%end%>
 <%else%>
 	<p><%= "You have no friends" %></p>
