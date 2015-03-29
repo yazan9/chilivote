@@ -7,8 +7,10 @@
   <%end%>
   <div id="cvote_<%=cvote.id%>" class="well well-small" style="margin-right:5px;background-color: white">
     <h6><%= cvote.name %></h6>
-    <small>Sumitted: <%= time_ago_in_words cvote.created_at%> ago</small>
-    <ul class="thumbnails">
+	<small>Submitted By: <%= user_avatar_one_line_small(cvote.user).html_safe %></small>
+  	<small>- <%= time_ago_in_words cvote.created_at%> ago</small>    <ul class="thumbnails">
+  		  	<br/>
+
       <%voted = false%>
       <% cvote.answers.each do |answer|%>
       <li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">

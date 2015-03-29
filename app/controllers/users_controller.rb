@@ -17,13 +17,22 @@ class UsersController < ApplicationController
   def show
     @is_current_user = current_user?(@user)
     @is_signed_in = signed_in?
-    @logged_in_user = current_user
-    @friendship = Friendship.find_by_user_id_and_friend_id(@logged_in_user, @user)
+    @crrent_user = current_user
+    
+    if @is_current_user
+      @logged_in_user = @current_user
+    else
+      @logged_in_user = @user
+    end
+    #@friendship = Friendship.find_by_user_id_and_friend_id(@logged_in_user, @user)
+    @friendship = Friendship.find_by_user_id_and_friend_id(@current_user, @logged_in_user)
     @cvotes = @user.cvotes.where("expiry_date > ?", DateTime.now).order(created_at: :desc)
     
     if params[:mode] == "self" && @is_signed_in
       @my_own_cvotes = @logged_in_user.cvotes.order(created_at: :desc)
     end
+    
+    
     
     if @is_signed_in
       @friends = @logged_in_user.friends

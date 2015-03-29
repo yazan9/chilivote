@@ -1,13 +1,17 @@
-<%= form_tag pvotes_path, method: :post, remote: true, id: 'voting_form_'+poll.id.to_s do %>
-  <%= hidden_field_tag 'poll[id]', poll.id %>
+	<%= form_tag pvotes_path, method: :post, remote: true, id: 'voting_form_'+poll.id.to_s do %>
+  		<%= hidden_field_tag 'poll[id]', poll.id %>
  
  
-  <% if current_user.voted_for?(poll) %>
-    <p>You have voted!</p>
-  <% else %>
-  
-    <%= render partial: 'polls/vote_option', :locals=>{:poll => poll}, collection: poll.vote_options, as: :option %>
-    <br>
-    <%= submit_tag 'Vote', class: 'btn btn-lg btn-primary' %>
-  <% end %>
-<% end %>
+  		<% if current_user.voted_for?(poll) %>
+    		<p>You have voted!</p>
+  		<% else %>
+  			
+    		<%= render partial: 'polls/vote_option', :locals=>{:poll => poll}, collection: poll.vote_options, as: :option %>
+    		<br>
+    		<%if poll.user_id != current_user.id%>		
+    			<%= submit_tag 'Vote', class: 'btn btn-lg btn-primary' %>
+    		<%else%>
+    			<small><i>Posted by you</i></small>
+    		<%end%>
+  		<% end %>
+	<% end %>
