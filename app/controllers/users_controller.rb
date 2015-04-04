@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   def show
     @is_current_user = current_user?(@user)
     @is_signed_in = signed_in?
-    @crrent_user = current_user
+    @current_user = current_user
     
     if @is_current_user
       @logged_in_user = @current_user
@@ -36,6 +36,7 @@ class UsersController < ApplicationController
     
     if @is_signed_in
       @friends = @logged_in_user.friends
+      @my_friends = current_user.friends
       @my_friends_cvotes = Array.new
       @friends.each do |friend|
         friend.cvotes.where("expiry_date > ?", DateTime.now).each do |cvote|

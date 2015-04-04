@@ -1,5 +1,6 @@
 <%= render partial: "facebook_share_button"%>
 
+
 <div id="voters_div" class="voters_div" style="position:absolute;display:none;background-color:black;color:white;padding:5px;"><small>Loading...</small></div>
   <% @my_friends_cvotes.each do |cvote|%>
   <%if cvote.instance_of? Poll%>
@@ -8,7 +9,7 @@
   <%end%>
   <div id="cvote_<%=cvote.id%>" class="well well-small" style="margin-right:5px;background-color: white">
   	<span><h6><%= cvote.name %></h6></span>
-  	<%if cvote.user_id == @logged_in_user.id%>
+  	<%if cvote.user_id == @current_user.id%>
   		<%= link_to "<i class='icon-remove pull-right'></i>".html_safe, {:controller=>"cvote", :action=> "remove_cvote", :id => cvote.id, remote: true, :method => :get}%>
   	<%end%>
   	<small>Submitted By: <%= user_avatar_one_line_small(cvote.user).html_safe %></small>
@@ -22,12 +23,12 @@
         			<span class="muted text-center">
     	  				Votes: <span class="some_trigger" id="votes_for_answer_<%=answer.id%>" data-url="<%= url_for(action: 'list_voters', answer_id: answer.id) %>"><%=answer.likes == nil ? 0 : answer.likes %></span>
         			</span>
-        			<% if @logged_in_user.id != cvote.user_id%>
+        			<% if @current_user.id != cvote.user_id%>
         			<span class="text-center">
-        				<% if @logged_in_user.cvoted?(cvote)%>
+        				<% if @current_user.cvoted?(cvote)%>
         					<%voted = true%>
         				<%end%>
-        				<%if @logged_in_user.cvoted?(cvote) && CvoteTracker.find_by_user_id_and_cvote_id(@logged_in_user.id, cvote.id).answer == answer%>        				  
+        				<%if @current_user.cvoted?(cvote) && CvoteTracker.find_by_user_id_and_cvote_id(@current_user.id, cvote.id).answer == answer%>        				  
         				  <br/><i class="icon-ok"></i>
         				  <% voted = true%>	
         				<%else%>
@@ -43,7 +44,7 @@
     		<%end%>
     	</ul> 
     	<%= render partial: "comments", :locals => {:cvote => cvote}%>  	
-    	<%if cvote.user_id == @logged_in_user.id%>
+    	<%if cvote.user_id == @current_user.id%>
   			<div class="fb-share-button" data-href="http://www.chilivote.com" data-layout="button">j</div>
   		<%end%>
     	

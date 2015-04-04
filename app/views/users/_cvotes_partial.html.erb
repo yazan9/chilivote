@@ -19,19 +19,21 @@
     	  Votes: <span id="votes_for_answer_<%=answer.id%>"><%=answer.likes == nil ? 0 : answer.likes %></span>
         </span>
         <span class="text-center">
-        	<% if @logged_in_user.cvoted?(cvote)%>
+        	<% if @current_user.cvoted?(cvote)%>
         		<%voted = true%>
         		<%else%>
         	<%end%>
-        	<%if @logged_in_user.cvoted?(cvote) && CvoteTracker.find_by_user_id_and_cvote_id(@logged_in_user.id, cvote.id).answer == answer%>        				  
-        		<br/><i class="icon-ok"></i>
-        		<% voted = true%>	
-        	<%else%>
-        		<% if voted == false%>
-        			<span id="button_<%=answer.id%>">
-						<%=button_to "Vote", {:controller => "cvote", :action => "submit_cvote", :cvote_id => cvote.id, :answer_id => answer.id} , :class=>"btn btn-success", remote: true, :method => :get%>
-					</span>
-				<%end%>	
+        	<%if cvote.user_id != @current_user.id%>
+        		<%if @current_user.cvoted?(cvote) && CvoteTracker.find_by_user_id_and_cvote_id(@current_user.id, cvote.id).answer == answer%>        				  
+        			<br/><i class="icon-ok"></i>
+        			<% voted = true%>	
+        		<%else%>
+        			<% if voted == false%>
+        				<span id="button_<%=answer.id%>">
+							<%=button_to "Vote", {:controller => "cvote", :action => "submit_cvote", :cvote_id => cvote.id, :answer_id => answer.id} , :class=>"btn btn-success", remote: true, :method => :get%>
+						</span>
+					<%end%>	
+        		<%end%>
         	<%end%>
       	</span>
     </li>
