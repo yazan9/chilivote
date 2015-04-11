@@ -1,5 +1,6 @@
 Chilivote::Application.routes.draw do
   
+
   get 'auth/:provider/callback', to: 'sessions#create_from_fb'
   get 'auth/failure', to: redirect('/')
   
@@ -23,8 +24,19 @@ Chilivote::Application.routes.draw do
   get 'users/search' => 'users#search'
   get 'users/create_comment' => 'users#create_comment'
   post 'users/create_comment' => 'users#create_comment'
+  post 'users/create_status' => 'users#create_status'
+  get 'users/create_status' => 'users#create_status'
   get 'users/list_voters' => 'users#list_voters'
   get 'users/best_friends' => 'users#best_friends'
+  
+  get 'svotes/vote_status_up' => 'svotes#vote_status_up'
+  
+   resources :svotes do
+    collection do
+      get :vote_status_up
+    end
+  end
+
 
   resources :users do
     get :vote
@@ -35,6 +47,7 @@ Chilivote::Application.routes.draw do
     get :create_comment
     get :list_voters
     get :best_friends
+    post :create_status
   end
   
   resources :friendship do
@@ -75,6 +88,10 @@ Chilivote::Application.routes.draw do
   resources :votes, only: [:create, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
   resources :cvotes
+  
+ 
+  
+
   get "welcome/index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

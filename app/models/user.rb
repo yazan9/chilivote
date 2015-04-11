@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   has_many :polls, dependent: :destroy
   has_many :pvotes, dependent: :destroy
   has_many :vote_options, through: :pvotes
+  has_one :status, dependent: :destroy
+  has_many :svotes, dependent: :destroy
   belongs_to :country
   before_save { self.email = email.downcase }
   before_create :create_remember_token
@@ -31,7 +33,7 @@ class User < ActiveRecord::Base
   end
   
   def voted?(post)
-    votes.find_by(post_id: post.id)
+    votes.find_by(post_id:  post.id)
   end
 
   def vote!(post)
@@ -92,6 +94,18 @@ class User < ActiveRecord::Base
   
   def voted_for?(poll)
     vote_options.any? {|v| v.poll == poll }
+  end
+  
+  def voted_for_status?(i)
+    svotes.find_by_status_id(i)
+  end
+  
+  def status_votes_up
+    Svote.find_all_by_status_id_and_svote_status(status.id, 2).count
+  end
+  
+  def status_votes_down
+    Svote.find_all_by_status_id_and_svote_status(status.id, 1).count
   end
 
   private

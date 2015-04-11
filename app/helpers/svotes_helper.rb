@@ -1,0 +1,2 @@
+module SvotesHelper
+end

@@ -185,6 +185,21 @@ class UsersController < ApplicationController
     end
   end
   
+  def create_status
+    @status = Status.find_by_user_id(current_user.id)
+    @status.destroy! if !@status.nil?
+    
+    @status = Status.new
+    @status.user_id = current_user.id
+    @status.title = params[:status_title]
+    @status.save!
+    
+    respond_to do |format|
+      format.js
+        format.html {render :nothing=>true, :status => 200, :content_type => 'text/html'}
+    end
+  end
+  
   def list_voters
     
     respond_to do |format|

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150308105909) do
+ActiveRecord::Schema.define(version: 20150405110058) do
 
   create_table "answers", force: true do |t|
     t.string   "name"
@@ -118,6 +118,24 @@ ActiveRecord::Schema.define(version: 20150308105909) do
   add_index "pvotes", ["user_id"], name: "index_pvotes_on_user_id"
   add_index "pvotes", ["vote_option_id", "user_id"], name: "index_pvotes_on_vote_option_id_and_user_id", unique: true
   add_index "pvotes", ["vote_option_id"], name: "index_pvotes_on_vote_option_id"
+
+  create_table "statuses", force: true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.integer  "status_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "statuses", ["user_id"], name: "index_statuses_on_user_id"
+
+  create_table "svotes", force: true do |t|
+    t.integer  "status_id"
+    t.integer  "user_id"
+    t.integer  "svote_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "first_name"

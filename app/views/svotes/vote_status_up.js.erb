@@ -1,0 +1,2 @@
+$('#status_vote_options').replaceWith("");
+$("#status_vote_counts").html("<%= escape_javascript render partial: 'svotes_count_partial', :locals => {:user=> @status.user}%>");
