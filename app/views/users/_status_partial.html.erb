@@ -5,7 +5,7 @@
 				<%=render partial: "/svotes/svotes_count_partial", :locals => {:user => @user}%>
 			</div>
 			
-			<%if !@current_user.voted_for_status?(@user.status.id)%>
+			<%if !@user.status.nil? and !@current_user.voted_for_status?(@user.status.id)%>
 			<div id="status_vote_options" style="color:red">
 				
 				<small><%=link_to "vote up", "/svotes/vote_status_up"+"?id=" + @user.status.id.to_s, :remote => true%></small> 
