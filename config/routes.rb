@@ -30,10 +30,12 @@ Chilivote::Application.routes.draw do
   get 'users/best_friends' => 'users#best_friends'
   
   get 'svotes/vote_status_up' => 'svotes#vote_status_up'
+  get 'svotes/vote_status_down' => 'svotes#vote_status_down'
   
    resources :svotes do
     collection do
       get :vote_status_up
+      get :vote_status_down
     end
   end
 

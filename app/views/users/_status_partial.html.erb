@@ -15,7 +15,10 @@
 			<%end%>
 	<%elsif @is_current_user%>
 		<div id="status<%=@current_user.id.to_s%>"> 
-			<small><i><%= ("\"" + @current_user.status.title + "\"") if !@current_user.status.nil? %></i></small>
+			<%if !@current_user.status.nil?%>
+				<small><i><%= ("\"" + @current_user.status.title + "\"")%></i></small><br>
+				<%=render partial: "/svotes/svotes_count_partial", :locals => {:user => @current_user}%>
+			<%end%>
 		</div>
 		<br>
 		<%= form_tag("/users/create_status", :remote => true) do%>
