@@ -1,4 +1,4 @@
-<div class = "span4" style="margin-left:0px;padding:2px;">
+<div class = "span4" style="margin-left:0px;padding:2px;max-height: 500px;overflow-y:scroll">
 <small>
 <%if current_user.notifications.count == 0%>
 	<centre><%= "You have no new notifications"%></centre>
@@ -7,7 +7,7 @@
 	<% case notification.notification_type when 1%>
 		<div <%=!notification.viewed ? "class=not_seen" : ''%> id="notification_element" onclick="location.href='<%='/posts/'+notification.target_id.to_s%>';$.ajax('/users/clear_notifications?id=<%=notification.id%>');"><%= user_avatar_one_line_no_link(notification.user).html_safe%> liked your photo</div>
 	<% when 2 %>
-		<div <%=!notification.viewed ? "class=not_seen" : ''%> id = "notification_element"><%= user_avatar_one_line(notification.user).html_safe%> accepted your friend request</div>
+		<div <%=!notification.viewed ? "class=not_seen" : ''%> id="notification_element" onclick="location.href='<%='/users/'+notification.user_friend.to_s%>';$.ajax('/users/clear_notifications?id=<%=notification.id%>');"><%= user_avatar_one_line_no_link(notification.user).html_safe%> accepted you friend request</div>
 	<% when 3%>
 		<div <%=!notification.viewed ? "class=not_seen" : ''%> id = "notification_element" onclick="location.href='<%='/users/'+notification.user_friend.to_s + "#cvote_" + notification.target_id.to_s%>'; $.ajax('/users/clear_notifications?id=<%=notification.id%>');"><%= user_avatar_one_line_no_link(notification.user).html_safe%> created a new Chilivote</div>
 	<% when 4%>
