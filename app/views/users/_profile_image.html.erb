@@ -17,7 +17,7 @@
 		</div>
 		<div id="uploader_form">
 			<%= form_for (@user) do |u|%>
-				<div class="field">
+				<div class="field form_line">
   	 				<%= cl_image_upload_tag(:image_id,
   	 					:crop => :fill, :width => 168, :height => 168,
                         :allowed_formats => ['JPG', 'PNG','GIF', 'BMP'],

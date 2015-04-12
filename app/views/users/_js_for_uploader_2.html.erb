@@ -1,0 +1,56 @@
+<script>
+
+//mouse enter into the image div
+$("#profile_image_container").mouseenter(function () {
+    $("#opaque_slider_div").show('slide', {direction: 'down'}, 100);
+});
+
+
+//mouse out of the image div
+$("#profile_image_container").mouseleave(function () {
+    $("#opaque_slider_div").hide('slide', {direction: 'down'}, 100);
+});
+
+//click on the image to call uploader
+//$("#profile_image_container").click(function () {
+//    $("#my_uploader").click();
+//});
+
+//$('#my_uploader').change(function(click) {
+//  $('#my_uploader').val(this.value);
+//});
+
+
+//the ugly code of uploader
+
+$(document).ready(function() {
+    $(".cloudinary-fileupload").each(function(){
+    	var field = $(this);
+  		var line = field.parents('.form_line');
+      field.cloudinary_fileupload({ 
+        acceptFileTypes: /(\.|\/)(gif|jpe?g|png|bmp)$/i,
+        maxFileSize: 10000000, // 5MB
+        dropZone: "#direct_upload",
+        start: function (e) {
+          $("#profile_image_div").html("<img src='http://res.cloudinary.com/hgqr8qyb1/image/upload/v1401996984/progress-dots_nld5sg.gif'>")
+          $("#opaque_slider_div").attr('display', 'none');
+        },
+        
+        progress: function (e, data) {},
+        fail: function (e, data) {
+          $("#profile_image_div").text("Upload failed");
+        }
+      })
+      field.off("cloudinarydone").on("cloudinarydone", function (e, data) {
+        $("#profile_image_div").html(
+       $.cloudinary.image(data.result.public_id, 
+           { format: data.result.format, version: data.result.version, 
+             crop: 'fit', width: 168, height: 168}).addClass('img-polaroid') );
+       $('.image_public_id').val(data.result.public_id);
+   	   $field.ajax("/users/add_avatar/<%=@user.id%>?image_id="+data.result.public_id)
+      //  view_upload_details(data.result);
+      });
+    });
+    });
+    
+</script>

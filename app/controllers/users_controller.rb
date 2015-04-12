@@ -191,13 +191,19 @@ class UsersController < ApplicationController
     
     @status = Status.new
     @status.user_id = current_user.id
-    @status.title = params[:status_title]
+    if params[:image_id].nil?
+      @status.title = params[:status_title]
+      @status.status_type = 1
+    else
+      @status.title = params[:image_id]
+      @status.status_type = 2
+    end
     @status.save!
     
-    respond_to do |format|
-      format.js
-        format.html {render :nothing=>true, :status => 200, :content_type => 'text/html'}
-    end
+      respond_to do |format|
+        format.js
+          format.html {render :nothing=>true, :status => 200, :content_type => 'text/html'}
+      end    
   end
   
   def list_voters
