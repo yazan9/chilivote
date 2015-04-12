@@ -1,7 +1,7 @@
 <div style="margin-left:0px;">
 	<%if !@is_current_user && current_user.friends.include?(@user)%>
 			<%if !@user.status.nil?%>
-				<%if @user.status.status_type.nil? or @user.status/status_type == 1%>
+				<%if @user.status.status_type.nil? or @user.status.status_type == 1%>
 				
 				  <small><i><%= ("\"" + @user.status.title + "\"")%></i></small>
 				  <%elsif @user.status.status_type == 2%>
