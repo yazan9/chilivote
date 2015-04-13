@@ -16,9 +16,9 @@
 			<%if !@user.status.nil? and !@current_user.voted_for_status?(@user.status.id)%>
 			<div id="status_vote_options" style="color:red">
 				
-				<small><%=link_to "vote up", "/svotes/vote_status_up"+"?id=" + @user.status.id.to_s, :remote => true%></small> 
-				| 
-				<small><%=link_to "vote down", "/svotes/vote_status_down"+"?id=" + @user.status.id.to_s, :remote => true%></small> 
+				<small><%=link_to "vote up", "/svotes/vote_status_up"+"?id=" + @user.status.id.to_s, {:class=>"btn btn-small btn-success", :remote => true}%></small> 
+				
+				<small><%=link_to "vote down", "/svotes/vote_status_down"+"?id=" + @user.status.id.to_s, {:class=>"btn btn-small btn-danger",:remote => true}%></small> 
 			</div>
 			<%end%>
 	<%elsif @is_current_user%>
@@ -36,9 +36,9 @@
 		<div id="status_image_div" class="status_image_div"></div><br>
 
 		<%= form_tag("/users/create_status", :remote => true) do%>
-		<div class="form_line">
-		<a href="javascript: void(0);" id="upload_widget_opener" class="btn btn-info" style="color:white;">Upload image</a><br><br>
-		Or..<br>
+		<div style = "">
+		<a href="javascript: void(0);" id="upload_widget_opener" class="btn btn-lg btn-primary" style="color:white;">Upload image</a>
+		
 
 <script src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>  
           
@@ -63,9 +63,9 @@
 
   }, false);
 </script>
-<br>
-        </div>
-		<small><%= text_field_tag :status_title,nil, {:placeholder => "What's chillin ..", :style=>"width:95%;font-size:12px;margin-left:0px"}%></small>
+
+		<small><%= text_field_tag :status_title,nil, {:placeholder => "What's chillin ..", :style=>"width:70%;font-size:12px;margin-left:0px;margin-top:5px;"}%></small>
+		</div>
 		<%end%>
 		
 	<%end%>

@@ -52,6 +52,9 @@ class UsersController < ApplicationController
         @my_friends_cvotes << cvote
       end
       
+      @logged_in_user.polls.each do |poll|
+        @my_friends_cvotes << poll
+      end
       
       @my_friends_cvotes = @my_friends_cvotes.sort_by { |obj| obj.created_at }.reverse!
       
