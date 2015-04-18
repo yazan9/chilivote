@@ -26,6 +26,15 @@ module ApplicationHelper
     @avatar += "</span>"
   end
   
+   def user_avatar_one_line_small_truncated(user)
+    @avatar = "<span class='avatar_box'>"
+    @avatar += cl_image_tag user.profile_image ? (user.profile_image) : Chilivote::Application.config.default_profile_image , :width=>25, :height => 25, :crop => :thumb
+    @avatar += "<span class='user_name_in_avatar'>"
+    @avatar += link_to truncate(user.first_name + " " + user.last_name, :length => 20), {:controller => 'users', :action => 'show', :id => user.id}
+    @avatar += "</span>"
+    @avatar += "</span>"
+  end
+  
   def user_avatar_one_line_small_photo(user)
     @avatar = "<span class='avatar_box pull-left'>"
     @avatar += cl_image_tag user.profile_image ? (user.profile_image) : Chilivote::Application.config.default_profile_image , :width=>25, :height => 25, :crop => :thumb

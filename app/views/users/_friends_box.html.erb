@@ -1,6 +1,6 @@
 <% if !@my_friends.nil?%>
 	<% @my_friends.each do |friend|%>
-		<%=user_avatar_one_line_small(friend).html_safe %>
+		<small><%=user_avatar_one_line_small_truncated(friend).html_safe %></small>
 		<br><br>
 	<%end%>
 <%else%>

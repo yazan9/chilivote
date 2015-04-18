@@ -203,6 +203,16 @@ class UsersController < ApplicationController
     end
     @status.save!
     
+    #create notification
+    current_user.friends.each do |my_friend|
+          n = Notification.new
+          n.notification_type = 8
+          n.user_me = my_friend.id
+          n.user_friend = current_user.id
+          n.target_id = current_user.id
+          n.save
+      end
+      
       respond_to do |format|
         format.js
           format.html {render :nothing=>true, :status => 200, :content_type => 'text/html'}
