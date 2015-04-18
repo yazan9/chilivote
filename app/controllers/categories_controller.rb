@@ -59,8 +59,23 @@ class CategoriesController < ApplicationController
   # PATCH/PUT /categories/1
   # PATCH/PUT /categories/1.json
   def update
+    #logger = Logger.new('logfile.log')
+    #logger.info "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
+    #logger.info params[:id]
+    #logger.info params[:category][:name]
+    #logger.info params[:category][:description]
+    #logger.info params[:category][:image_id]
+    #logger.info params[:image_id]
+
+    
+    @category = Category.find(params[:id])
+    @category.name = params[:category][:name]
+    @category.description = params[:category][:description]
+    preloaded = Cloudinary::PreloadedFile.new(params[:image_id])         
+    raise "Invalid upload signature" if !preloaded.valid?
+    @category.image_id = preloaded.identifier
     respond_to do |format|
-      if @category.update(category_params)
+      if @category.save
         format.html { redirect_to @category, notice: 'Category was successfully updated.' }
         format.json { head :no_content }
       else
