@@ -61,6 +61,7 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem 'omniauth-facebook'
 gem 'jquery-turbolinks'
 gem 'cocoon' 
+gem 'puma'
 
 group :production do
   gem 'pg', '0.15.1'
