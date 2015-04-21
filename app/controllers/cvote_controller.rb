@@ -5,7 +5,7 @@ class CvoteController < ApplicationController
   
   def new
     @cvote = Cvote.new
-    [:answer1, :answer2, :answer3, :answer4].each { |k| session.delete(k) }
+    [:answer1, :answer2, :answer3].each { |k| session.delete(k) }
   end
   
   def create
@@ -48,12 +48,9 @@ class CvoteController < ApplicationController
       @answer3.image_id = session[:answer3]
     end 
     
-    if session[:answer4] 
-      @answer4 = @cvote.answers.build
-      @answer4.image_id = session[:answer4]
-    end
     
-    [:answer1, :answer2, :answer3, :answer4].each { |k| session.delete(k) }
+    
+    [:answer1, :answer2, :answer3].each { |k| session.delete(k) }
     
       
     
@@ -82,7 +79,6 @@ class CvoteController < ApplicationController
     if !session[:answer1] then session[:answer1] = params[:image_id]
       elsif !session[:answer2] then session[:answer2] = params[:image_id] 
       elsif !session[:answer3] then session[:answer3] = params[:image_id] 
-      elsif !session[:answer4] then session[:answer4] = params[:image_id] 
     end
     respond_to do |format|
         format.html {render :nothing => true, :status => 200, :content_type => 'text/html'}
@@ -94,7 +90,6 @@ class CvoteController < ApplicationController
     session[:answer1] = nil
     session[:answer2] = nil
     session[:answer3] = nil
-    session[:answer4] = nil
     
     redirect_to :action => :new
   end

@@ -58,12 +58,21 @@ class UsersController < ApplicationController
       
       @my_friends_cvotes = @my_friends_cvotes.sort_by { |obj| obj.created_at }.reverse!
       
+      #modified the following line with pagination, remove_if_fucks_up
+      #@paginated_elements = @my_friends_cvotes.paginate(page: params[:page], per_page: 20)
+     
      # @best_friend = get_best_friend(@logged_in_user.id)
     else
       @friends = nil
     end
     
     @best_friends = get_best_friends
+    
+    #modified the following block with pagination, remove_if_fucks_up
+    #respond_to do |format|
+    #  format.html
+    #  format.js
+    #end
   end
 
   # GET /users/new
@@ -81,7 +90,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    #@user = User.new(user_params)
+    @user = User.new(user_params)
 
     respond_to do |format|
       if @user.save
