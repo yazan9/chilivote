@@ -40,11 +40,13 @@ class UsersController < ApplicationController
       @my_friends_cvotes = Array.new
       @friends.each do |friend|
         friend.cvotes.where("expiry_date > ?", DateTime.now).each do |cvote|
-          @my_friends_cvotes << cvote
+          @my_friends_cvotes << cvote if (!@is_current_user and @my_friends.include?(cvote.user))
+          @my_friends_cvotes << cvote if cvote.user.id == @current_user.id
         end
         #adding code for friends questions
         friend.polls.each do |poll|
-          @my_friends_cvotes << poll
+          @my_friends_cvotes << poll if (!@is_current_user && @my_friends.include?(poll.user))
+          @my_friends_cvotes << poll if poll.user.id == @current_user.id
         end
       end
       
