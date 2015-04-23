@@ -1,5 +1,5 @@
 <%@cvote_trackers.each do |tracker|%>
-	<small><%= tracker.user.first_name%></small>
+	<small><%= tracker.user.first_name%> <%=tracker.user.last_name%></small>
 	<br>
 <%end%>
 <%if @cvote_trackers.count == 0%>

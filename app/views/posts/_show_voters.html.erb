@@ -1,0 +1,7 @@
+<%@votes.each do |vote|%>
+	<small><%= vote.user.first_name%> <%= vote.user.last_name%></small>
+	<br>
+<%end%>
+<%if @votes.count == 0%>
+<small>No votes yet</small>
+<%end%>

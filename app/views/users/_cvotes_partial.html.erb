@@ -1,4 +1,6 @@
 <br>
+<div id="voters_div" class="voters_div" style="position:absolute;display:none;background-color:black;color:white;padding:5px;"><small>Loading...</small></div>
+
 <%if @my_friends_cvotes.count != 0%>
   <%@my_friends_cvotes.each do |cvote|%>
   <%if cvote.instance_of? Poll%>
@@ -16,7 +18,7 @@
       <li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">
         <%= cl_image_tag answer.image_id %>
         <span class="muted text-center">
-    	  Votes: <span id="votes_for_answer_<%=answer.id%>"><%=answer.likes == nil ? 0 : answer.likes %></span>
+    	  Votes: <span class = "some_trigger" id="votes_for_answer_<%=answer.id%>" data-url="<%= url_for(action: 'list_voters', answer_id: answer.id) %>"><%=answer.likes == nil ? 0 : answer.likes %></span>
         </span>
         <span class="text-center">
         	<% if @current_user.cvoted?(cvote)%>
@@ -45,3 +47,27 @@
 <%end%>
 <%end%>
 
+<script>
+//$(document).ready(function(){
+//  $('.some_trigger').hover(function(){
+//  	$("#voters_div").css({top: event.clientY, left: event.clientX}).show();
+//    $.ajax($(this).data('url'));
+//  }, function() {
+//    $("#voters_div").hide();
+//});
+//});
+
+
+$(document).ready(setTimeout(function(){
+ $('.some_trigger').hover(function(e){
+ var top = e.pageY+'px';
+ var left = e.pageX+'px';   
+ $.ajax($(this).data('url'));
+ $('#voters_div').css({position:'absolute',top:top,left:left}).show();    
+  }, function() {
+    $("#voters_div").hide();
+    $("#voters_div").html("Loading ...");
+});
+}),3000);
+
+</script>

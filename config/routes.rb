@@ -17,6 +17,7 @@ Chilivote::Application.routes.draw do
       get :previous
       get :activate
       get :deactivate
+      get :list_voters
     end
   end
 

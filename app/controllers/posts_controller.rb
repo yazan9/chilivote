@@ -148,6 +148,14 @@ class PostsController < ApplicationController
   def vote
     
   end
+  
+  def list_voters
+     respond_to do |format|
+      @votes = Vote.find_all_by_post_id(params[:post_id])
+        format.js
+        format.html {render :nothing => true, :status => 200, :content_type => 'text/html'}
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -1,1 +1,26 @@
-<strong>votes: </strong><%=@post.votes.count%>
+<div id="voters_div" class="voters_div" style="position:absolute;display:none;background-color:black;color:white;padding:5px;z-index:3000;"><small>Loading...</small></div>
+<div id="votes_count_div" data-url="<%= url_for(controller: 'posts', action: 'list_voters', post_id: @post.id) %>"><strong>votes: </strong><%=@post.votes.count%></div>
+<script>
+//$(document).ready(function(){
+//  $('.some_trigger').hover(function(){
+//  	$("#voters_div").css({top: event.clientY, left: event.clientX}).show();
+//    $.ajax($(this).data('url'));
+//  }, function() {
+//    $("#voters_div").hide();
+//});
+//});
+
+
+$(document).ready(setTimeout(function(){
+ $('#votes_count_div').hover(function(e){
+ var top = e.pageY+'px';
+ var left = e.pageX+'px';   
+ $.ajax($(this).data('url'));
+ $('#voters_div').css({position:'absolute',top:top,left:left}).show();    
+  }, function() {
+    $("#voters_div").hide();
+    $("#voters_div").html("Loading ...");
+});
+}),3000);
+
+</script>

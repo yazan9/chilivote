@@ -1,4 +1,5 @@
 <div class="row" class="span12">
+	<h1><%=@post.category.name%></h1>
 	<span <%= "style = font-weight:bold" if params[:view_by] == "recent" %>>
 		<%= link_to "Most Recent", "/posts/" + (Post.where(:category_id => @post.category_id).order("id DESC").first).id.to_s + "?view_by=recent"%> |
 	</span>
