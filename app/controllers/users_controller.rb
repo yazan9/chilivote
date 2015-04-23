@@ -159,6 +159,18 @@ class UsersController < ApplicationController
       #notification.destroy
     #end
     
+    if !params[:mode].nil? and params[:mode] == "all"  
+      @notifications = Notification.where(user_me: current_user.id)
+      @notifications.each do |notification|
+          notification.destroy
+      end
+      
+      respond_to do |format|
+        format.js
+      end
+      return
+    end
+    
     @notification = Notification.find(params[:id])
     if current_user.id != @notification.user_me
       redirect_to '/' and return
@@ -168,11 +180,14 @@ class UsersController < ApplicationController
     @notification.save
     
     @notifications = Notification.where(user_me: current_user.id)
+    
+    
     @notifications.each do |notification|
       if (Time.now - notification.created_at)/1.day > 7
         notification.destroy
       end
     end
+    
     
     respond_to do |format|
         format.js

@@ -1,4 +1,6 @@
 <div class = "span4" style="margin-left:0px;padding:2px;max-height: 500px;overflow-y:scroll">
+<small><%=link_to "Clear All", {:controller=>"users", :action => "clear_notifications", :mode => "all", :remote => true}, :style => "color:blue"%></small>
+<div id="user_notifications">
 <small>
 <%if current_user.notifications.count == 0%>
 	<centre><%= "You have no new notifications"%></centre>
@@ -25,4 +27,5 @@
 <%end%>
 <%end%>
 </small>
+</div>
 </div>

@@ -1,2 +1,3 @@
 $("#notifications_counter").html("<span class='badge badge-warning'><%= current_user.notifications.where(viewed: 'f').count%></span>");
+$("#user_notifications").html("<small><centre>You have no new notifications</centre></small>");
 
