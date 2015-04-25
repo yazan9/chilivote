@@ -18,9 +18,6 @@
     <%= f.text_field :last_name , placeholder: "Last Name"%>
   </div>
   <div class="field">
-    <%= f.text_field :email , placeholder: "Email"%>
-  </div>
-  <div class="field">
     <%= f.password_field :password , placeholder: "Password"%>
   </div>
   <div class="field">
@@ -30,6 +27,17 @@
     <%= f.label :gender %>
     <%= f.select :gender, [['Male', 1],['Female', 0]] %>
   </div>
+  
+  <div class="field">
+  	<%= f.label :date_of_birth %>
+	<%= f.date_select :dob, {:start_year => 1930, :end_year => 2010}%>
+  </div>
+  
+  <div class="field">
+  	<%= f.label :country %>
+	<%= f.collection_select :country_id, Country.all, :id, :name %>
+  </div>
+  
   <div class="actions">
     <%= f.submit 'Update', :class=> 'btn btn-success'%>
   </div>
