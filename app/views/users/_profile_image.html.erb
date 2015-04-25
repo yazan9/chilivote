@@ -31,7 +31,11 @@
 	<%else%>
 	<div id="profile_image_container">
 		<div id="profile_image_div">
-	  <%= cl_image_tag @user.profile_image ? @user.profile_image : Chilivote::Application.config.default_profile_image , :width=>168, :height => 168, :crop => :fill, :class => "img-polaroid"%>
+			<%if @user.profile_image%>
+			<%= cl_image_tag @user.profile_image, :width=>168, :height => 168, :crop => :fill, :class => "img-polaroid"%>
+			<%else%>
+			<%= cl_image_tag Chilivote::Application.config.default_profile_image , :width=>168, :height => 168, :crop => :fill, :class => "img-polaroid"%>
+			<%end%>
 	 </div>
 	 </div>
 	<%end%>
