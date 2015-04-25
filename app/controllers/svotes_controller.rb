@@ -134,6 +134,19 @@ class SvotesController < ApplicationController
         format.js
     end
   end
+  
+  def list_voters
+    if params[:mode] == "up"
+      @status_code = 2
+    elsif params[:mode] == "down"
+      @status_code = 1
+    end
+    respond_to do |format|
+      @status_voters = Svote.find_all_by_status_id_and_svote_status(params[:status_id], @status_code)
+        format.js
+        format.html {render :nothing => true, :status => 200, :content_type => 'text/html'}
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

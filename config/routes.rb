@@ -37,6 +37,7 @@ Chilivote::Application.routes.draw do
     collection do
       get :vote_status_up
       get :vote_status_down
+      get :list_voters
     end
   end
 

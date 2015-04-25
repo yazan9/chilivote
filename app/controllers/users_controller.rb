@@ -216,7 +216,9 @@ class UsersController < ApplicationController
   
   def create_status
     @status = Status.find_by_user_id(current_user.id)
+    destroy_related_notifications(@status)
     @status.destroy! if !@status.nil?
+    
     
     @status = Status.new
     @status.user_id = current_user.id
@@ -339,6 +341,10 @@ class UsersController < ApplicationController
       redirect_to '/' unless current_user.admin?
     end
     
+    def destroy_related_notifications(status)
+      Notification.destroy_all(target_id: status.user_id, notification_type: 8)      
+    end
+      
   
     
     

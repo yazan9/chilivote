@@ -1,6 +1,23 @@
-
+<div id="status_voters_div" class="status_voters_div" style="position:absolute;display:none;background-color:black;color:white;padding:5px;"><small>Loading...</small></div>
 <%if !user.status.nil?%>
-<small>votes up: <%=user.status_votes_up%></small> 
+<small>votes up: <span class="votes_up_trigger" id="votes_up_count" data-url="<%= url_for(controller: 'svotes', action: 'list_voters', status_id: user.status.id, mode: 'up')%>"><%=user.status_votes_up%></span></small> 
 | 
-<small>votes down: <%=user.status_votes_down%></small>
+<small>votes down: <span class="votes_up_trigger" id="votes_up_count" data-url="<%= url_for(controller: 'svotes', action: 'list_voters', status_id: user.status.id, mode: 'down')%>"><%=user.status_votes_down%></span></small> 
 <%end%> 
+
+
+
+<script>
+$(document).ready(setTimeout(function(){
+ $('.votes_up_trigger').hover(function(e){
+ var top = e.pageY+'px';
+ var left = e.pageX+'px';   
+ $.ajax($(this).data('url'));
+ $('#status_voters_div').css({position:'absolute',top:top,left:left}).show();    
+  }, function() {
+    $("#status_voters_div").hide();
+    $("#status_voters_div").html("Loading ...");
+});
+}),3000);
+
+</script>

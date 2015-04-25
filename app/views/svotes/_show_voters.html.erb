@@ -1,0 +1,7 @@
+<%@status_voters.each do |voter|%>
+	<small><%= voter.user.first_name%> <%=voter.user.last_name%></small>
+	<br>
+<%end%>
+<%if @status_voters.count == 0%>
+<small>No votes yet</small>
+<%end%>
