@@ -26,6 +26,7 @@
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) if !user.admin?%></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } if !user.admin?%></td>
+        <td><%= link_to 'Activity', '/users/'+user.id.to_s+'/activity/' %></td>
       </tr>
     <% end %>
   </tbody>

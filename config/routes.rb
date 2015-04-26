@@ -52,6 +52,7 @@ Chilivote::Application.routes.draw do
     get :list_voters
     get :best_friends
     post :create_status
+    get :activity
   end
   
   resources :friendship do

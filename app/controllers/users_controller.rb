@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :signed_in_user, only: [:index, :edit, :update, :destroy]
+  before_action :signed_in_user, only: [:index, :edit, :update, :destroy, :activity]
   before_action :correct_user,   only: [:edit, :update, :add_avatar]
-  before_action :admin_user, only:[:destroy, :index]
+  before_action :admin_user, only:[:destroy, :index, :activity]
 
 
   # GET /users
@@ -312,6 +312,13 @@ class UsersController < ApplicationController
       end
     
       @best_friends_sorted = counts.sort_by { |user_id, occurance| occurance }.reverse
+    end
+    
+    def activity
+      @user = User.find(params[:user_id])
+      @cvotes = @user.cvotes
+      @posts = @user.posts
+      @polls = @user.polls
     end
 
   private
