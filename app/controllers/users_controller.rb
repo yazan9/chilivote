@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.all.order(created_at: :asc)
   end
 
   # GET /users/1
@@ -216,7 +216,7 @@ class UsersController < ApplicationController
   
   def create_status
     @status = Status.find_by_user_id(current_user.id)
-    destroy_related_notifications(@status)
+    destroy_related_notifications(@status) if !@status.nil?
     @status.destroy! if !@status.nil?
     
     
