@@ -28,9 +28,9 @@ class UsersController < ApplicationController
     @friendship = Friendship.find_by_user_id_and_friend_id(@current_user, @logged_in_user)
     @cvotes = @user.cvotes.where("expiry_date > ?", DateTime.now).order(created_at: :desc)
     
-    if params[:mode] == "self" && @is_signed_in
-      @my_own_cvotes = @logged_in_user.cvotes.order(created_at: :desc)
-    end
+    #if params[:mode] == "self" && @is_signed_in
+    #  @my_own_cvotes = @logged_in_user.cvotes.order(created_at: :desc)
+    #end
     
     
     
@@ -40,12 +40,12 @@ class UsersController < ApplicationController
       @my_friends_cvotes = Array.new
       @friends.each do |friend|
         friend.cvotes.where("expiry_date > ?", DateTime.now).each do |cvote|
-          @my_friends_cvotes << cvote if (!@is_current_user and @my_friends.include?(cvote.user))
+          @my_friends_cvotes << cvote if (@my_friends.include?(cvote.user))
           @my_friends_cvotes << cvote if cvote.user.id == @current_user.id
         end
         #adding code for friends questions
         friend.polls.each do |poll|
-          @my_friends_cvotes << poll if (!@is_current_user && @my_friends.include?(poll.user))
+          @my_friends_cvotes << poll if (@my_friends.include?(poll.user))
           @my_friends_cvotes << poll if poll.user.id == @current_user.id
         end
       end
