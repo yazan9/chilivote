@@ -15,6 +15,7 @@
 //= require jquery.ui.effect-slide
 //= require bootstrap
 //= require turbolinks
+//= require social-share-button
 //= require_tree .
 //= require cloudinary
 //= require cocoon

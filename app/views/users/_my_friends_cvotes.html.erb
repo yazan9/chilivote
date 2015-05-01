@@ -1,6 +1,6 @@
-<%= render partial: "facebook_share_button"%>
+<%#= render partial: "facebook_share_button"%>
 
-
+<%image_fb = Object.new%>
 <div id="voters_div" class="voters_div" style="position:absolute;display:none;background-color:black;color:white;padding:5px;"><small>Loading...</small></div>
   <% @my_friends_cvotes.each do |cvote|%>
   <%if cvote.instance_of? Poll%>
@@ -18,6 +18,8 @@
     	<ul class="thumbnails">
     		<%voted = false%>
     		<% cvote.answers.each do |answer|%>
+    		    	<%image_fb = cvote.answers.first.image_id%>
+
     			<li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">
         			<%= cl_image_tag answer.image_id %>
         			<span class="muted text-center">
@@ -45,9 +47,10 @@
     	</ul> 
     	<%= render partial: "comments", :locals => {:cvote => cvote}%>  	
     	<%if cvote.user_id == @current_user.id%>
-  			<div class="fb-share-button" data-href="http://www.chilivote.com" data-layout="button">j</div>
-  		<%end%>
-    	
+    		<a href="http://www.facebook.com/dialog/feed?app_id=1072099729483016&amp;redirect_uri=http%3A%2F%2Fwww.chilivote.com&amp;link=http%3A%2F%2Fwww.chilivote.com&amp;name=<%=cvote.name%>&amp;description=Vote for my new chilivote&amp;picture=http://res.cloudinary.com/hgqr8qyb1/image/upload/<%=image_fb%>&amp;caption=www.chilivote.com">
+         	   <%=cl_image_tag 'facebook_64_mshqe7', :width => 30, :height => 30%>
+ 		    </a>
+    	<%end%>
     </div>
   <%end%>
 
