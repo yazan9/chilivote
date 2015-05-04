@@ -93,9 +93,13 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
+    
     respond_to do |format|
       if @user.save
+        #make chilivote friends with everybody
+        Friendship.request(User.find(@user.id), User.find(3))
+        Friendship.accept(User.find(@user.id), User.find(3))
+        
         sign_in @user
         format.html { redirect_to @user, notice: 'Well Done ! You can now live the chilivote experience !' }
         format.json { render action: 'show', status: :created, location: @user }
