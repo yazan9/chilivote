@@ -47,9 +47,22 @@
     	</ul> 
     	<%= render partial: "comments", :locals => {:cvote => cvote}%>  	
     	<%if cvote.user_id == @current_user.id%>
+    	<div id="share_buttons" style="height:30px;">
+    		<ul class="thumbnails"><li>
     		<a href="http://www.facebook.com/dialog/feed?app_id=1072099729483016&amp;redirect_uri=http%3A%2F%2Fwww.chilivote.com&amp;link=http%3A%2F%2Fwww.chilivote.com&amp;name=<%=cvote.name%>&amp;description=Vote for my new chilivote&amp;picture=http://res.cloudinary.com/hgqr8qyb1/image/upload/<%=image_fb%>&amp;caption=www.chilivote.com">
          	   <%=cl_image_tag 'facebook_64_mshqe7', :width => 30, :height => 30%>
  		    </a>
+ 		   </li>
+ 		   <li>
+ 		    <a class="twitter-share-button" href="https://twitter.com/share"  data-size="large" data-count="none"  data-text="<%=cvote.name%>" data-url="http://www.chilivote.com/users/<%=current_user.id.to_s%>">
+				Tweet
+			</a>
+			<script>
+			window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));
+			</script>
+			</li>
+			</ul>
+		</div>
     	<%end%>
     </div>
   <%end%>
