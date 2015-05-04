@@ -6,31 +6,27 @@ class CvoteController < ApplicationController
   def new
     @cvote = Cvote.new
     [:answer1, :answer2, :answer3].each { |k| session.delete(k) }
+    respond_to do |format|
+        format.js {render '/cvote/new/'}
+    end
   end
   
   def create
     @cvote = Cvote.new
     @cvote.name = params[:cvote][:name]
     @cvote.user_id = current_user.id
-    #scan the expiy date
-    if params[:expiry_date] == "1 day"
-      @cvote.expiry_date = 1.day.from_now
-    elsif params[:expiry_date] == "2 days"
-      @cvote.expiry_date = 2.days.from_now
-    elsif params[:expiry_date] == "3 days"
-      @cvote.expiry_date = 3.days.from_now
-    elsif params[:expiry_date] == "1 week"
-      @cvote.expiry_date = 1.week.from_now
-    elsif params[:expiry_date] == "1 month"
-      @cvote.expiry_date = 1.month.from_now
-    elsif params[:expiry_date] == "Forever"
-      @cvote.expiry_date = 10.years.from_now
-    else
-      @cvote.expiry_date = 10.years.from_now
+    @cvote.expiry_date = 10.years.from_now
+    
+    #checking for errors
+    @errors = Array.new
+    if params[:cvote][:name].nil? or params[:cvote][:name].strip() == ""
+      @errors << "Please write a question"
     end
     
+    
     if !session[:answer1] or !session[:answer2]
-      redirect_to "/cvote/start_over", notice: 'You have to submit two answers at least' and return
+      #redirect_to "/cvote/start_over", notice: 'You have to submit two answers at least' and return
+      @errors << "You have to provide at least two answers"
     end
     
     if session[:answer1]
@@ -50,13 +46,12 @@ class CvoteController < ApplicationController
     
     
     
-    [:answer1, :answer2, :answer3].each { |k| session.delete(k) }
     
-      
-    
+    #logger = Logger.new('logfile2.log')
+    #logger.info "Attention !!!"
             
     respond_to do |format|
-      if @cvote.save
+      if @errors.size == 0 && @cvote.save
         #add a notification to my friends
         current_user.friends.each do |my_friend|
           n = Notification.new
@@ -65,24 +60,52 @@ class CvoteController < ApplicationController
           n.user_friend = current_user.id
           n.target_id = @cvote.id
           n.save
+
         end
-        format.html { redirect_to "/users/" + current_user.id.to_s, notice: 'Your new Chilivote has been created !' }
-        format.json { }
+        format.html { 
+          redirect_to "/users/" + current_user.id.to_s, notice: 'Your new Chilivote has been created !'
+           }
+        format.js { 
+          #render :js => "window.location.href = '#{'/users/'+ current_user.id}'" , notice: 'Your new Chilivote has been created !'
+          [:answer1, :answer2, :answer3].each { |k| session.delete(k) }
+          render js: "window.location = '/users/#{current_user.id.to_s}';"
+          }
       else
         format.html { render action: 'new', notice: "Please enter a title for your new Chilivote" }
-        format.json { }
+        format.js { }
       end
     end
   end
   
   def manage_answers
-    if !session[:answer1] then session[:answer1] = params[:image_id]
-      elsif !session[:answer2] then session[:answer2] = params[:image_id] 
-      elsif !session[:answer3] then session[:answer3] = params[:image_id] 
+    #logger = Logger.new('logfile2.log')
+    #logger.info "Started Logging ...."
+    #logger.info "params[:source]=" + params[:source]
+    #logger.info "params[:image_id]=" + params[:image_id]
+    #logger.info "session[:answer1]=" + session[:answer1] if session[:answer1]
+    #logger.info "session[:answer2]=" + session[:answer2] if session[:answer2]
+    #logger.info "session[:answer3]=" + session[:answer3] if session[:answer3]
+    #logger.info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+
+    if !session[:answer1] 
+      session[:answer1] = params[:image_id]
+    elsif !session[:answer2]
+      session[:answer2] = params[:image_id]
+    elsif !session[:answer3]
+      session[:answer3] = params[:image_id]
     end
+    
+    #if !session[:answer1] then session[:answer1] = params[:image_id]
+    #  elsif !session[:answer2] then session[:answer2] = params[:image_id] 
+    #  elsif !session[:answer3] then session[:answer3] = params[:image_id] 
+    #end
+    #respond_to do |format|
+    #    format.html {render :nothing => true, :status => 200, :content_type => 'text/html'}
+    #    format.json {render :nothing => true, :status => 200, :content_type => 'text/html'}
+    #end
     respond_to do |format|
-        format.html {render :nothing => true, :status => 200, :content_type => 'text/html'}
-        format.json {render :nothing => true, :status => 200, :content_type => 'text/html'}
+    #    format.html {render :nothing => true, :status => 200, :content_type => 'text/html'}
+        format.js {}
     end
   end
     

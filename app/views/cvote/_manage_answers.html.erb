@@ -1,0 +1,94 @@
+<ul class="thumbnails">
+<li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">
+<%if !session[:answer1]%>
+  <div id="cvote_image1"><a href="javascript: void(0);" id="upload_widget_opener1"><%= cl_image_tag "placeholder2_mgcflo"%></a></div>
+  <script type="text/javascript">  
+
+  document.getElementById("upload_widget_opener1").addEventListener("click", function() {
+  	var clicked_image = this.id;
+
+    cloudinary.openUploadWidget({ cloud_name: 'hgqr8qyb1', upload_preset: 'g4ksfnin'}, 
+      function(error, result) { console.log(error, result) });
+      
+	$(document).on('cloudinarywidgetsuccess', function(e, data) {
+       $.ajax("/cvote/manage_answers/" + data[0].public_id);
+           //alert(JSON.stringify(data, null, 4));
+           //alert(data[0].public_id);
+           //$.ajax("/users/create_status?image_id="+data[0].public_id);
+	});
+
+
+  }, false);
+</script>
+<%elsif session[:answer1]%>
+  <div ><%= cl_image_tag session[:answer1], :crop => :fill, :width=> 168, :height => 168%></div>
+<%end%>
+</li>
+
+<li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">
+<%if session[:answer1] && !session[:answer2]%>
+  <div id="cvote_image2"><a href="javascript: void(0);" id="upload_widget_opener2"><%= cl_image_tag "placeholder2_mgcflo"%></a></div>
+  <script type="text/javascript">  
+
+  document.getElementById("upload_widget_opener2").addEventListener("click", function() {
+  	var clicked_image = this.id;
+
+    cloudinary.openUploadWidget({ cloud_name: 'hgqr8qyb1', upload_preset: 'g4ksfnin'}, 
+      function(error, result) { console.log(error, result) });
+      
+	$(document).on('cloudinarywidgetsuccess', function(e, data) {
+       //$.ajax("/cvote/manage_answers/" + data[0].public_id + "?source=" + clicked_image);
+           //alert(JSON.stringify(data, null, 4));
+           //alert(data[0].public_id);
+           //$.ajax("/users/create_status?image_id="+data[0].public_id);
+	});
+
+
+  }, false);
+</script>
+<%elsif session[:answer2]%>
+  <div ><%= cl_image_tag session[:answer2], :crop => :fill, :width=> 168, :height => 168%></div>
+ <%else%>
+  <div ><%= cl_image_tag "placeholder_d1tsdk"%></div> 	
+<%end%>
+</li>
+
+
+
+<li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">
+<%if session[:answer2] && !session[:answer3]%>
+  <div id="cvote_image3"><a href="javascript: void(0);" id="upload_widget_opener3"><%= cl_image_tag "placeholder2_mgcflo"%></a></div>
+  <script type="text/javascript">  
+
+  document.getElementById("upload_widget_opener3").addEventListener("click", function() {
+  	var clicked_image = this.id;
+
+    cloudinary.openUploadWidget({ cloud_name: 'hgqr8qyb1', upload_preset: 'g4ksfnin'}, 
+      function(error, result) { console.log(error, result) });
+      
+	$(document).on('cloudinarywidgetsuccess', function(e, data) {
+       //$.ajax("/cvote/manage_answers/" + data[0].public_id + "?source=" + clicked_image);
+           //alert(JSON.stringify(data, null, 4));
+           //alert(data[0].public_id);
+           //$.ajax("/users/create_status?image_id="+data[0].public_id);
+	});
+
+
+  }, false);
+</script>
+<%elsif session[:answer3]%>
+  <div ><%= cl_image_tag session[:answer3],:crop => 'fill', :width=> 168, :height => 168%></div>
+ <%else%>
+  <div ><%= cl_image_tag "placeholder_d1tsdk"%></div> 	
+<%end%>
+</li>
+</ul>
+<div style="color:red">
+	<small>
+		<%if !@errors.nil?%>
+		<%@errors.each do |err|%>
+			<%= err %><br>
+		<%end%>
+		<%end%>
+	</small>
+</div>

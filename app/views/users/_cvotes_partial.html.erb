@@ -17,7 +17,7 @@
       <% cvote.answers.each do |answer|%>
       <%image_fb = cvote.answers.first.image_id%>
       <li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">
-        <%= cl_image_tag answer.image_id %>
+        <%= cl_image_tag answer.image_id,:crop => 'fill', :width=> 168, :height => 168 %>
         <span class="muted text-center">
     	  Votes: <span class = "some_trigger" id="votes_for_answer_<%=answer.id%>" data-url="<%= url_for(action: 'list_voters', answer_id: answer.id) %>"><%=answer.likes == nil ? 0 : answer.likes %></span>
         </span>

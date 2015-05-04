@@ -1,0 +1,43 @@
+<div class="well well-small" style="margin-right:5px;background-color: white">
+<%=form_for(@cvote, :url => url_for(:controller => 'cvote', :action => 'create'), :remote => :true) do |f|%>
+	<%= f.text_field :name, placeholder: 'Enter your question here' %>
+	<br><h6>Upload images as answers</h6>
+	<div id="cvote_answers_uploaders">
+	<ul class="thumbnails">
+    	<li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">
+        	<div id="cvote_image1"><a href="javascript: void(0);" id="upload_widget_opener1"><%= cl_image_tag "placeholder2_mgcflo"%></a></div>
+        </li>
+        <li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">
+        	<div id="cvote_image2"><a href="javascript: void(0);" id="upload_widget_opener2"><%= cl_image_tag "placeholder_d1tsdk"%></a></div>
+        </li>
+        <li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">
+        	<div id="cvote_image3"><a href="javascript: void(0);" id="upload_widget_opener3"><%= cl_image_tag "placeholder_d1tsdk"%></a></div>
+        </li>
+   </ul>
+   </div>
+	<%= f.submit "Create My Chilivote", :class=>"btn btn-primary"%>
+<%end%>
+</div>
+
+<script type="text/javascript">  
+
+  document.getElementById("upload_widget_opener1").addEventListener("click", function() {
+  	var clicked_image = this.id;
+
+    cloudinary.openUploadWidget({ cloud_name: 'hgqr8qyb1', upload_preset: 'g4ksfnin'}, 
+      function(error, result) { console.log(error, result) });
+      
+	$(document).on('cloudinarywidgetsuccess', function(e, data) {
+       $.ajax("/cvote/manage_answers/" + data[0].public_id);
+           //alert(JSON.stringify(data, null, 4));
+           //alert(data[0].public_id);
+           //$.ajax("/users/create_status?image_id="+data[0].public_id);
+	});
+
+
+  }, false);
+</script>
+
+
+
+
