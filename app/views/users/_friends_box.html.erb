@@ -1,3 +1,30 @@
+<%if current_user.id == 1%>
+<div id="facebook_invite"></div>
+<script src="http://connect.facebook.net/en_US/all.js"></script>
+<a href="#" onclick="FBInvite()">Invite Facebook Friends</a><br>
+<script>
+ FB.init({
+  appId:'1072099729483016',
+  cookie:true,
+  status:true,
+  xfbml:true
+ });
+</script>
+<script>
+ function FBInvite(){
+  FB.ui({
+   method: 'apprequests',
+   message: 'Join me at Chilivote'
+  },function(response) {
+   if (response) {
+    //alert('Successfully Invited');
+   } else {
+    //alert('Failed To Invite');
+   }
+  });
+ }
+</script>
+<%end%>
 <% if !@my_friends.nil?%>
 	<% @my_friends.each do |friend|%>
 		<small><%=user_avatar_one_line_small_truncated(friend).html_safe %></small>
