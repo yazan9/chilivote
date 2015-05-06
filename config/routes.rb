@@ -78,6 +78,7 @@ Chilivote::Application.routes.draw do
       get :news
       get :help
       get :contact
+      post :about
     end
   end
   
