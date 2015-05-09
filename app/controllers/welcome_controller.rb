@@ -4,7 +4,7 @@ class WelcomeController < ApplicationController
   end
   
   def about
-    
+    redirect_to :action => :help
   end
   
   def help
