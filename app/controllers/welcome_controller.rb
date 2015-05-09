@@ -23,8 +23,8 @@ class WelcomeController < ApplicationController
   end
   
   def from_fb
-    #render layout: false
-    redirect_to '/'
+    render layout: false
+    #redirect_to '/'
   end
   
   private
