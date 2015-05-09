@@ -1,7 +1,9 @@
 class WelcomeController < ApplicationController
   skip_before_filter :verify_authenticity_token
   after_action :allow_facebook_iframe
+  
   def index
+    
   end
   
   def about
@@ -17,6 +19,10 @@ class WelcomeController < ApplicationController
   end
   
   def contact
+    
+  end
+  
+  def from_fb
     
   end
   

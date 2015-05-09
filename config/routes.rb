@@ -79,6 +79,8 @@ Chilivote::Application.routes.draw do
       get :help
       get :contact
       post :about
+      get :from_fb
+      post :from_fb
     end
   end
   
