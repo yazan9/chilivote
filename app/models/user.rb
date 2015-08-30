@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   has_many :friends, :through => :friendships, :conditions => "status = 2" #accepted friends
   has_many :requested_friends, :through => :friendships, :source => :friend, :conditions => "status = 1" #the ones who requested a friendship with this user
   has_many :pending_friends, :through => :friendships, :source => :friend, :conditions => "status = 0" #the ones for whom this user asked for a friendship
+  has_many :followers, :through => :friendships, :source => :friend, :conditions => "status = 4" #users who follow this one
+  has_many :followed_users, :through => :friendships, :source => :friend, :conditions => "status = 3"#users who are followed by this one
   has_many :cvotes, dependent: :destroy
   has_many :cvote_trackers, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -14,6 +16,9 @@ class User < ActiveRecord::Base
   has_many :vote_options, through: :pvotes
   has_one :status, dependent: :destroy
   has_many :svotes, dependent: :destroy
+  has_many :contributions, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :preferences, dependent: :destroy
   belongs_to :country
   before_save { self.email = email.downcase }
   before_create :create_remember_token
@@ -32,14 +37,43 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
   
-  def voted?(post)
-    votes.find_by(post_id:  post.id)
-  end
-
-  def vote!(post)
-    votes.create!(post_id: post.id, category_id: post.category_id)
+  #def voted_deprecated?(post)
+  #  votes.find_by(post_id:  post.id)
+  #end
+  
+  #def vote_deprecated!(post)
+  #  votes.create!(post_id: post.id, category_id: post.category_id)
+  #end
+  
+  def voted_on_status?(contribution)
+    likes.find_by(target_id: contribution.id)
   end
   
+  def vote_status_up!(contribution)
+    likes.create!(target_id: contribution.id, like_type: Chilivote::Application.config.like_up)
+  end
+  
+  def vote_status_down!(contribution)
+    likes.create!(target_id: contribution.id, like_type: Chilivote::Application.config.like_down)
+  end
+  
+  def owner_of_contribution?(contribution)
+    contributions.find_by(id: contribution.id)
+  end
+  
+  def voted_on_cvote?(cvote)
+    likes.find_by(group_id: cvote.id)
+  end
+  
+  def place_vote_on_cvote!(cvote,answer)
+    likes.create!(target_id: answer.id, group_id: cvote.id)
+  end
+  
+  def get_voted_answer_on_cvote(cvote)
+    likes.find_by(group_id: cvote.id)
+  end
+  
+  #Below is old and deprecated
   def unvote!(post)
     votes.find_by(post_id: post.id).destroy
   end
@@ -112,6 +146,7 @@ class User < ActiveRecord::Base
   def status_votes_down
     Svote.find_all_by_status_id_and_svote_status(status.id, 1).count
   end
+  
 
   private
 

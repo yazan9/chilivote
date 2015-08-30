@@ -1,54 +1,41 @@
-  <% if @is_current_user%>
-	<div id="profile_image_container">
-		<div id="profile_image_div">
-			<%if @user.profile_image%>
-				<%= cl_image_tag @user.profile_image, :width=>168, :height => 168, :crop => :fill, :class => "img-polaroid" %>
-			<%else%>
-				<%= cl_image_tag Chilivote::Application.config.default_profile_image, :width=>168, :height => 168, :crop => :fill, :class => "img-polaroid"%>
-			<%end%>	
-		</div>
-		
-		<div id="opaque_slider_div">
-			<div id="opaque_div"></div>
-			<div id="slider_camera_and_text_div">
-				<%=cl_image_tag "v1401985862/ErjpFSQWdpX_zgzaux.png"%>
-				Update Profile Picture
-			</div>
-		</div>
-		<div id="uploader_form">
-			<%= form_for (@user) do |u|%>
-				<div class="field form_line">
-  	 				<%= cl_image_upload_tag(:image_id,
-  	 					:crop => :fill, :width => 168, :height => 168,
-                        :allowed_formats => ['JPG', 'PNG','GIF', 'BMP'],
-                        :transformation => {:format => 'JPG'},
-                        :eager => {:width => 40, :height => 40, :crop => :thumb},
-                        :html => {:id => "my_uploader"}) %>
-  	 			</div>
-        	<%end%>
-    	</div>
-	</div>
-	<%else%>
-	<div id="profile_image_container">
-		<div id="profile_image_div">
-			<%if @user.profile_image%>
-			<%= cl_image_tag @user.profile_image, :width=>168, :height => 168, :crop=>:fill, :class => "img-polaroid"%>
-			<%else%>
-			<%= cl_image_tag Chilivote::Application.config.default_profile_image , :width=>168, :height => 168, :crop => :fill, :class => "img-polaroid"%>
-			<%end%>
-	 </div>
-	 </div>
-	<%end%>
-
-<br/></br/>
-<div class="pull-left" class="">
-<%= link_to "New Chilivote !", '/cvote/new' , {:class=>"btn btn-success text-white", :style=>"color:white;width:130px", :remote=> true}%>
-</div><br><br>
-<div class="pull-left" class="">
-<%= link_to "True Friends", '/polls/' , {:class=>"btn btn-success text-white", :style=>"color:white;width:130px"}%>
-</div><br><br>
-<div class="pull-left" class="">
-<%= link_to "Popular Chilivotes", '/categories/list_categories/' , {:class=>"btn btn-success text-white", :style=>"color:white;width:130px"}%>
+<div class="well well-small well-white">
+  <div style="text-align:left;">
+    <%= user_avatar_one_line(@current_user).html_safe%>
+  </div>
+<div style="width:178px;text-align:left;">
+  <br>
+  <span class="red_color"><strong>FOLLOWERS  </strong></span><span id="followers_count"><%=@user.followers.count%></span><br><br>
+  <span class="red_color"><strong>FOLLOWING  </strong></span><span id="following_count"><%=@user.followed_users.count%></span><br>
 </div>
-<br><br><br>
+<br/>
+ 
+<div class="sidebar-nav">
+<ul class="nav nav-list" style="text-align:left;margin-top:10px">
+  <%if current_user != @user%>
+  <li id="follow_control">
+    <%=render partial: "/friendship/following_partial", :locals => {:user => @user}%>
+  </li>
+  <%end%>
+  <li>
+    <a><i class="icon-envelope"></i>Messages</a>
+  </li>
+  <li>
+    <%= link_to "<i class='icon-star'></i>".html_safe+"True Friends", '/polls/'%>
+  </li>
+  <li>
+        <%= link_to "<i class='icon-chevron-up'></i>".html_safe+"Top accounts", '/categories/list_categories'%>
+  </li> 
+  <li>
+    <%= link_to "<i class='icon-bell'></i>".html_safe+"Notifications", '/categories/list_categories'%>
+  </li> 
+  <li>
+    <%= link_to "<i class='icon-search'></i>".html_safe+"Find Friends", '/friends'%>
+  </li> 
+  <li>
+    <%= link_to "<i class='icon-plus'></i>".html_safe+"Invite Friends", '/friends'%>
+  </li> 
+</ul>
+</div>
+<br/>
 <%= render partial: "best_friends_box"%>
+</div>

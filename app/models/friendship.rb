@@ -10,6 +10,10 @@ class Friendship < ActiveRecord::Base
     not find_by_user_id_and_friend_id(user, friend).nil?
   end
   
+  def self.following?(user, friend)
+    not find_by_user_id_and_friend_id_and_status(user,friend,3).nil?
+  end
+  
   #Record a pending friend request
   def self.request(user,friend)
     unless user == friend or Friendship.exists?(user,friend)
@@ -37,6 +41,24 @@ class Friendship < ActiveRecord::Base
     end
   end
   
+  
+  def self.follow(user,friend)
+    unless user == friend or Friendship.exists?(user,friend)
+      transaction do
+        @user_to_friend = create(:user=>user, :friend => friend, :status => 3)
+        create(:user=>friend, :friend => user, :status => 4)
+      end
+    end
+    @user_to_friend
+  end
+  
+  def self.unfollow(user,friend)
+    transaction do
+      destroy(find_by_user_id_and_friend_id_and_status(user.id,friend.id,3))
+      destroy(find_by_user_id_and_friend_id_and_status(friend.id, user.id, 4))
+    end
+  end
+  
   private
   
   #Update the DB with one side of an accepted friendship request
@@ -46,4 +68,7 @@ class Friendship < ActiveRecord::Base
     request.status = 2
     request.save!
   end
+  
+
+ 
 end

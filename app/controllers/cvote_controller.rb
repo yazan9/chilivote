@@ -12,6 +12,66 @@ class CvoteController < ApplicationController
   end
   
   def create
+    @cvote = Contribution.new
+    @cvote.title = params[:cvote][:name]
+    @cvote.user_id = current_user.id
+    @cvote.contribution_type = Chilivote::Application.config.contribution_type_cvote
+    @cvote.privacy = Chilivote::Application.config.privacy_friends_only
+    
+    #checking for errors
+    @errors = Array.new
+    if params[:cvote][:name].nil? or params[:cvote][:name].strip() == ""
+      @errors << "Please write a question"
+    end
+        
+    if !session[:answer1] or !session[:answer2]
+      @errors << "You have to provide at least two answers"
+    end    
+    
+    #build the options through contribution_id
+    if session[:answer1]
+      @answer1 = @cvote.options.build
+      @answer1.image_id = session[:answer1]
+    end
+    
+    if session[:answer2] 
+      @answer2 = @cvote.options.build
+      @answer2.image_id = session[:answer2]
+    end
+    
+    if session[:answer3] 
+      @answer3 = @cvote.options.build
+      @answer3.image_id = session[:answer3]
+    end 
+    
+    #saving
+    respond_to do |format|
+      if @errors.size == 0 && @cvote.save
+        #add a notification to my friends
+        current_user.friends.each do |my_friend|
+          n = Notification.new
+          n.notification_type = 3
+          n.user_me = my_friend.id
+          n.user_friend = current_user.id
+          n.target_id = @cvote.id
+          n.save
+        end
+        format.html { 
+          redirect_to "/users/" + current_user.id.to_s, notice: 'Your new Chilivote has been created !'
+         }
+        format.js { 
+          #render :js => "window.location.href = '#{'/users/'+ current_user.id}'" , notice: 'Your new Chilivote has been created !'
+          [:answer1, :answer2, :answer3].each { |k| session.delete(k) }
+          render js: "window.location = '/users/#{current_user.id.to_s}';"
+          }
+      else
+        format.html { render action: 'new', notice: "Please enter a title for your new Chilivote" }
+        format.js { }
+      end
+    end
+  end
+  
+  def create_deprecated
     @cvote = Cvote.new
     @cvote.name = params[:cvote][:name]
     @cvote.user_id = current_user.id

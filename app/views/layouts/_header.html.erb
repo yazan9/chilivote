@@ -1,99 +1,46 @@
-	<header class="navbar navbar-fixed-top navbar-inverse">
+<%if !(controller.controller_name == "users" and controller.action_name == "new")%>
+<div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-        	<div class="row">
-        		<div class="span2" style="margin-top: 6px">
-        		<a href='/categories/list_categories/'><%= cl_image_tag "http://res.cloudinary.com/hgqr8qyb1/image/upload/v1400960064/Chilivote_big_msml8f.png", :width=>184, :height => 35 %> </a>
-        		<span style="background-color: black; color:white; position:absolute;top:10px;left:180px;"><small>Beta</small></span>
-        		</div>
-        		
-        		
-        		<nav>
-            		<ul class="nav">
-             			<%if signed_in?%>
-              				<li id="fat-menu" class="dropdown">
-              					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              						<div id="friend_requests_counter" style="position:absolute;margin-left:10px"><span class="badge badge-info"><%= current_user.requested_friends.count%></span></div>
-                					<% if current_user.requested_friends.empty?%>
-                						<i class="icon-user"></i>
-                					<%else%>
-                						<i class="icon-white icon-user"></i>
-                					<%end%>
-              					</a>
-              					<ul class="dropdown-menu">
-                					<li><%= render partial: "users/friend_requests"%></li>	
-				              	</ul>
-            				</li>
-            			<%end%>
-            		</ul>
-				</nav>
-				<% if signed_in?%>
-     				<div class="span2" style="height:30px; padding-top:10px;color:white;margin-left:20px">
-     					<strong><a style="color:white;" href='/friends/'>Friends</a></strong>
-     				</div>
-     				<div class="span2" style="height:30px; padding-top:10px;color:white;margin-left:-50px">
-     					<strong><a style="color:white;" href="/users/<%=current_user.id%>">My Chilivotes</a></strong>				
-  					</div> 		
-     			
-     			<nav>
-            			<ul class="nav">
-              				<li id="fat-menu" class="dropdown">
-              					<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="notifications_button">
-     								<div id="notifications_counter"><span class="badge badge-info"><%= current_user.notifications.where(viewed: 'f').count%></span></div>
-              					</a>
-              					
-              					<ul class="dropdown-menu">
-                					<li><div id="my_notifications"><%= render partial: "users/notifications"%></div></li>	
-				              	</ul>
-				              	
-            				</li>
-            		</ul>
-				</nav>
-     			<%end%>
-     			
-     				
-			<nav>
-            <ul class="nav pull-right">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li style="text-align:left;"><a href="#" style="padding-top:6px;padding-bottom:7px;padding-left:0px;"><%= cl_image_tag "http://res.cloudinary.com/hgqr8qyb1/image/upload/v1400960064/CH_q16fcj" %></a></li>
               <%if signed_in?%>
-              	<li id="fat-menu" class="dropdown">
-              		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                		<%= current_user.first_name + ' ' + current_user.last_name%> <b class="caret"></b>
-              		</a>
-              	<ul class="dropdown-menu">
-                	<%if current_user.admin?%>
-                	<li><%= link_to "Users", '/users/' %></li>
-                	<li><%= link_to "Categories", '/categories/' %></li>
-                	<li><%= link_to "Posts", '/posts/' %></li>
-	               	<li class="divider"></li>
-
-                	<%end%>
-                	<li><%= link_to "Profile", "/users/" + current_user.id.to_s + "/edit/" %></li>
-                	<li><%= link_to "Sign out", signout_path, method: "delete" %></li>
-              	</ul>
-            	</li>
-            	<% else %>
-            		<li><%= link_to "Sign in", signin_path %></li>
-          		<% end %>
+              <li>
+                <% if current_user.requested_friends.empty?%>
+                <%=link_to "<i class='icon-user'></i>".html_safe, :controller => :users, :action => :show_friend_requests, :remote => :true%>
+                <%else%>
+                <%=link_to "<i class='icon-user icon-white'></i>".html_safe, :controller => :users, :action => :show_friend_requests, :remote => :true%>%>
+                <%end%>
+                </a></li>
+              <li><a href="#"><i class="icon-bell"></i></a></li>
+              <li><a href="#"><i class="icon-envelope"></i></a></li>
+              <li style="margin-left:50px;"><a href="#" style="color:black;text-shadow:none"><i class="icon-random"></i>Public</a></li>
+              
+               <li class="dropdown">
+                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span style="color:black;text-shadow:none;"><%=(current_user.first_name + " " + current_user.last_name).titleize%> <b class="caret"></b></span></a>
+               <%end%>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li class="nav-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#"><%= link_to "Sign out", signout_path, method: "delete" %></li>
+                </ul>
+              </li>
             </ul>
-          </nav>
-          </div>
+            <form class="navbar-form pull-right">
+              <input class="span2" type="text" placeholder="Search">
+            </form>
+          </div><!--/.nav-collapse -->
         </div>
       </div>
-    </header>
-    
-<script type="text/javascript">
-function handle_notifications_click() {
-    //document.write("Clicked");
-    //$.ajax("/users/clear_notifications/");
-    //return false;
-}
-</script>
-
-<script type = "text/javascript" >
-var link1 = document.getElementById("notifications_button");
-if (typeof window.addEventListener != "undefined") {
-    link1.addEventListener("click",handle_notifications_click,false);
-} else {
-    link1.attachEvent("onclick",handle_notifications_click);
-}
-</script>
+    </div>
+<%end%>

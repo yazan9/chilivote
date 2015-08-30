@@ -1,8 +1,2 @@
-<%if @status.status_type == 1%>
-$("#status<%=current_user.id.to_s%>").html("<small><i><%=@current_user.status.title%></i></small>");
-$("#status_title").val("");
-<%else%>
-$("#status<%=current_user.id.to_s%>").html("");
-$("#status_title").val("");
-<%end%>
-
+$("#status_image_div").html("");
+$("#status_text").val("");

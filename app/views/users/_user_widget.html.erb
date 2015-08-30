@@ -1,0 +1,40 @@
+<div class="well well-small well-white">
+<%= form_tag("/users/create_status", {:style => "margin:0px;", :remote => true}) do%>
+<%= text_area_tag :status_text,nil, {:placeholder => "What's chillin ..", :style=>"width:100%;font-size:12px;margin-left:0px;margin-top:5px;", :class => "text-area-no-border", :rows => "4"}%>
+<div id="status_image_div" class="status_image_div"></div><br>
+<script src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>            
+<script type="text/javascript">  
+  document.getElementById("upload_widget_opener").addEventListener("click", function() {
+    cloudinary.openUploadWidget({ cloud_name: 'hgqr8qyb1', upload_preset: 'g4ksfnin'}, 
+      function(error, result) { console.log(error, result) });
+	$(document).on('cloudinarywidgetsuccess', function(e, data) {
+		 $(".status_image_div").html(
+       $.cloudinary.image(data[0].public_id, 
+          { 
+          format: data[0].format, version: data[0].version ,
+          crop: 'fill', width: 500, height: 300}) );
+           //alert(JSON.stringify(data, null, 4));
+           //alert(data[0].public_id);
+           //$.ajax("/users/create_status?image_id="+data[0].public_id);
+	});
+  }, false);
+</script>
+  
+<ul class="nav nav-pills no-margins-widget">
+  <li class="active">
+    <a href="javascript: void(0);" id="upload_widget_opener">photo</a>
+  </li>
+  <li class="active"><%= link_to "Create Chilivote", '/cvote/new/', {:remote => true}%></li>
+  <li>
+    <div class="btn-group" id="privacy_select">
+      <%= render partial: "toggle_privacy"%>
+    </div>
+  </li>
+  <li class="active button-widget-small" style="float:right">
+    <%=submit_tag "Post", {:class => "btn btn-primary button-widget"}%>
+  </li>
+</ul>
+  <%end%>
+</div>
+<%=render partial: "photos_widget_js"%>
+<div id="cvote_new" class="cvote_new"></div>

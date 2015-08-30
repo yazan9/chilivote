@@ -23,9 +23,84 @@ class VotesController < ApplicationController
     
     n = Notification.find_by_notification_type_and_user_me_and_user_friend_and_target_id(1,@post.user.id,current_user.id, @post.id)
     n.destroy
-    
+    #logger = Logger.new('logfile2.log')
+    #logger.info "inside vote up _____________________"
     respond_to do |format|
       format.html { redirect_to @post }
+      format.js
+    end
+  end
+  
+  def vote_status_up     
+    #make sure the contribution exists
+    @contribution = Contribution.find(params[:id])
+    if @contribution.nil?
+      redirect_to "/" and return
+    end
+    
+    #make sure the user is a friend of the owner of the status
+    if !Friendship.exists?(current_user, @contribution.user)
+      redirect_to "/" and return
+    end
+      
+    #make sure that the user did not vote before
+    if current_user.voted_on_status?(@contribution)
+      redirect_to "/" and return
+    end
+    
+    current_user.vote_status_up!(@contribution)
+   
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  def vote_status_down
+    #make sure the contribution exists
+    @contribution = Contribution.find(params[:id])
+    if @contribution.nil?
+      redirect_to "/" and return
+    end
+    
+    #make sure the user is a friend of the owner of the status
+    if !Friendship.exists?(current_user, @contribution.user)
+      redirect_to "/" and return
+    end
+      
+    #make sure that the user did not vote before
+    if current_user.voted_on_status?(@contribution)
+      redirect_to "/" and return
+    end
+    
+    current_user.vote_status_down!(@contribution)
+   
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  def vote_on_cvote
+    #make sure the contribution exists
+    @contribution = Contribution.find(params[:cvote_id])
+    @answer = Contribution.find(params[:answer_id])
+    if @contribution.nil? or @answer.nil?
+      redirect_to "/" and return
+    end
+    
+    #make sure the user is a friend of the owner of the cvote
+    if !Friendship.exists?(current_user, @contribution.user)
+      redirect_to "/" and return
+    end
+      
+    #make sure that the user did not vote before
+    if current_user.voted_on_cvote?(@contribution)
+      redirect_to "/" and return
+    end
+    
+    
+    current_user.place_vote_on_cvote!(@contribution, @answer)
+   
+    respond_to do |format|
       format.js
     end
   end

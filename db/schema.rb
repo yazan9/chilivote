@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150405110058) do
+ActiveRecord::Schema.define(version: 20150523172456) do
 
   create_table "answers", force: true do |t|
     t.string   "name"
@@ -38,6 +38,18 @@ ActiveRecord::Schema.define(version: 20150405110058) do
     t.integer  "cvote_id"
     t.integer  "user_id"
     t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "contributions", force: true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "body"
+    t.integer  "contribution_type"
+    t.string   "image_id"
+    t.integer  "parent_id"
+    t.integer  "privacy"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -73,6 +85,15 @@ ActiveRecord::Schema.define(version: 20150405110058) do
     t.datetime "updated_at"
   end
 
+  create_table "likes", force: true do |t|
+    t.integer  "target_id"
+    t.integer  "user_id"
+    t.integer  "like_type"
+    t.integer  "group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "notifications", force: true do |t|
     t.integer  "notification_type"
     t.integer  "user_me"
@@ -81,6 +102,15 @@ ActiveRecord::Schema.define(version: 20150405110058) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "viewed",            default: false
+  end
+
+  create_table "options", force: true do |t|
+    t.string   "title"
+    t.integer  "contribution_id"
+    t.string   "image_id"
+    t.boolean  "correct_answer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "polls", force: true do |t|
@@ -105,6 +135,15 @@ ActiveRecord::Schema.define(version: 20150405110058) do
   add_index "posts", ["active"], name: "index_posts_on_active"
   add_index "posts", ["category_id"], name: "index_posts_on_category_id"
   add_index "posts", ["user_id"], name: "index_posts_on_user_id"
+
+  create_table "preferences", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "contribution_id"
+    t.boolean  "hide"
+    t.boolean  "inappropriate"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "pvotes", force: true do |t|
     t.integer  "user_id"

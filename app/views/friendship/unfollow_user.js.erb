@@ -1,0 +1,2 @@
+$("#followers_count").html("<%= @friend.followers.count%>")
+$("#follow_control").html("<%=escape_javascript render partial: '/friendship/following_partial', :locals=>{:user=> @friend}%>")

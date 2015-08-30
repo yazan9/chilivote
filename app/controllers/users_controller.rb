@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :signed_in_user, only: [:index, :edit, :update, :destroy, :activity]
+  before_action :signed_in_user, only: [:index, :edit, :update, :destroy, :activity, :show]
   before_action :correct_user,   only: [:edit, :update, :add_avatar]
   before_action :admin_user, only:[:destroy, :index, :activity]
 
@@ -15,6 +15,33 @@ class UsersController < ApplicationController
   # GET /users/1.json
   #variable @user is automatically initialized
   def show
+    #setting flags
+    @is_current_user = current_user?(@user)
+    
+    #setting other variables
+    @current_user = current_user
+    @target_user = @user
+    
+    #scenario 1: the timeline is mine
+    if @current_user == @target_user
+      @friend_ids = @current_user.friend_ids
+      @friend_ids << @current_user.id
+      
+      @timeline_items = Contribution.where(user_id: @friend_ids).order(created_at: :desc)
+      
+      #logger = Logger.new('logfile2.log')
+      #logger.info "timeline................."
+      #logger.info @friend_ids
+    end
+  end
+  
+  def show_friend_requests
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  def show_deprecated
     @is_current_user = current_user?(@user)
     @is_signed_in = signed_in?
     @current_user = current_user
@@ -83,6 +110,7 @@ class UsersController < ApplicationController
     if !current_user.nil?
       redirect_to "/users/" + current_user.id.to_s
     end
+    
   end
 
   # GET /users/1/edit
@@ -97,8 +125,8 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         #make chilivote friends with everybody
-        Friendship.request(User.find(@user.id), User.find(3))
-        Friendship.accept(User.find(@user.id), User.find(3))
+        #Friendship.request(User.find(@user.id), User.find(3))
+        #Friendship.accept(User.find(@user.id), User.find(3))
         
         sign_in @user
         format.html { redirect_to @user, notice: 'Well Done ! You can now live the chilivote experience !' }
@@ -218,7 +246,36 @@ class UsersController < ApplicationController
     end
   end
   
+  #this is the latest create status
   def create_status
+   #  logger = Logger.new('logfile2.log')
+   #   logger.info "provacyyyyyyyyyyyyyyyyyyyyyy"
+   # logger.info params[:privacy]
+    @status = Contribution.new
+    @status.user_id = current_user.id
+    @status.body = params[:status_text]
+    @status.contribution_type = Chilivote::Application.config.contribution_type_status
+    @status.privacy = params[:privacy] if params[:privacy]
+    if session[:photo_for_status]
+      @status.image_id = session[:photo_for_status]
+      session.delete(:photo_for_status)
+    end
+    @status.save!
+    respond_to do |format|
+      format.js
+      format.html {render :nothing=>true, :status => 200, :content_type => 'text/html'}
+    end    
+  end
+  
+  def add_photo_to_status
+    session[:photo_for_status] = params[:image_id]
+    respond_to do |format|
+      format.js {render :nothing=>true, :status => 200, :content_type => 'text/html'}
+    end
+  end
+  
+  #deprecated
+  def create_status_depricated
     @status = Status.find_by_user_id(current_user.id)
     destroy_related_notifications(@status) if !@status.nil?
     @status.destroy! if !@status.nil?
@@ -324,6 +381,16 @@ class UsersController < ApplicationController
       @posts = @user.posts
       @polls = @user.polls
     end
+  
+  def toggle_privacy
+    @privacy = params[:privacy]
+    respond_to do |format|
+      format.js
+      format.html {render :nothing=>true, :status => 200, :content_type => 'text/html'}
+    end    
+  end
+  
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.

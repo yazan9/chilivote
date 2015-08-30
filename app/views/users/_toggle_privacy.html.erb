@@ -1,0 +1,27 @@
+<%if local_assigns[:privacy].nil? or local_assigns[:privacy] == Chilivote::Application.config.privacy_public.to_s%>
+<a class="btn dropdown-toggle button-widget" data-toggle="dropdown">
+  <small>Public</small>
+  <span class="caret"></span>
+</a>
+<ul class="dropdown-menu">
+  <li>
+    <div style="padding:5px;cursor:pointer;">
+      <a href="/users/toggle_privacy/?privacy=<%=Chilivote::Application.config.privacy_friends_only.to_s%>" data-remote="true"><small>Friends</small></a>
+    </div>
+  </li>
+</ul>
+<%= hidden_field_tag :privacy, Chilivote::Application.config.privacy_public.to_s %>
+<%else%>
+<a class="btn dropdown-toggle button-widget" data-toggle="dropdown">
+  <small>Friends</small>
+  <span class="caret"></span>
+</a>
+<ul class="dropdown-menu">
+  <li>
+    <div style="padding:5px;cursor:pointer;">
+      <a href="/users/toggle_privacy/?privacy=<%=Chilivote::Application.config.privacy_public.to_s%>" data-remote="true"><small>Public</small></a>
+    </div>
+  </li>
+</ul>
+<%= hidden_field_tag :privacy, Chilivote::Application.config.privacy_friends_only.to_s %>
+<%end%>

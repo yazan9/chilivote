@@ -1,47 +1,9 @@
-<%if @is_signed_in && !@is_current_user%>
+<%if @current_user != @target_user%>
 <div id="friendship_button">
 	<%=render partial: "friendship_button"%>
 </div>
-<% elsif @is_signed_in && @is_current_user%>
-	
-<% elsif !@is_signed_in%>
-	
+<% else %>
+<%= render partial: "user_widget"%>
+<%= render partial: "my_own_timeline"%>
 <%end%>
 
-<%if params[:mode]=="self"%>
-	<p>
-  	<strong>First name:</strong>
-  	<%= @user.first_name %>
-	</p>
-
-	<p>
-  	<strong>Last name:</strong>
-  	<%= @user.last_name %>
-	</p>
-
-	<p>
-  	<strong>Email:</strong>
-  	<%= @user.email %>
-	</p>
-
-	<p>
-  	<strong>Gender:</strong>
-  	<%= @user.gender ? 'Male' : 'Female' %>
-	</p>
-<%else%>
-	<h2><b><%= (@user.first_name + " " + @user.last_name).titleize%></b></h2>
-<%end%>
-<%= render partial: "status_partial"%>
-<div id="cvote_new" class="cvote_new"></div>
-<%if !@is_current_user && current_user.friends.include?(@user)%>
-	<%= render partial: "cvotes_partial"%>
-<%end%>
-
-<% if @is_current_user && params[:mode] != "self"%>
-	<%= render partial: "my_friends_cvotes"%>
-	<%#= render partial: "paginated_timeline"%>
-<%end%>
-
-<% if @is_current_user && params[:mode] == "self"%>
-	<%= render partial: "my_own_cvotes"%>
-<%end%>

@@ -29,6 +29,9 @@ Chilivote::Application.routes.draw do
   get 'users/create_status' => 'users#create_status'
   get 'users/list_voters' => 'users#list_voters'
   get 'users/best_friends' => 'users#best_friends'
+  get 'users/toggle_privacy' => 'users#toggle_privacy'
+  get 'users/add_photo_to_status' => 'users#add_photo_to_status'
+  get 'users/show_friend_requests' => 'users#show_friend_requests'
   
   get 'svotes/vote_status_up' => 'svotes#vote_status_up'
   get 'svotes/vote_status_down' => 'svotes#vote_status_down'
@@ -53,6 +56,8 @@ Chilivote::Application.routes.draw do
     get :best_friends
     post :create_status
     get :activity
+    get :toggle_privacy
+    get :add_photo_to_status
   end
   
   resources :friendship do
@@ -60,6 +65,8 @@ Chilivote::Application.routes.draw do
     post :unfriend
     post :accept
     post :decline
+    get :follow_user
+    get :unfollow_user
   end
   
   resources :cvote do
@@ -93,7 +100,14 @@ Chilivote::Application.routes.draw do
   resources :pvotes, only: [:create]
 
   
-  resources :votes, only: [:create, :destroy]
+  #resources :votes, only: [:create, :destroy]
+  resources :votes do
+    collection do
+      get :vote_status_up
+      get :vote_status_down
+      get :vote_on_cvote
+    end 
+  end
   resources :sessions, only: [:new, :create, :destroy]
   resources :cvotes
   
@@ -123,6 +137,8 @@ Chilivote::Application.routes.draw do
   post 'friendship/unfriend/:id' => 'friendship#unfriend'
   post 'friendship/accept/:id' => 'friendship#accept'
   post 'friendship/decline/:id' => 'friendship#decline'
+  get 'friendship/follow_user/:id' => 'friendship#follow_user'
+  get 'friendship/unfollow_user/:id' => 'friendship#unfollow_user'
   get 'cvote/manage_answers/:image_id' => 'cvote#manage_answers'
   get 'users/search/:q' => 'users#search'
 

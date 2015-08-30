@@ -54,6 +54,26 @@ class FriendshipController < ApplicationController
     end
   end
   
+  def follow_user
+    if !@user.followed_users.include?(@friend)
+      Friendship.follow(@user, @friend)
+    end
+    
+     respond_to do |format|
+       format.js
+    end
+  end
+  
+  def unfollow_user
+    if @user.followed_users.include?(@friend)
+      Friendship.unfollow(@user, @friend)
+    end
+    
+     respond_to do |format|
+       format.js
+    end
+  end
+  
   private
   
   def setup_users_friends

@@ -1,0 +1,1 @@
+$("#status_votes_up_<%=@contribution.id.to_s%>").html("<%= escape_javascript render partial: "/votes/count_votes_up", :locals => {:status => @contribution}%>");
