@@ -1,1 +1,6 @@
-<%= image_tag "UnderConstructionPage4.gif"%>
+welcome to Chilivote
+<%= form_tag("/welcome/request_invitation/", method: "get") do %>
+<%= label_tag(:email, "email:") %>
+<%= text_field_tag(:email) %>
+<%= submit_tag("Request Invitation") %>
+<% end %>

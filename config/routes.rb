@@ -88,6 +88,7 @@ Chilivote::Application.routes.draw do
       post :about
       get :from_fb
       post :from_fb
+      get :request_invitation
     end
   end
   

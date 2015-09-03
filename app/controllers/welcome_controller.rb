@@ -27,6 +27,20 @@ class WelcomeController < ApplicationController
     #redirect_to '/'
   end
   
+  def request_invitation
+    n = Invitation.new
+    n.email = params[:email]
+    n.code = SecureRandom.urlsafe_base64
+    n.used = false
+    
+    n.save
+    UserMailer.welcome_email.deliver
+    
+    respond_to do |format|
+      format.html {}
+    end
+  end
+  
   private
   def allow_facebook_iframe
     response.headers['X-Frame-Options'] = 'ALLOW-FROM https://apps.facebook.com'
