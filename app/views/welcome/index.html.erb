@@ -1,6 +1,19 @@
-welcome to Chilivote
-<%= form_tag("/welcome/request_invitation/", method: "get") do %>
-<%= label_tag(:email, "email:") %>
+<ul class = "nav nav-pills pull-right">
+  <li class="active"><%= link_to "LOG IN", "/sessions/new"%></li>
+  <li class="active"><%= link_to "I HAVE A CODE", "/users/new"%></li>
+</ul>
+<br/><br/><br/><br/><br/>
+<div style="text-align:center;width:100%;">
+  <h1>BE IN THE SOCIAL NETWORK OF THE FUTURE</h1>
+</div>
+<div style="text-align:center;">
+  <%= form_tag("/welcome/request_invitation/", method: "get", remote: true) do %>
 <%= text_field_tag(:email) %>
-<%= submit_tag("Request Invitation") %>
+  <br/>
+<%= submit_tag("Request Invitation", class:"btn btn-inverse") %>
 <% end %>
+<div id="confirmation_message">
+</div>
+</div>
+
+<br/><br/><br/><br/><br/>

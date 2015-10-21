@@ -108,11 +108,20 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     if !current_user.nil?
-      redirect_to "/users/" + current_user.id.to_s
+      #redirect_to "/users/" + current_user.id.to_s
+      #redirect_to "/users/advanced_data"
     end
-    
+    render '/users/forms/form_basic'
+  end
+  
+  def advanced_data
+    @user = current_user
+    render "/users/forms/advanced_data"
   end
 
+  def show_profile
+    
+  end
   # GET /users/1/edit
   def edit
   end
@@ -121,6 +130,8 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    @invitation = Invitation.find_by_code(params[:confirmation_code])
+    @user.email = @invitation.email
     
     respond_to do |format|
       if @user.save
@@ -129,6 +140,7 @@ class UsersController < ApplicationController
         #Friendship.accept(User.find(@user.id), User.find(3))
         
         sign_in @user
+        redirect_to "/users/advanced_data" and return
         format.html { redirect_to @user, notice: 'Well Done ! You can now live the chilivote experience !' }
         format.json { render action: 'show', status: :created, location: @user }
       else
@@ -400,7 +412,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :gender, :password, :password_confirmation, :image_id, :dob, :country_id)
+      params.require(:user).permit(:first_name, :last_name, :email, :gender, :password, :password_confirmation, :image_id, :dob, :country_id, :confirmation_code)
     end
     
     def signed_in_user

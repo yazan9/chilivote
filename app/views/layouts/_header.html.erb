@@ -1,4 +1,4 @@
-<%if !(controller.controller_name == "users" and controller.action_name == "new")%>
+<%if !((controller.controller_name == "users" and controller.action_name == "new") or (controller.controller_name == "welcome")) %>
 <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -18,7 +18,7 @@
                 <%=link_to "<i class='icon-user icon-white'></i>".html_safe, :controller => :users, :action => :show_friend_requests, :remote => :true%>%>
                 <%end%>
                 </a></li>
-              <li><a href="#"><i class="icon-bell"></i></a></li>
+              <li><a id="example1" href="#"><i class="icon-bell"></i></a></li>
               <li><a href="#"><i class="icon-envelope"></i></a></li>
               <li style="margin-left:50px;"><a href="#" style="color:black;text-shadow:none"><i class="icon-random"></i>Public</a></li>
               
@@ -43,4 +43,7 @@
         </div>
       </div>
     </div>
+<script>
+  $('#example1').popover();
+</script>
 <%end%>

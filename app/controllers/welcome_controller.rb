@@ -33,11 +33,16 @@ class WelcomeController < ApplicationController
     n.code = SecureRandom.urlsafe_base64
     n.used = false
     
-    n.save
-    UserMailer.welcome_email.deliver
-    
-    respond_to do |format|
-      format.html {}
+    if n.save
+      UserMailer.welcome_email(params[:email]).deliver
+      respond_to do |format|
+        format.js
+      end
+    else
+      flash[:notice] = "Please enter a valid email"
+      respond_to do |format|
+        format.html {redirect_to :action => :index}
+      end
     end
   end
   

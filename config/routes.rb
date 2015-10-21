@@ -32,7 +32,8 @@ Chilivote::Application.routes.draw do
   get 'users/toggle_privacy' => 'users#toggle_privacy'
   get 'users/add_photo_to_status' => 'users#add_photo_to_status'
   get 'users/show_friend_requests' => 'users#show_friend_requests'
-  
+  get 'users/advanced_data' => 'users#advanced_data'
+  get 'users/show_profile' => 'users#show_profile'
   get 'svotes/vote_status_up' => 'svotes#vote_status_up'
   get 'svotes/vote_status_down' => 'svotes#vote_status_down'
   

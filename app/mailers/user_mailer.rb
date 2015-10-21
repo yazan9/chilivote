@@ -1,6 +1,6 @@
 class UserMailer < ActionMailer::Base
   default from: "yazan.khalaileh@gmail.com"
-  def welcome_email
-    mail(to: "yazan.khalaileh@gmail.com", subject: "Helloy there")
+  def welcome_email(email)
+    mail(to: email, subject: "Your Chilivote Registration Code")
   end
 end

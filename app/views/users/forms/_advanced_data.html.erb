@@ -1,0 +1,32 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="center">
+  <h3>Enter additional information</h3> 
+    <br>
+  <div class="field">
+    <%= f.select :gender, [['Male', 1],['Female', 0]] %>
+  </div>
+  <div class="field">
+    <%= f.label :date_of_birth, :class=>"nav-header" %>
+	  <%= f.date_select :dob, {:start_year => 1930, :end_year => 2010}%>
+  </div>
+  
+  <div class="field">
+    <%= f.label :country, :class=> "nav-header" %>
+	  <%= f.collection_select :country_id, Country.all, :id, :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Next', :class=> 'btn btn-info btn-large btn-block'%>
+  </div>
+</div>
+<% end %>
