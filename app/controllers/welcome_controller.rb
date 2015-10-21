@@ -32,9 +32,9 @@ class WelcomeController < ApplicationController
     n.email = params[:email]
     n.code = SecureRandom.urlsafe_base64
     n.used = false
-    
+ 
     if n.save
-      UserMailer.welcome_email(params[:email]).deliver
+      UserMailer.welcome_email(params[:email], n.code).deliver
       respond_to do |format|
         format.js
       end

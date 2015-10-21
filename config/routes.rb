@@ -129,7 +129,8 @@ Chilivote::Application.routes.draw do
   
    # You can have the root of your site routed with "root"
   #root 'categories#list_categories'
-  root 'users#new'
+  #root 'users#new'
+  root 'welcome#index'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
   
