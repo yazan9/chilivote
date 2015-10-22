@@ -18,7 +18,7 @@
       <br><i class='icon-ok'></i>
       <%end%>
       
-      <%elsif current_user.owner_of_contribution?(timeline_item.group_id)%>
+      <%elsif current_user.owner_of_contribution?(timeline_item)%>
       <%else%>
       <span id="button_<%=answer.id%>">
         <%=button_to "Vote", {:controller => "votes", :action => "vote_on_cvote", :cvote_id => timeline_item.id, :answer_id => answer.id} , :class=>"btn btn-success", remote: true, :method => :get%>

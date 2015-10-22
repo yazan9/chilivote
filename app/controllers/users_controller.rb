@@ -286,6 +286,13 @@ class UsersController < ApplicationController
     end
   end
   
+  def show_public
+    @timeline_items = Contribution.where(privacy: Chilivote::Application.config.privacy_public).order(created_at: :desc)
+    @current_user = current_user
+    @user = @current_user
+    render '/users/public_views/show_public'
+  end
+  
   #deprecated
   def create_status_depricated
     @status = Status.find_by_user_id(current_user.id)
