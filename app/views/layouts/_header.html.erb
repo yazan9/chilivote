@@ -15,10 +15,19 @@
                 <% if current_user.requested_friends.empty?%>
                 <%=link_to "<i class='icon-user'></i>".html_safe, :controller => :users, :action => :show_friend_requests, :remote => :true%>
                 <%else%>
-                <%=link_to "<i class='icon-user icon-white'></i>".html_safe, :controller => :users, :action => :show_friend_requests, :remote => :true%>%>
+                <%=link_to "<i class='icon-user icon-white'></i>".html_safe, :controller => :users, :action => :show_friend_requests, :remote => :true%>
+                <div class="notification-bubble badge badge-warning"><%=current_user.requested_friends.count%></div>
                 <%end%>
-                </a></li>
-              <li><a id="example1" href="#"><i class="icon-bell"></i></a></li>
+                
+                      <div id="friend_requests" style="display:none" class="well well-white notification-box"></div>
+            </li>
+              <li>
+                <%=link_to "<i class='icon-bell'></i>".html_safe, :controller => :users, :action => :show_notifications, :remote => :true %>
+                <%if !current_user.notifications.empty?%>
+                  <div class="notification-bubble badge badge-warning"><%=current_user.notifications.count%></div>
+                <%end%>
+<div id="notifications_div" style="display:none" class="well well-white notification-box"></div>
+          </li>
               <li><a href="#"><i class="icon-envelope"></i></a></li>
               <li style="margin-left:50px;"><a href="/users/show_public" style="color:black;text-shadow:none"><i class="icon-random"></i>Public</a></li>
               

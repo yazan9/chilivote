@@ -41,6 +41,12 @@ class UsersController < ApplicationController
     end
   end
   
+  def show_notifications
+    respond_to do |format|
+      format.js
+    end
+  end
+  
   def show_deprecated
     @is_current_user = current_user?(@user)
     @is_signed_in = signed_in?

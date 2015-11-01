@@ -1,9 +1,9 @@
-<div class = "span4" style="margin-left:0px;padding:2px;max-height: 500px;overflow-y:scroll">
-<small><%=link_to "Clear All", {:controller=>"users", :action => "clear_notifications", :mode => "all", :remote => true}, :class => "badge badge-info"%></small>
+<div style="margin-left:0px;max-height: 500px;overflow-y:auto;">
+<smallest><%=link_to "Clear All", {:controller=>"users", :action => "clear_notifications", :mode => "all", :remote => true}, :style => "text-decoration:underline;font-size:smaller"%></smallest>
 <div id="user_notifications">
 <small>
 <%if current_user.notifications.count == 0%>
-	<centre><%= "You have no new notifications"%></centre>
+  <centre><span class="text-capital"><%= "You have no new notifications"%></span></centre>
 <%else%>
 <% current_user.notifications.order(created_at: :desc).each do |notification|%>
 	<% case notification.notification_type when 1%>

@@ -37,6 +37,7 @@ Chilivote::Application.routes.draw do
   get 'users/show_public' => 'users#show_public'
   get 'svotes/vote_status_up' => 'svotes#vote_status_up'
   get 'svotes/vote_status_down' => 'svotes#vote_status_down'
+  get 'users/show_notifications' => 'users#show_notifications'
   
    resources :svotes do
     collection do

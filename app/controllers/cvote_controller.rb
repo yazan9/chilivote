@@ -16,7 +16,8 @@ class CvoteController < ApplicationController
     @cvote.title = params[:cvote][:name]
     @cvote.user_id = current_user.id
     @cvote.contribution_type = Chilivote::Application.config.contribution_type_cvote
-    @cvote.privacy = Chilivote::Application.config.privacy_friends_only
+    #@cvote.privacy = Chilivote::Application.config.privacy_friends_only
+    @cvote.privacy = params[:privacy] if params[:privacy]
     
     #checking for errors
     @errors = Array.new
