@@ -63,6 +63,8 @@ gem 'jquery-turbolinks'
 gem 'cocoon' 
 gem 'puma'
 gem 'social-share-button', '~> 0.1.6'
+gem 'mailboxer'
+gem 'chosen-rails'
 
 group :production do
   gem 'pg', '0.15.1'

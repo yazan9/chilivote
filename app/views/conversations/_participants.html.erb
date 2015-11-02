@@ -1,0 +1,5 @@
+<% conversation.participants.each do |participant| %>
+  <% unless participant == current_user %>
+    <%=user_avatar_one_line_small(participant).html_safe%>
+  <% end %>
+<% end %>

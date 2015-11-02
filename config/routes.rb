@@ -115,9 +115,20 @@ Chilivote::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :cvotes
   
- 
+  resources :conversations, only: [:index, :show, :destroy]  do
+    member do
+      post :reply
+    end
+    member do
+      post :restore
+    end
+    collection do
+      delete :empty_trash
+    end
+  end
+    
+  resources :messages, only: [:new, :create]
   
-
   get "welcome/index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

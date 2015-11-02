@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
   #validates :email, presence: true, format: {with: VALID_EMAIL_REGEX}, uniqueness: { case_sensitive: false }
   #validates_inclusion_of :gender, :in => [true, false]
   has_secure_password
+  acts_as_messageable
   
   def User.new_remember_token
     SecureRandom.urlsafe_base64
@@ -147,6 +148,9 @@ class User < ActiveRecord::Base
     Svote.find_all_by_status_id_and_svote_status(status.id, 1).count
   end
   
+  def mailboxer_email(object)
+    email
+  end
 
   private
 
