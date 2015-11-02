@@ -360,7 +360,7 @@ footer ul li {
 /* friends box */
 .friends_box_right{
   margin-left:-1px; 
-  border-left:1px solid #eee;
+  //border-left:1px solid #eee;
   min-height:168px;
   padding-left:5px;
 }
@@ -524,4 +524,21 @@ footer ul li {
   overflow-y: auto;
   margin-bottom: 1em;
   margin-top: 1em;
+}
+.btn-white:visited{
+  color:white;
+}
+//messages
+.list-group{
+  margin-top:10px;
+  margin-left:0px;
+}
+.list-group-item{
+  display:block;
+}
+.black-heading{
+  color:black;
+}
+.media-body{
+  margin-left:50px;
 }

@@ -1,11 +1,10 @@
-<li class="list-group-item clearfix">
-  <%= link_to conversation.subject, conversation_path(conversation) %>
-
+<li class="list-group-item well well-small well-white">
+  <h6><%= link_to conversation.subject, conversation_path(conversation) %></h6>
   <div class="btn-group-vertical pull-right">
     <% if conversation.is_trashed?(current_user) %>
-      <%= link_to 'Restore', restore_conversation_path(conversation), class: 'btn btn-xs btn-info', method: :post %>
+      <%= link_to 'Restore', restore_conversation_path(conversation), class: 'btn btn-mini btn-info btn-white', method: :post %>
     <% else %>
-      <%= link_to 'Move to trash', conversation_path(conversation), class: 'btn btn-xs btn-danger', method: :delete,
+      <%= link_to 'Move to trash', conversation_path(conversation), class: 'btn btn-mini btn-danger btn-white', method: :delete,
                   data: {confirm: 'Are you sure?'} %>
       <% end %>
   </div>

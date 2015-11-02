@@ -41,6 +41,12 @@ module ApplicationHelper
     @avatar += "</span>"
   end
   
+  def user_avatar_one_line_medium_photo(user)
+    @avatar = "<span class='avatar_box pull-left'>"
+    @avatar += cl_image_tag user.profile_image ? (user.profile_image) : Chilivote::Application.config.default_profile_image , :width=>40, :height => 40, :crop => :thumb
+    @avatar += "</span>"
+  end
+  
   def user_avatar_one_line_no_link(user)
     @avatar = "<span class='avatar_box'>"
     @avatar += cl_image_tag user.profile_image ? (user.profile_image) : Chilivote::Application.config.default_profile_image , :width=>40, :height => 40, :crop => :thumb
