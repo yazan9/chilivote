@@ -1,20 +1,19 @@
-<%= "Start Conversation" %>
-
-<%= form_tag messages_path, method: :post do %>
-  <div class="form-group">
-    <%= label_tag 'message[subject]', 'Subject' %>
-    <%= text_field_tag 'message[subject]', nil, class: 'form-control', required: true %>
+<div class="row">
+	<div class="span3">
+    <div class="well well-small well-white">
+      <%= render partial: "/conversations/control_box" %>
+    </div>
   </div>
 
-  <div class="form-group">
-    <%= label_tag 'message[body]', 'Message' %>
-    <%= text_area_tag 'message[body]', nil, cols: 3, class: 'form-control', required: true %>
-  </div>
+	<div class="span7">
+    <div class="well well-small well-white">
+      <%= render partial: "new"%>
+    </div>
+	</div>
 
-  <div class="form-group">
-    <%= label_tag 'recipients', 'Choose recipients' %>
-    <%= select_tag 'recipients', recipients_options, multiple: true, class: 'form-control chosen-it' %>
-  </div>
-
-  <%= submit_tag 'Send', class: 'btn btn-primary' %>
-<% end %>
+	<div class="span2">
+    <div class="friends_box_right">
+    <%= render partial: "/users/friends_box"%>
+    </div>
+	</div>
+</div>
