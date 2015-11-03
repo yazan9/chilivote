@@ -293,7 +293,13 @@ class UsersController < ApplicationController
   end
   
   def show_public
-    @timeline_items = Contribution.where(privacy: Chilivote::Application.config.privacy_public).order(created_at: :desc)
+    if params[:view] == "public" or params[:view].nil?
+      @timeline_items = Contribution.where(privacy: Chilivote::Application.config.privacy_public).order(created_at: :desc)
+    elsif params[:view] == "followees"
+      @timeline_items = Contribution.where("privacy = ? AND user_id IN (?)", Chilivote::Application.config.privacy_public, current_user.followed_users.pluck(:id)).order(created_at: :desc)
+    else
+      @timeline_items = {}
+    end
     @current_user = current_user
     @user = @current_user
     render '/users/public_views/show_public'

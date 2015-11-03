@@ -25,6 +25,11 @@
     <span class="votes_count" id="status_votes_down_<%=timeline_item.id.to_s%>">
       <%= render partial: "/votes/count_votes_down", :locals => {:status => timeline_item}%>
     </span>
+    <%if current_page?(action: 'show_public')%>
+    <div class="pull-right follow_control_<%=timeline_item.user.id.to_s%>">
+      <%=render partial: "/friendship/following_partial", :locals => {:user => timeline_item.user}%>
+    </div>
+    <%end%>
   </div>
   <%else%>
     <div class="status_voting_div">

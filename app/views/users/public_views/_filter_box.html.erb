@@ -1,0 +1,12 @@
+<span class="text-capital">Filters</span>
+<ul class="nav nav-pills nav-stacked">
+  <li <%= if params[:view] == "public" or params[:view].nil? then "class=active" end%>>
+    <a href="/users/show_public?view=public">All Public</a>
+  </li>
+  <li <%= if params[:view] == "followees" then "class=active" end%>>
+    <a href="/users/show_public?view=followees">My Chilling</a>
+  </li>
+  <li <%= if params[:view] == "favorites" then "class=active" end%>>
+    <a href="/users/show_public?view=favorites">Favorites</a>
+  </li>
+</ul>
