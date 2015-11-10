@@ -60,6 +60,13 @@ class FavoritesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def add_to_favorites
+    Favorite.favor(current_user, Contribution.find(params[:id]).user)
+    respond_to do |format|
+      format.js
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

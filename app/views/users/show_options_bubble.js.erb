@@ -1,0 +1,8 @@
+if(!$('#options_bubble_<%=@contribution_id%>').is(':visible')){
+$('#options_bubble_<%=@contribution_id%>').show();
+$("#options_bubble_<%=@contribution_id%>").html("<%=escape_javascript render partial: '/users/renderers/options_bubble'%>");
+}
+else
+{
+  $('#options_bubble_<%=@contribution_id%>').hide();
+}

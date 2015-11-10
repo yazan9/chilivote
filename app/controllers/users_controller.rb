@@ -425,8 +425,14 @@ class UsersController < ApplicationController
     end    
   end
   
-  
-
+  def show_options_bubble
+    @contribution_id = params[:id]
+    @contribution = Contribution.find(@contribution_id)
+    respond_to do |format|
+      format.js
+    end
+  end
+     
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

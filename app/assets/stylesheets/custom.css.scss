@@ -542,3 +542,11 @@ footer ul li {
 .media-body{
   margin-left:50px;
 }
+.options_bubble{
+  position:absolute;
+  display:none;
+  margin-top:-5px;
+  margin-left:-160px;
+  display:block;
+  background-clip:padding-box;
+}

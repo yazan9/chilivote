@@ -1,0 +1,15 @@
+<ul class="nav nav-list">
+  <%if current_user != @contribution.user and !Favorite.exists?(current_user,@contribution.user)%>
+  <li>
+    <%= link_to "<i class='icon-fire'></i>".html_safe+"Add to favorites", :controller => :favorites, :action => :add_to_favorites, :id => @contribution_id, :remote => :true%>
+  </li>
+  <li class="divider"></li>
+  <%end%>
+  <li>
+    <%= link_to "<i class='icon-eye-open'></i>".html_safe+"Report Post", '/polls/'%>
+  </li>
+  <li class="divider"></li>
+  <li>
+    <%= link_to "<i class='icon-remove'></i>".html_safe+"Delete Post", '/polls/'%>
+  </li>
+</ul>

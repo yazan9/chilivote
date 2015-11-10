@@ -1,7 +1,6 @@
 Chilivote::Application.routes.draw do
   
 
-  resources :favorites
 
   get 'auth/:provider/callback', to: 'sessions#create_from_fb'
   get 'auth/failure', to: redirect('/')
@@ -40,6 +39,7 @@ Chilivote::Application.routes.draw do
   get 'svotes/vote_status_up' => 'svotes#vote_status_up'
   get 'svotes/vote_status_down' => 'svotes#vote_status_down'
   get 'users/show_notifications' => 'users#show_notifications'
+  get 'users/show_options_bubble' => 'users#show_options_bubble'
   
    resources :svotes do
     collection do
@@ -130,6 +130,13 @@ Chilivote::Application.routes.draw do
   end
     
   resources :messages, only: [:new, :create]
+  
+  resources :favorites do
+    collection do  
+      get :add_to_favorites
+    end
+  end
+
   
   get "welcome/index"
   # The priority is based upon order of creation: first created -> highest priority.
