@@ -4,9 +4,15 @@
     <a href="/users/show_public?view=public">All Public</a>
   </li>
   <li <%= if params[:view] == "followees" then "class=active" end%>>
-    <a href="/users/show_public?view=followees">My Chilling</a>
+    <a href="/users/show_public?view=followees">Following</a>
+  </li>
+  <li <%= if params[:view] == "country" then "class=active" end%>>
+    <a href="/users/show_public?view=country">My Country</a>
   </li>
   <li <%= if params[:view] == "favorites" then "class=active" end%>>
     <a href="/users/show_public?view=favorites">Favorites</a>
   </li>
 </ul>
+<%if params[:view] == "favorites"%>
+<%= render partial: "/users/public_views/favorites_box"%>
+<%end%>

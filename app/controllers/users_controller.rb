@@ -297,6 +297,10 @@ class UsersController < ApplicationController
       @timeline_items = Contribution.where(privacy: Chilivote::Application.config.privacy_public).order(created_at: :desc)
     elsif params[:view] == "followees"
       @timeline_items = Contribution.where("privacy = ? AND user_id IN (?)", Chilivote::Application.config.privacy_public, current_user.followed_users.pluck(:id)).order(created_at: :desc)
+    elsif params[:view] == "favorites"
+            @timeline_items = Contribution.where("privacy = ? AND user_id IN (?)", Chilivote::Application.config.privacy_public, current_user.favored_users.pluck(:id)).order(created_at: :desc)
+       elsif params[:view] == "country"
+            @timeline_items = Contribution.where("privacy = ? AND user_id IN (?)", Chilivote::Application.config.privacy_public, current_user.compatriots).order(created_at: :desc)
     else
       @timeline_items = {}
     end

@@ -68,7 +68,4 @@ class Friendship < ActiveRecord::Base
     request.status = 2
     request.save!
   end
-  
-
- 
 end

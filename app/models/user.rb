@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
   has_many :pending_friends, :through => :friendships, :source => :friend, :conditions => "status = 0" #the ones for whom this user asked for a friendship
   has_many :followers, :through => :friendships, :source => :friend, :conditions => "status = 4" #users who follow this one
   has_many :followed_users, :through => :friendships, :source => :friend, :conditions => "status = 3"#users who are followed by this one
+  has_many :favorites
+  has_many :favored_users, :through => :favorites
+  #has_many :admirers, :through => :favorites, :source => :user
   has_many :cvotes, dependent: :destroy
   has_many :cvote_trackers, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -150,6 +153,11 @@ class User < ActiveRecord::Base
   
   def mailboxer_email(object)
     email
+  end
+  
+  def compatriots
+    @users = User.find_all_by_country_id(country.id)
+    @users.collect(&:id)
   end
 
   private

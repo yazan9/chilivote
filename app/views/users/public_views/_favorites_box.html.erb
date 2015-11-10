@@ -1,0 +1,6 @@
+<span class="text-capital">My Favorites</span>
+<ul class="nav nav-pills nav-stacked" style="margin-bottom:0px;">
+<%current_user.favored_users.each do |fav|%>
+  <li><a href=""><%= fav.first_name + " " + fav.last_name%></a></li>
+<%end%>
+</ul>
