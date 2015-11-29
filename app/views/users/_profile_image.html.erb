@@ -17,7 +17,7 @@
   </li>
   <%end%>
   <li>
-    <a><i class="icon-envelope"></i>Messages</a>
+    <%= link_to "<i class='icon-envelope'></i>".html_safe+"Messages", '/conversations/'%>
   </li>
   <li>
     <%= link_to "<i class='icon-star'></i>".html_safe+"True Friends", '/polls/'%>

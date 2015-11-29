@@ -1,0 +1,41 @@
+<div class="container well well-small well-white">
+<div class="row">
+<div class="span3">
+  <%= cl_image_tag Chilivote::Application.config.default_profile_image, :width=>168, :height => 168, :crop => :fill, :class => "img-polaroid"%>
+</div>
+<div class="span9 overlap-span">
+    <h1><%=@target_user.first_name + " " + @target_user.last_name%></h1>
+    <div id="friendship_button">
+	    <%=render partial: "friendship_button"%>
+    </div>
+    <div>
+      <h5>C Status</h5>
+      0
+      <br>
+      <h5>Chili Ups</h5>
+      0
+      <br>
+      <h5>Chili Downs</h5>
+      0
+      <hr>
+      <h5>Followers</h5>
+      <%=@target_user.followers.count%>
+      <br>
+      <h5>Following</h5>
+      <%=@target_user.followed_users.count%>
+      <br>
+      <h5>Friends</h5>
+      <%=@target_user.friends.count%>
+      <hr>
+      <h5>Chilivote Rank</h5>
+      0
+    </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span12">
+      <hr>
+      <h5>About me</h5>
+    </div>
+  </div>
+</div>

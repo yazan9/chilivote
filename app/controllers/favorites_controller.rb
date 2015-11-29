@@ -67,6 +67,13 @@ class FavoritesController < ApplicationController
       format.js
     end
   end
+  
+  def remove_from_favorites
+    Favorite.unfavor(current_user, Contribution.find(params[:id]).user)
+    respond_to do |format|
+      format.js
+    end  
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

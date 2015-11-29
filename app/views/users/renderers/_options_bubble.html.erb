@@ -1,15 +1,28 @@
+<%divider_flag = false%>
 <ul class="nav nav-list">
   <%if current_user != @contribution.user and !Favorite.exists?(current_user,@contribution.user)%>
   <li>
     <%= link_to "<i class='icon-fire'></i>".html_safe+"Add to favorites", :controller => :favorites, :action => :add_to_favorites, :id => @contribution_id, :remote => :true%>
   </li>
-  <li class="divider"></li>
+  <%divider_flag = true%>
   <%end%>
+  <%if current_user != @contribution.user and Favorite.exists?(current_user,@contribution.user)%>
   <li>
-    <%= link_to "<i class='icon-eye-open'></i>".html_safe+"Report Post", '/polls/'%>
+    <%= link_to "<i class='icon-fire'></i>".html_safe+"Remove from favorites", :controller => :favorites, :action => :remove_from_favorites, :id => @contribution_id, :remote => :true%>
   </li>
-  <li class="divider"></li>
+  <%divider_flag = true%>
+  <%end%>
+  <%if current_user != @contribution.user%>
+  <%if divider_flag == true%><li class="divider"></li><%end%>
   <li>
-    <%= link_to "<i class='icon-remove'></i>".html_safe+"Delete Post", '/polls/'%>
+    <%= link_to "<i class='icon-eye-open'></i>".html_safe+"Report Post", :controller => :contributions, :action => :report_contribution, :id => @contribution_id, :remote => :true%>
   </li>
+  <%divider_flag = true%>
+  <%end%>
+  <%if current_user == @contribution.user%>
+  <%if divider_flag == true%><li class="divider"><%divider_flag = false%></li><%end%>
+  <li>
+    <%= link_to "<i class='icon-remove'></i>".html_safe+"Delete Post", @contribution, method: :delete, :remote => :true%>
+  </li>
+  <%end%>
 </ul>

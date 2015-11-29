@@ -1,4 +1,9 @@
-<div class="well well-small well-white no-bottom-space">
+<div class="well well-small well-white no-bottom-space" id="container_<%=timeline_item.id%>">
+  <div class="pull-right">
+    <%= link_to "<i class='icon-chevron-down'></i>".html_safe, :controller => :users, :action => :show_options_bubble, :id => timeline_item.id, :remote => "true"%>
+    <div id="options_bubble_<%=timeline_item.id%>" style= "display:none;" class="options_bubble well well-small well-white">
+    </div>
+  </div>
   <div>
     <%=user_avatar_one_line_small(timeline_item.user).html_safe%>
     <small>- <%= time_ago_in_words timeline_item.created_at%> ago</small>
@@ -28,4 +33,6 @@
     <%end%>
     </ul>
   </div>
+  <hr class="thin-line">
+  <%= render partial: "comments", :locals => {:contribution => timeline_item}%>  	
 </div>

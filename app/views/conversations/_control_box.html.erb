@@ -1,4 +1,4 @@
-<%= link_to 'new', new_message_path, class: 'btn btn-primary btn-white btn-mini pull-right' %>
+<%= link_to 'new', new_message_path, class: 'btn btn-primary btn-white btn-mini pull-right' , method: :get%>
     <span class="text-capital">conversations</span><br/>
     <ul class="nav nav-pills nav-stacked">
       <%= mailbox_section 'inbox', @box %>

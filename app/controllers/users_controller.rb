@@ -32,6 +32,9 @@ class UsersController < ApplicationController
       #logger = Logger.new('logfile2.log')
       #logger.info "timeline................."
       #logger.info @friend_ids
+    else
+      @friendship = Friendship.find_by_user_id_and_friend_id(@current_user, @target_user)
+      render :show_other_user
     end
   end
   
@@ -150,7 +153,7 @@ class UsersController < ApplicationController
         format.html { redirect_to @user, notice: 'Well Done ! You can now live the chilivote experience !' }
         format.json { render action: 'show', status: :created, location: @user }
       else
-        format.html { render action: 'new' }
+        format.html { render action: 'form_basic' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -161,7 +164,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'Profile Updated' }
+        format.html { redirect_to "/users/show_public", notice: 'Profile Updated' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -251,7 +254,7 @@ class UsersController < ApplicationController
   
   def create_comment
     @comment = Comment.new
-    @cvote_id = params[:cid]
+    @contribution_id = params[:cid]
     @comment.cvote_id = params[:cid]
     @comment.user_id = current_user.id
     @comment.text = params[:text]

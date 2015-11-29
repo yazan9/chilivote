@@ -28,20 +28,21 @@ class WelcomeController < ApplicationController
   end
   
   def request_invitation
-    n = Invitation.new
-    n.email = params[:email]
-    n.code = SecureRandom.urlsafe_base64
-    n.used = false
+    @n = Invitation.new
+    @n.email = params[:email]
+    @n.code = SecureRandom.urlsafe_base64
+    @n.used = false
  
-    if n.save
-      UserMailer.welcome_email(params[:email], n.code).deliver
+    if @n.save
+      UserMailer.welcome_email(params[:email], @n.code).deliver
       respond_to do |format|
         format.js
       end
     else
-      flash[:notice] = "Please enter a valid email"
+      #flash[:notice] = "Please enter a valid email"
       respond_to do |format|
         format.html {redirect_to :action => :index}
+        format.js
       end
     end
   end

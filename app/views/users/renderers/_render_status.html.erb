@@ -1,4 +1,4 @@
-<div class="well well-small well-white">
+<div class="well well-small well-white" id="container_<%=timeline_item.id%>">
   <div class="pull-right">
     <%= link_to "<i class='icon-chevron-down'></i>".html_safe, :controller => :users, :action => :show_options_bubble, :id => timeline_item.id, :remote => "true"%>
     <div id="options_bubble_<%=timeline_item.id%>" style= "display:none;" class="options_bubble well well-small well-white">
@@ -52,4 +52,6 @@
     </span>
     </div>
   <%end%>
+  <hr class="thin-line">
+  <%= render partial: "comments", :locals => {:contribution => timeline_item}%>  
 </div>

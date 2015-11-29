@@ -1,5 +1,5 @@
 <li class="list-group-item well well-small well-white">
-  <h6><%= link_to conversation.subject, conversation_path(conversation) %></h6>
+  <h6>Subject: <u><%= link_to conversation.subject, conversation_path(conversation) %></u></h6>
   <div class="btn-group-vertical pull-right">
     <% if conversation.is_trashed?(current_user) %>
       <%= link_to 'Restore', restore_conversation_path(conversation), class: 'btn btn-mini btn-info btn-white', method: :post %>
@@ -11,6 +11,7 @@
 
   <p><%= render 'conversations/participants', conversation: conversation %></p>
 
-  <p><%= conversation.last_message.body %>
+  <p><%#= conversation.last_message.body %>
+    <i>Last message on</i>
     <small>(<span class="text-muted"><%= conversation.last_message.created_at.strftime("%-d %B %Y, %H:%M:%S") %></span>)</small></p>
 </li>

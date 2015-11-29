@@ -134,9 +134,15 @@ Chilivote::Application.routes.draw do
   resources :favorites do
     collection do  
       get :add_to_favorites
+      get :remove_from_favorites
     end
   end
-
+  
+  resources :contributions, only: [:destroy] do
+    member do
+      get :report_contribution
+    end
+  end
   
   get "welcome/index"
   # The priority is based upon order of creation: first created -> highest priority.

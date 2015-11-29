@@ -1,0 +1,25 @@
+<div id="comments<%=cvote.id.to_s%>" style="margin-left:10px;">
+	<%cvote.comments.each do |comment|%>
+	<div id="comment_<%=comment.id.to_s%>">
+		<%= user_avatar_one_line_small(comment.user).html_safe%> - 
+		<span><small><%= time_ago_in_words comment.created_at%> Ago</small></span>
+		<br><div>
+			<% if comment.user_id == current_user.id%>
+				<%= link_to "<i class='icon-remove pull-right'></i>".html_safe, {:controller=>"cvote", :action=> "remove_comment", :id => comment.id, remote: true, :method => :get}%>
+			<%end%>
+			<%= comment.text%>
+			</div><br>
+	</div>
+	<%end%>
+
+
+<br>
+
+	<%=form_tag("/users/create_comment", :remote => true) do%>
+	<span>
+	<%=user_avatar_one_line_small_photo(current_user).html_safe%>
+	<span>	<small><%= text_field_tag :text,nil, {:placeholder => "Comment ...", :style=>"width:85%; font-size:12px;margin-left:5px"}%></small></span>
+	</span>
+		<%=hidden_field_tag 'cid', cvote.id%> 
+	<%end%>
+</div>
