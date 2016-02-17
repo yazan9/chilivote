@@ -24,8 +24,8 @@ Chilivote::Application.configure do
     :domain => "gmail.com",
     :authentication => :plain,
     :enable_starttls_auto => true,
-    :user_name => "yazan.khalaileh@gmail.com",
-    :password => "illigator14071983"
+    :user_name => "admin@chilivote.com",
+    :password => "chilivoteadmin"
     }
   
   # Print deprecation notices to the Rails logger.
