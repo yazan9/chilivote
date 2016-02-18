@@ -120,6 +120,11 @@ class UsersController < ApplicationController
       #redirect_to "/users/" + current_user.id.to_s
       #redirect_to "/users/advanced_data"
     end
+    if !params[:code].nil? 
+      @code = params[:code] 
+    else 
+      @code = nil
+    end 
     render '/users/forms/form_basic'
   end
   
@@ -304,6 +309,17 @@ class UsersController < ApplicationController
             @timeline_items = Contribution.where("privacy = ? AND user_id IN (?)", Chilivote::Application.config.privacy_public, current_user.favored_users.pluck(:id)).order(created_at: :desc)
        elsif params[:view] == "country"
             @timeline_items = Contribution.where("privacy = ? AND user_id IN (?)", Chilivote::Application.config.privacy_public, current_user.compatriots).order(created_at: :desc)
+      elsif params[:view] == "top"
+      most_active = Like.order("count_all desc").count(group: :target_id)
+      @timeline_items = Array.new
+      logger = Logger.new('logfile3.log')
+      logger.info "provacyyyyyyyyyyyyyyyyyyyyyy"
+    
+      most_active.each do |m|
+        logger.info m[0]
+        c = Contribution.find_by_id_and_privacy(m[0], Chilivote::Application.config.privacy_public)
+        @timeline_items << c if !c.nil?
+      end
     else
       @timeline_items = {}
     end

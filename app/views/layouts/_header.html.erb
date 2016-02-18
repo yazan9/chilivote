@@ -33,9 +33,15 @@
               <div class="notification-bubble badge badge-warning"><%=current_user.mailbox.inbox({:read => false}).count%></div>
                 <%end%>
               </li>
-              <li style="margin-left:50px;"><a href="/users/show_public" style="color:black;text-shadow:none"><i class="icon-random"></i>Public</a></li>
+              <li style="margin-left:50px;"><a href="/users/show_public" style="text-shadow:none"><i class="icon-random"></i><span class="red_color"><strong>PUBLIC</strong></span></a></li>
               
-               <li class="dropdown">
+              <li style="margin-left:200px;">
+                <form class="navbar-form">
+                  <input class="span2" type="text" placeholder="Search">
+                </form>
+              </li>
+              
+               <li class="dropdown pull-right">
                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span style="color:black;text-shadow:none;"><%=(current_user.first_name + " " + current_user.last_name).titleize%> <b class="caret"></b></span></a>
                <%end%>
                 <ul class="dropdown-menu">
@@ -49,9 +55,7 @@
                 </ul>
               </li>
             </ul>
-            <form class="navbar-form pull-right">
-              <input class="span2" type="text" placeholder="Search">
-            </form>
+            
           </div><!--/.nav-collapse -->
         </div>
       </div>

@@ -12,6 +12,9 @@
   <li <%= if params[:view] == "favorites" then "class=active" end%>>
     <a href="/users/show_public?view=favorites">Favorites</a>
   </li>
+  <li <%= if params[:view] == "top" then "class=active" end%>>
+    <a href="/users/show_public?view=top">Top Posts</a>
+  </li>
 </ul>
 <%if params[:view] == "favorites"%>
 <%= render partial: "/users/public_views/favorites_box"%>
