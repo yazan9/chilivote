@@ -71,4 +71,23 @@ module ApplicationHelper
   def get_cvotes(contribution_id)
     Like.find_all_by_target_id(contribution_id).count
   end
+  
+  def get_cstatus(user)
+    logger = Logger.new('logfile3.log')
+      #logger.info "timeline................."
+      #logger.info @friend_ids
+    contributions = user.contributions
+    up = down = 0
+    logger.info "starting...."
+    contributions.each do |contribution|
+      logger.info "looping....."
+      logger.info "up=" + up.to_s
+      logger.info "down=" + down.to_s
+      up = up + get_votes_up(contribution.id)
+      down = down + get_votes_down(contribution.id)
+      logger.info "up=" + up.to_s
+      logger.info "down=" + down.to_s
+    end
+    return up-down
+  end
 end

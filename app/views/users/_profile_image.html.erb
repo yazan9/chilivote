@@ -4,10 +4,11 @@
   </div>
 <div style="width:178px;text-align:left;">
   <br>
+  <span class="red_color"><strong>C STATUS  </strong></span><span id="following_count"><%=get_cstatus(@current_user)%></span><br><br>
   <span class="red_color"><strong>FOLLOWERS  </strong></span><span id="followers_count"><%=@user.followers.count%></span><br><br>
-  <span class="red_color"><strong>FOLLOWING  </strong></span><span id="following_count"><%=@user.followed_users.count%></span><br>
+  <span class="red_color"><strong>FOLLOWING  </strong></span><span id="following_count"><%=@user.followed_users.count%></span>
 </div>
-<br/>
+
  
 <div class="sidebar-nav">
 <ul class="nav nav-list" style="text-align:left;margin-top:10px">
