@@ -34,7 +34,13 @@ class UsersController < ApplicationController
       #logger.info @friend_ids
     else
       @friendship = Friendship.find_by_user_id_and_friend_id(@current_user, @target_user)
-      render :show_other_user
+      #Scenario two: The timeline belongs to my friend
+      if !@friendship.nil?
+        @timeline_items = Contribution.where(user_id: @target_user).order(created_at: :desc)
+      else
+        render :show_other_user
+      end 
+      
     end
   end
   
@@ -287,6 +293,14 @@ class UsersController < ApplicationController
       session.delete(:photo_for_status)
     end
     @status.save!
+    current_user.friends.each do |my_friend|
+          n = Notification.new
+          n.notification_type = 5
+          n.user_me = my_friend.id
+          n.user_friend = current_user.id
+          n.target_id = @status.id
+          n.save
+    end
     respond_to do |format|
       format.js
       format.html {render :nothing=>true, :status => 200, :content_type => 'text/html'}
@@ -450,6 +464,12 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+  
+  def suggestions
+    @current_user = current_user
+    @user = @current_user
+    @suggested_accounts = User.limit(5).order("RANDOM()")
   end
      
   private

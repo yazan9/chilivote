@@ -40,6 +40,7 @@ Chilivote::Application.routes.draw do
   get 'svotes/vote_status_down' => 'svotes#vote_status_down'
   get 'users/show_notifications' => 'users#show_notifications'
   get 'users/show_options_bubble' => 'users#show_options_bubble'
+  get 'users/suggestions' => 'users#suggestions'
   
    resources :svotes do
     collection do
@@ -63,6 +64,7 @@ Chilivote::Application.routes.draw do
     get :activity
     get :toggle_privacy
     get :add_photo_to_status
+    get :suggestions
   end
   
   resources :friendship do

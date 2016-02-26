@@ -28,6 +28,14 @@ class ContributionsController < ApplicationController
 
     respond_to do |format|
       if @contribution.save
+        #add a notification to my friends
+        current_user.friends.each do |my_friend|
+          n = Notification.new
+          n.notification_type = 3
+          n.user_me = my_friend.id
+          n.user_friend = current_user.id
+          n.target_id = @contribution.id
+          n.save
         format.html { redirect_to @contribution, notice: 'Contribution was successfully created.' }
         format.json { render action: 'show', status: :created, location: @contribution }
       else

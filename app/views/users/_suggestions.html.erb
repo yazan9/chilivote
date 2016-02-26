@@ -1,0 +1,8 @@
+<%@suggested_accounts.each do |suggested_account| %>
+<div class="well well-small well-white">
+  <%=user_avatar_one_line(suggested_account).html_safe%>
+   <div class="pull-right follow_control_<%=suggested_account.id.to_s%>">
+      <%=render partial: "/friendship/following_partial", :locals => {:user => suggested_account}%>
+    </div>
+  </div>
+<%end%>

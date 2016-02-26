@@ -494,6 +494,10 @@ footer ul li {
   margin-left:5px;
   display:block;
   background-clip:padding-box;
+  padding-left:1px;
+  padding-right:1px;
+  padding-top:1px;
+  width:260px;
 }
 
 .notification-box:before{
@@ -506,6 +510,9 @@ footer ul li {
   position: absolute;
   top: -7px;
   left: 9px;
+}
+.notification-line{
+  padding:10px;  
 }
 .notification-bubble{
   position:absolute;

@@ -49,6 +49,12 @@ class VotesController < ApplicationController
     end
     
     current_user.vote_status_up!(@contribution)
+    n = Notification.new
+    n.notification_type = 1
+    n.user_me = @contribution.user_id
+    n.user_friend = current_user.id
+    n.target_id = @contribution.id
+    n.save   
    
     respond_to do |format|
       format.js
@@ -73,6 +79,12 @@ class VotesController < ApplicationController
     end
     
     current_user.vote_status_down!(@contribution)
+    n = Notification.new
+    n.notification_type = 1
+    n.user_me = @contribution.user_id
+    n.user_friend = current_user.id
+    n.target_id = @contribution.id
+    n.save   
    
     respond_to do |format|
       format.js
@@ -99,6 +111,13 @@ class VotesController < ApplicationController
     
     
     current_user.place_vote_on_cvote!(@contribution, @answer)
+    #create the notification
+    n = Notification.new
+    n.notification_type = 4
+    n.user_me = @contribution.user_id
+    n.user_friend = current_user.id
+    n.target_id = @contribution.id
+    n.save   
    
     respond_to do |format|
       format.js

@@ -1,9 +1,5 @@
-<%if @current_user != @target_user%>
-<div id="friendship_button">
-	<%=render partial: "friendship_button"%>
-</div>
-<% else %>
+
 <%= render partial: "user_widget"%>
 <%= render partial: "my_own_timeline"%>
-<%end%>
+
 

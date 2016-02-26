@@ -24,7 +24,7 @@
               <li>
                 <%=link_to "<i class='icon-bell'></i>".html_safe, :controller => :users, :action => :show_notifications, :remote => :true %>
                 <%if !current_user.notifications.empty?%>
-                  <div class="notification-bubble badge badge-warning"><%=current_user.notifications.count%></div>
+                  <div class="notification-bubble badge badge-warning"><%=current_user.notifications.where(viewed: false).count%></div>
                 <%end%>
 <div id="notifications_div" style="display:none" class="well well-white notification-box"></div>
           </li>
@@ -45,13 +45,11 @@
                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span style="color:black;text-shadow:none;"><%=(current_user.first_name + " " + current_user.last_name).titleize%> <b class="caret"></b></span></a>
                <%end%>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
+                  <li><a href="#">My Profile</a></li>
+                  <li><a href="/friends">My Friends</a></li>
+                  <li><a href="#">Following/Followers</a></li>
                   <li class="divider"></li>
-                  <li class="nav-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#"><%= link_to "Sign out", signout_path, method: "delete" %></li>
+                  <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
                 </ul>
               </li>
             </ul>
