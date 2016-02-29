@@ -1,3 +1,31 @@
 <div style="text-align:center;">
 <%= link_to "Start the chilivote experience", '/', {:class=> "btn btn-large"}%>
 </div>
+<div class="full-background"></div>
+<ul class = "nav nav-pills pull-right">
+  <li class="active"><%= link_to "LOG IN", "/sessions/new"%></li>
+  <li class="active"><%= link_to "I HAVE A CODE", "/users/new"%></li>
+</ul>
+<br/><br/><br/><br/><br/>
+<div style="text-align:center;width:100%;">
+  <h1>BE IN THE SOCIAL NETWORK OF THE FUTURE</h1>
+</div>
+<div style="text-align:center;">
+  <%= form_tag("/welcome/request_invitation/", method: "get", remote: true) do %>
+<%= text_field_tag(:email) %>
+  <br/>
+  <%= submit_tag("Request Invitation", class:"btn btn-inverse ajaxified") %>
+<% end %>
+<div id="confirmation_message">
+</div>
+  
+<div id = "ajax-spinner" class="ajax-spinner"><%=cl_image_tag("ajax-loader_xzmjon.gif")%></div>
+</div>
+<script>
+$(document).ajaxStart(function() {
+    $(".ajax-spinner").show();$(".ajaxified").hide();
+  }).ajaxStop(function() {
+      $(".ajax-spinner").hide();
+  });
+</script>
+<br/><br/><br/><br/><br/>
