@@ -38,6 +38,7 @@ class ContributionsController < ApplicationController
           n.save
         format.html { redirect_to @contribution, notice: 'Contribution was successfully created.' }
         format.json { render action: 'show', status: :created, location: @contribution }
+        end
       else
         format.html { render action: 'new' }
         format.json { render json: @contribution.errors, status: :unprocessable_entity }
