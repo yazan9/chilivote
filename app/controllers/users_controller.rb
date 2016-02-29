@@ -326,11 +326,11 @@ class UsersController < ApplicationController
       elsif params[:view] == "top"
       most_active = Like.order("count_all desc").count(group: :target_id)
       @timeline_items = Array.new
-      logger = Logger.new('logfile3.log')
-      logger.info "provacyyyyyyyyyyyyyyyyyyyyyy"
+      #logger = Logger.new('logfile3.log')
+      #logger.info "provacyyyyyyyyyyyyyyyyyyyyyy"
     
       most_active.each do |m|
-        logger.info m[0]
+        #logger.info m[0]
         c = Contribution.find_by_id_and_privacy(m[0], Chilivote::Application.config.privacy_public)
         @timeline_items << c if !c.nil?
       end
