@@ -1,4 +1,23 @@
-<div style="text-align:center;">
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chilivote</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <%= render 'layouts/shim' %>
+  <link rel="shortcut icon" href="http://res.cloudinary.com/hgqr8qyb1/image/upload/v1400960779/2020_fgiana.png"/>
+  <meta name="google-site-verification" content="zKUUiVtXBD5-PAwkJ_NStVBgUqXxHiSlCt463kkvoyw" />
+  
+</head>
+<body style="background-color:#e9e9e9">
+<%= render 'layouts/header' %>
+
+<div class="container">	
+	<% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+	<div style="text-align:center;">
 <%= link_to "Start the chilivote experience", '/', {:class=> "btn btn-large"}%>
 </div>
 <div class="full-background"></div>
@@ -29,3 +48,11 @@ $(document).ajaxStart(function() {
   });
 </script>
 <br/><br/><br/><br/><br/>
+</div>
+<%= render 'layouts/footer' %>
+
+<%= debug(params) if Rails.env.development? %>
+
+
+</body>
+</html>
