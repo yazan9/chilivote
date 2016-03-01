@@ -17,10 +17,7 @@
 	<% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>
     <% end %>
-	<div style="text-align:center;">
-<%= link_to "Start the chilivote experience", '/', {:class=> "btn btn-large"}%>
-</div>
-<div class="full-background"></div>
+	<div class="full-background"></div>
 <ul class = "nav nav-pills pull-right">
   <li class="active"><%= link_to "LOG IN", "/sessions/new"%></li>
   <li class="active"><%= link_to "I HAVE A CODE", "/users/new"%></li>

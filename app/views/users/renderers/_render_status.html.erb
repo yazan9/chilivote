@@ -18,14 +18,14 @@
   <%end%>
   <%if !current_user.owner_of_contribution?(timeline_item)%>
   <div class="status_voting_div">
-    <span class="vote_up"><i class="icon-arrow-up"></i>
-      <%=link_to "vote up", "/votes/vote_status_up"+"?id=" + timeline_item.id.to_s, :remote => true%>
+    <span class="">
+      <%=link_to (cl_image_tag Chilivote::Application.config.thumb_up_black), "/votes/vote_status_up"+"?id=" + timeline_item.id.to_s, :remote => true%>
     </span>
     <span class="votes_count" id="status_votes_up_<%=timeline_item.id.to_s%>">
       <%= render partial: "/votes/count_votes_up", :locals => {:status => timeline_item}%>
     </span>
-    <span class="vote_down"><i class="icon-arrow-down"></i>
-      <%=link_to "vote down", "/votes/vote_status_down"+"?id=" + timeline_item.id.to_s, :remote => true%>
+    <span class="">
+      <%=link_to (cl_image_tag Chilivote::Application.config.thumb_down_black), "/votes/vote_status_down"+"?id=" + timeline_item.id.to_s, :remote => true%>
     </span>
     <span class="votes_count" id="status_votes_down_<%=timeline_item.id.to_s%>">
       <%= render partial: "/votes/count_votes_down", :locals => {:status => timeline_item}%>
@@ -38,14 +38,14 @@
   </div>
   <%else%>
     <div class="status_voting_div">
-    <span><i class="icon-arrow-up"></i>
-      votes up:
+    <span>
+      <%=cl_image_tag Chilivote::Application.config.thumb_up_black%>
     </span>
     <span class="votes_count" id="status_votes_up_<%=timeline_item.id.to_s%>">
       <%= render partial: "/votes/count_votes_up", :locals => {:status => timeline_item}%>
     </span>
-    <span><i class="icon-arrow-down"></i>
-     votes down:
+    <span>
+     <%=cl_image_tag Chilivote::Application.config.thumb_down_black%>
     </span>
     <span class="votes_count" id="status_votes_down_<%=timeline_item.id.to_s%>">
       <%= render partial: "/votes/count_votes_down", :locals => {:status => timeline_item}%>

@@ -587,3 +587,18 @@ footer ul li {
 .margin-bottom-10{
   margin-bottom:10px;
 }
+
+/*Yellow Fade*/
+:target {
+    -webkit-animation: target-fade 0.5s 1;
+    -moz-animation: target-fade 0.5s 1;
+}
+
+@-webkit-keyframes target-fade {
+    0% { background-color: rgba(255,0,0,1); }
+    100% { background-color: rgba(255,255,255,0); }
+}
+@-moz-keyframes target-fade {
+    0% { background-color: rgba(255,0,0,1); }
+    100% { background-color: rgba(255,255,255,0); }
+}

@@ -7,7 +7,7 @@
 <%else%>
 <% current_user.notifications.order(created_at: :desc).each do |notification|%>
 	<% case notification.notification_type when 1%>
-		<div <%=!notification.viewed ? "class=not_seen" : ''%> id="notification_element" onclick="location.href='<%='/users/'+current_user.id.to_s%>';$.ajax('/users/clear_notifications?id=<%=notification.id%>');"><%= user_avatar_one_line_no_link(notification.user).html_safe%> voted on your post</div>
+		<div <%=!notification.viewed ? "class=not_seen" : ''%> id="notification_element" onclick="location.href='<%='/users/'+current_user.id.to_s+"#container_" + notification.target_id.to_s%>';$.ajax('/users/clear_notifications?id=<%=notification.id%>');"><%= user_avatar_one_line_no_link(notification.user).html_safe%> voted on your post</div>
 	<% when 2 %>
 		<div <%=!notification.viewed ? "class=not_seen" : ''%> id="notification_element" onclick="location.href='<%='/users/'+notification.user_friend.to_s%>';$.ajax('/users/clear_notifications?id=<%=notification.id%>');"><%= user_avatar_one_line_no_link(notification.user).html_safe%> accepted you friend request</div>
 	<% when 3%>

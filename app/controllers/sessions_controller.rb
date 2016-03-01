@@ -18,8 +18,8 @@ class SessionsController < ApplicationController
   
   def create_from_fb
     user = User.from_omniauth(env["omniauth.auth"])   
-          Rails.logger.info("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm")
-      Rails.logger.info(user.id.to_s)
+      #Rails.logger.info("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm")
+      #Rails.logger.info(user.id.to_s)
 
     #user = User.find_by(email: params[:session][:email].downcase)
     #if user && user.authenticate(params[:session][:password])

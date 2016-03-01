@@ -3,7 +3,9 @@ class WelcomeController < ApplicationController
   after_action :allow_facebook_iframe
   
   def index
-    
+    if !current_user.nil?
+      redirect_to "/users/show_public"
+    end
   end
   
   def about

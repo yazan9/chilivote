@@ -14,7 +14,7 @@
 <ul class="nav nav-list" style="text-align:left;margin-top:10px">
   <%if current_user != @user%>
   <li id="follow_control">
-    <%=render partial: "/friendship/following_partial", :locals => {:user => @user}%>
+    <%#=render partial: "/friendship/following_partial", :locals => {:user => @user}%>
   </li>
   <%end%>
   <li>
@@ -23,7 +23,7 @@
   <li>
     <%= link_to "<i class='icon-star'></i>".html_safe+"True Friends", '/polls/'%>
   </li>
-   <li>
+  <li>
     <%= link_to "<i class='icon-bell'></i>".html_safe+"Notifications", '/categories/list_categories'%>
   </li> 
   <li>
@@ -38,5 +38,5 @@
 </ul>
 </div>
 <br/>
-  <%= render partial: "/users/best_friends_box"%>
+  <%#= render partial: "/users/best_friends_box"%>
 </div>

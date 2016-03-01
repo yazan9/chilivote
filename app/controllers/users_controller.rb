@@ -22,13 +22,15 @@ class UsersController < ApplicationController
     @current_user = current_user
     @target_user = @user
     
+    #getting list of friends
+    @my_friends = @current_user.friends
+    
     #scenario 1: the timeline is mine
     if @current_user == @target_user
       @friend_ids = @current_user.friend_ids
       @friend_ids << @current_user.id
       
       @timeline_items = Contribution.where(user_id: @friend_ids).order(created_at: :desc)
-      
       #logger = Logger.new('logfile2.log')
       #logger.info "timeline................."
       #logger.info @friend_ids
@@ -468,6 +470,10 @@ class UsersController < ApplicationController
   
   def suggestions
     @current_user = current_user
+    
+    #getting list of friends
+    @my_friends = @current_user.friends
+    
     @user = @current_user
     @suggested_accounts = User.limit(5).order("RANDOM()")
   end
