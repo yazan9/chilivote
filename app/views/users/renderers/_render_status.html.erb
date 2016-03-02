@@ -17,15 +17,28 @@
   </div>
   <%end%>
   <%if !current_user.owner_of_contribution?(timeline_item)%>
+  <%voted_on_status = current_user.voted_on_status?(timeline_item)%>
   <div class="status_voting_div">
     <span class="">
-      <%=link_to (cl_image_tag Chilivote::Application.config.thumb_up_black), "/votes/vote_status_up"+"?id=" + timeline_item.id.to_s, :remote => true%>
+      <%if !voted_on_status.nil? and voted_on_status.like_type == Chilivote::Application.config.like_up%>
+        <%=cl_image_tag Chilivote::Application.config.thumb_up_green%>gg
+      <%elsif !voted_on_status.nil? and voted_on_status.like_type == Chilivote::Application.config.like_down%>
+       <%=cl_image_tag Chilivote::Application.config.thumb_up_black%>
+      <%else%>
+        <%=link_to (cl_image_tag Chilivote::Application.config.thumb_up_black), "/votes/vote_status_up"+"?id=" + timeline_item.id.to_s, :remote => true%>
+      <%end%>
     </span>
     <span class="votes_count" id="status_votes_up_<%=timeline_item.id.to_s%>">
       <%= render partial: "/votes/count_votes_up", :locals => {:status => timeline_item}%>
     </span>
     <span class="">
-      <%=link_to (cl_image_tag Chilivote::Application.config.thumb_down_black), "/votes/vote_status_down"+"?id=" + timeline_item.id.to_s, :remote => true%>
+       <%if !voted_on_status.nil? and voted_on_status.like_type == Chilivote::Application.config.like_up%>
+        <%=cl_image_tag Chilivote::Application.config.thumb_down_black%>
+      <%elsif !voted_on_status.nil? and voted_on_status.like_type == Chilivote::Application.config.like_down%>
+       <%=cl_image_tag Chilivote::Application.config.thumb_down_red%>
+      <%else%>
+        <%=link_to (cl_image_tag Chilivote::Application.config.thumb_down_black), "/votes/vote_status_down"+"?id=" + timeline_item.id.to_s, :remote => true%>
+      <%end%>
     </span>
     <span class="votes_count" id="status_votes_down_<%=timeline_item.id.to_s%>">
       <%= render partial: "/votes/count_votes_down", :locals => {:status => timeline_item}%>
