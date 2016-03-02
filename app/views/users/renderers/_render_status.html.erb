@@ -21,7 +21,7 @@
   <div class="status_voting_div">
     <span class="">
       <%if !voted_on_status.nil? and voted_on_status.like_type == Chilivote::Application.config.like_up%>
-        <%=cl_image_tag Chilivote::Application.config.thumb_up_green%>gg
+        <%=cl_image_tag Chilivote::Application.config.thumb_up_green%>
       <%elsif !voted_on_status.nil? and voted_on_status.like_type == Chilivote::Application.config.like_down%>
        <%=cl_image_tag Chilivote::Application.config.thumb_up_black%>
       <%else%>
