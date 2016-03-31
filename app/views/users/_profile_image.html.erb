@@ -4,7 +4,7 @@
   </div>
 <div style="width:178px;text-align:left;">
   <br>
-  <span class="red_color"><strong>C STATUS  </strong></span><span id="following_count"><%=get_cstatus(@current_user)%></span><br><br>
+  <span class="red_color"><strong>C STATUS  </strong></span><span id="following_count"><%=get_cstatus(@current_user)%></span><i class='icon-question-sign' title="C Status = Votes up - Votes down"></i><br><br>
   <span class="red_color"><strong>FOLLOWERS  </strong></span><span id="followers_count"><%=@user.followers.count%></span><br><br>
   <span class="red_color"><strong>FOLLOWING  </strong></span><span id="following_count"><%=@user.followed_users.count%></span>
 </div>
@@ -38,5 +38,5 @@
 </ul>
 </div>
 <br/>
-  <%#= render partial: "/users/best_friends_box"%>
+  <%= render partial: "/users/best_friends_box"%>
 </div>

@@ -602,3 +602,31 @@ footer ul li {
     0% { background-color: rgba(255,0,0,1); }
     100% { background-color: rgba(255,255,255,0); }
 }
+.blue-button{
+  background-color: rgb(0, 136, 204);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border: 0px;
+  color: rgb(255, 255, 255);
+  cursor: auto;
+  display: block;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  height: 14px;
+  line-height: 14px;
+  list-style-image: none;
+  list-style-position: outside;
+  list-style-type: none;
+  margin-bottom: 2px;
+  margin-right: 2px;
+  margin-top: 2px;
+  padding-bottom: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 8px;
+  text-align: left;
+  text-decoration: none;
+  height: 30px;
+}

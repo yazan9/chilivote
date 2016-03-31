@@ -9,7 +9,8 @@ class SessionsController < ApplicationController
       sign_in user
       #render 'users/' + user.id.to_s
       #redirect_back_or user
-      redirect_to '/users/'+user.id.to_s
+      #redirect_to '/users/'+user.id.to_s
+      redirect_to '/users/show_public'
     else
       flash.now[:error] = 'Invalid email/password combination' # Not quite right!
       render 'new'
@@ -34,6 +35,6 @@ class SessionsController < ApplicationController
 
   def destroy
     sign_out
-    redirect_to '/signin'
+    redirect_to '/'
   end
 end

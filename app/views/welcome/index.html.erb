@@ -1,11 +1,16 @@
 <div class="full-background"></div>
 <ul class = "nav nav-pills pull-right">
-  <li class="active"><%= link_to "LOG IN", "/sessions/new"%></li>
   <li class="active"><%= link_to "I HAVE A CODE", "/users/new"%></li>
 </ul>
-<br/><br/><br/><br/><br/>
+<br/><br/><br/>
+<div class="pull-right">
+  <%= render partial: "/sessions/new"%>
+  </div>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
 <div style="text-align:center;width:100%;">
-  <h1>BE IN THE SOCIAL NETWORK OF THE FUTURE</h1>
+  <h1 style="font-family: 'Comic Sans MS'">'The whole world together for better choices'</h1><br/>
+  <span>- Social Network -</span>
 </div>
 <div style="text-align:center;">
   <%= form_tag("/welcome/request_invitation/", method: "get", remote: true) do %>
