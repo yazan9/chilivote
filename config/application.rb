@@ -38,9 +38,14 @@ module Chilivote
     config.like_up = 2
     config.like_down = 1
     
-    config.thumb_up_black = "v1401984216/thumb_up_black_ir2xtj.png"
-    config.thumb_up_green = "v1401984216/thumb_up_green_onpfr9.png"
-    config.thumb_down_black = "v1401984216/thumb_down_black_xkojuu.png"
-    config.thumb_down_red = "v1401984216/thumb_down_red_hlhryx.png"
+    #config.thumb_up_black = "v1401984216/thumb_up_black_ir2xtj.png"
+    #config.thumb_up_green = "v1401984216/thumb_up_green_onpfr9.png"
+    #config.thumb_down_black = "v1401984216/thumb_down_black_xkojuu.png"
+    #config.thumb_down_red = "v1401984216/thumb_down_red_hlhryx.png"
+    
+    config.thumb_up_black = "v1401984216/1_bqld8u.png"
+    config.thumb_up_green = "v1401984216/3_hsx51t.png"
+    config.thumb_down_black = "v1401984216/2_q0rj29.png"
+    config.thumb_down_red = "v1401984216/4_ywbueq.png"
   end
 end
