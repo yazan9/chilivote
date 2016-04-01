@@ -19,7 +19,7 @@
   <%if !current_user.owner_of_contribution?(timeline_item)%>
   <%voted_on_status = current_user.voted_on_status?(timeline_item)%>
   <div class="status_voting_div">
-    <span class="">
+    <span id="vote_up_face_<%=timeline_item.id.to_s%>">
       <%if !voted_on_status.nil? and voted_on_status.like_type == Chilivote::Application.config.like_up%>
         <%=cl_image_tag Chilivote::Application.config.thumb_up_green%>
       <%elsif !voted_on_status.nil? and voted_on_status.like_type == Chilivote::Application.config.like_down%>
@@ -31,7 +31,7 @@
     <span class="votes_count" id="status_votes_up_<%=timeline_item.id.to_s%>">
       <%= render partial: "/votes/count_votes_up", :locals => {:status => timeline_item}%>
     </span>
-    <span class="">
+    <span class="" id="vote_down_face_<%=timeline_item.id.to_s%>">
        <%if !voted_on_status.nil? and voted_on_status.like_type == Chilivote::Application.config.like_up%>
         <%=cl_image_tag Chilivote::Application.config.thumb_down_black%>
       <%elsif !voted_on_status.nil? and voted_on_status.like_type == Chilivote::Application.config.like_down%>

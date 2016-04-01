@@ -1,1 +1,2 @@
+$("#vote_down_face_<%=@contribution.id.to_s%>").html("<img alt='4 ywbueq' src='http://res.cloudinary.com/hgqr8qyb1/image/upload/v1401984216/4_ywbueq.png'>");
 $("#status_votes_down_<%=@contribution.id.to_s%>").html("<%= escape_javascript render partial: "/votes/count_votes_down", :locals => {:status => @contribution}%>");
