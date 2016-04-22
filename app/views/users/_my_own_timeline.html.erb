@@ -1,3 +1,4 @@
+<div id="new_status"></div>
 <% @timeline_items.each do |timeline_item|%>
   <% if timeline_item.contribution_type == Chilivote::Application.config.contribution_type_status%>
 <%=render partial: "/users/renderers/render_status", :locals=>{:timeline_item => timeline_item}%>
