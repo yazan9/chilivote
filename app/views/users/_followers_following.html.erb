@@ -1,0 +1,17 @@
+<ul class="nav nav-pills">
+  <li <%if params[:display] == "followers" || params[:display].nil?%> class='active' <%end %>>
+    <a href="/users/followers_following?display=followers">Followers</a>
+  </li>
+  <li <%if params[:display] == "followed_users"%> class='active' <%end %>>
+    <a href="/users/followers_following?display=followed_users">Following</a>
+  </li>
+</ul>
+
+<%@display_users.each do |u|%>
+<div class="well well-small well-white">
+  <%=user_avatar_one_line(u).html_safe%>
+   <div class="pull-right follow_control_<%=u.id.to_s%>">
+      <%=render partial: "/friendship/following_partial", :locals => {:user => u}%>
+    </div>
+  </div>
+<%end%>

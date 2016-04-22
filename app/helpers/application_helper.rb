@@ -56,6 +56,11 @@ module ApplicationHelper
     @avatar += "</span>"
   end
   
+  def user_avatar_no_image(user)
+    @avatar = ""
+    @avatar += link_to user.first_name + " " + user.last_name, {:controller => 'users', :action => 'show', :id => user.id}
+  end
+  
   def avatar_image_big(user)
     cl_image_tag user.profile_image ? user.profile_image : Chilivote::Application.config.default_profile_image , :width=>168, :height => 168, :crop => :fit, :class => "img-polaroid"
   end

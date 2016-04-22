@@ -1,0 +1,10 @@
+<span class="label label-info">PROMOTED ACCOUNTS</span><br/><br/>
+<%@promoted_accounts.each do |promoted_account| %>
+<div class="well well-small well-white">
+  <%=user_avatar_one_line(promoted_account).html_safe%>
+  <br/>Information of user will be here<br/><br/><br/>
+   <div class="pull-right follow_control_<%=promoted_account.id.to_s%>" style="margin-top:-20px;">
+      <%=render partial: "/friendship/following_partial", :locals => {:user => promoted_account}%>
+    </div>
+  </div>
+<%end%>

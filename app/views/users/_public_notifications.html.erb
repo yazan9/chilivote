@@ -1,0 +1,23 @@
+<%@notifications.each do |notification|%>
+<div class="well well-small well-white notification_public">
+  <% case notification.notification_type when 1%>
+		<div onclick="location.href='<%='/users/'+current_user.id.to_s+"#container_" + notification.target_id.to_s%>';$.ajax('/users/clear_notifications?id=<%=notification.id%>');"><%= user_avatar_one_line_no_link(notification.user).html_safe%> gave you <%=cl_image_tag Chilivote::Application.config.thumb_up_green%> for your status</div>
+  <% when 9 %>
+  <div onclick="location.href='<%='/users/'+current_user.id.to_s+"#container_" + notification.target_id.to_s%>';$.ajax('/users/clear_notifications?id=<%=notification.id%>');"><%= user_avatar_one_line_no_link(notification.user).html_safe%> gave you <%=cl_image_tag Chilivote::Application.config.thumb_down_red%> for your status</div>
+	<% when 2 %>
+		<div onclick="location.href='<%='/users/'+notification.user_friend.to_s%>';$.ajax('/users/clear_notifications?id=<%=notification.id%>');"><%= user_avatar_one_line_no_link(notification.user).html_safe%> accepted you friend request</div>
+	<% when 3%>
+		<div onclick="location.href='<%='/users/'+notification.user_friend.to_s + "#cvote_" + notification.target_id.to_s%>'; $.ajax('/users/clear_notifications?id=<%=notification.id%>');"><%= user_avatar_one_line_no_link(notification.user).html_safe%> created a new Chilivote</div>
+	<% when 4%>
+		<div onclick="location.href='<%='/users/'+current_user.id.to_s + "#cvote_" + notification.target_id.to_s%>'; $.ajax('/users/clear_notifications?id=<%=notification.id%>');"><%= user_avatar_one_line_no_link(notification.user).html_safe%> voted on your Chilivote</div>
+	<% when 5%>
+		<div onclick="location.href='<%='/users/' + notification.user_friend.to_s%>'; $.ajax('/users/clear_notifications?id=<%=notification.id%>');"><%= user_avatar_one_line_no_link(notification.user).html_safe%> created a new post</div>
+	<% when 6%>
+		<div onclick="location.href='<%='/users/'+notification.user_friend.to_s + "#poll_" + notification.target_id.to_s%>'; $.ajax('/users/clear_notifications?id=<%=notification.id%>');"><%= user_avatar_one_line_no_link(notification.user).html_safe%> posted a new question </div>
+	<% when 7%>
+		<div onclick="location.href='<%='/users/'+current_user.id.to_s + "#poll_" + notification.target_id.to_s%>'; $.ajax('/users/clear_notifications?id=<%=notification.id%>');"><%= user_avatar_one_line_no_link(notification.user).html_safe%> answered your question</div>
+	<% when 8%>
+	    <div onclick="location.href='<%='/users/' + notification.target_id.to_s%>'; $.ajax('/users/clear_notifications?id=<%=notification.id%>');"><%= user_avatar_one_line_no_link(notification.user).html_safe%> changed status</div>
+	<%end%>
+</div>
+<%end%>

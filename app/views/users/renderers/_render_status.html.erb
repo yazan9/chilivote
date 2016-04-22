@@ -31,7 +31,7 @@
     <span class="votes_count" id="status_votes_up_<%=timeline_item.id.to_s%>">
       <%= render partial: "/votes/count_votes_up", :locals => {:status => timeline_item}%>
     </span>
-    <span class="" id="vote_down_face_<%=timeline_item.id.to_s%>">
+    <span class="" id="vote_down_face_<%=timeline_item.id.to_s%>" style="margin-left:30px;">
        <%if !voted_on_status.nil? and voted_on_status.like_type == Chilivote::Application.config.like_up%>
         <%=cl_image_tag Chilivote::Application.config.thumb_down_black%>
       <%elsif !voted_on_status.nil? and voted_on_status.like_type == Chilivote::Application.config.like_down%>
@@ -57,7 +57,7 @@
     <span class="votes_count" id="status_votes_up_<%=timeline_item.id.to_s%>">
       <%= render partial: "/votes/count_votes_up", :locals => {:status => timeline_item}%>
     </span>
-    <span>
+    <span style="margin-left:30px;">
      <%=cl_image_tag Chilivote::Application.config.thumb_down_black%>
     </span>
     <span class="votes_count" id="status_votes_down_<%=timeline_item.id.to_s%>">

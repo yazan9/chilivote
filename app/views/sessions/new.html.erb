@@ -1,4 +1,5 @@
-<h1>Sign in</h1>
+<div class="well well-small">
+  <h1>Sign in</h1>
     <%= form_for(:session, url: sessions_path) do |f| %>
       <%= f.text_field :email , placeholder: 'Email'%><br>
 
@@ -7,6 +8,6 @@
       <%= f.submit "Sign in", class: "btn btn-success" %>
     <% end %>
 <hr>
-<h6>Not a member yet? <%=link_to "Signup", "/signup"%></h6>
-      
+<h6>Forgot your password? <%=link_to "click here", "/welcome/forgot_password/"%></h6>
+</div>      
 <%= render partial: "/users/placeholder_code"%>

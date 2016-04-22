@@ -1,0 +1,5 @@
+I, [2016-04-05T22:23:58.527939 #18547]  INFO -- : inside reset password
+I, [2016-04-05T22:23:58.566909 #18547]  INFO -- : yazan_rus@hotmail.com
+I, [2016-04-05T22:23:58.567062 #18547]  INFO -- : $2a$10$SRVI2ydqiM24dh7UDkl2ZuW8jS9y7w4YNLkLV.s1B.ghIgdWf//36
+I, [2016-04-05T22:23:58.567420 #18547]  INFO -- : BICPWFJV
+I, [2016-04-05T22:23:58.652052 #18547]  INFO -- : saving user.. and sending mail

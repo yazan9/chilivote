@@ -4,11 +4,14 @@
   </div>
 <div style="width:178px;text-align:left;">
   <br>
-  <span class="red_color"><strong>C STATUS  </strong></span><span id="following_count"><%=get_cstatus(@current_user)%></span><i class='icon-question-sign' title="C Status = Votes up - Votes down"></i><br><br>
-  <span class="red_color"><strong>FOLLOWERS  </strong></span><span id="followers_count"><%=@user.followers.count%></span><br><br>
-  <span class="red_color"><strong>FOLLOWING  </strong></span><span id="following_count"><%=@user.followed_users.count%></span>
+  <span class="red_color"><strong>C STATUS  </strong></span><span id="following_count"><%=get_cstatus(@current_user)%></span><i class='icon-question-sign' title="C Status = Votes up - Votes down"></i><hr>
+  <table>
+  <tr><td><span class="red_color" style="min-width:100px"><strong>FOLLOWERS  </strong></span></td><td><span id="followers_count"><%=@user.followers.count%></span></td></tr>
+  <tr><td><span class="red_color"><strong>FOLLOWING  </strong></span></td><td><span id="following_count"><%=@user.followed_users.count%></span></td></tr>
+  <tr><td><span class="red_color"><strong>FRIENDS</strong></span></td><td><span id="following_count"><%=@user.friends.count%></span></td></tr>
+    </table>
+  <hr>
 </div>
-
  
 <div class="sidebar-nav">
 <ul class="nav nav-list" style="text-align:left;margin-top:10px">
@@ -24,7 +27,7 @@
     <%= link_to "<i class='icon-star'></i>".html_safe+"True Friends", '/polls/'%>
   </li>
   <li>
-    <%= link_to "<i class='icon-bell'></i>".html_safe+"Notifications", '/categories/list_categories'%>
+    <%= link_to "<i class='icon-bell'></i>".html_safe+"Notifications", '/users/public_notifications'%>
   </li> 
   <li>
     <%= link_to "<i class='icon-search'></i>".html_safe+"Find Friends", '/friends'%>

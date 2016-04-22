@@ -41,6 +41,9 @@ Chilivote::Application.routes.draw do
   get 'users/show_notifications' => 'users#show_notifications'
   get 'users/show_options_bubble' => 'users#show_options_bubble'
   get 'users/suggestions' => 'users#suggestions'
+  get 'users/followers_following' => 'users#followers_following'
+  get 'users/public_notifications' => 'users#public_notifications'
+
   
    resources :svotes do
     collection do
@@ -65,6 +68,8 @@ Chilivote::Application.routes.draw do
     get :toggle_privacy
     get :add_photo_to_status
     get :suggestions
+    get :followers_following
+    get :public_notifications
   end
   
   resources :friendship do
@@ -96,6 +101,8 @@ Chilivote::Application.routes.draw do
       get :from_fb
       post :from_fb
       get :request_invitation
+      get :forgot_password
+      get :reset_password
     end
   end
   

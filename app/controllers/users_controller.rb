@@ -476,8 +476,36 @@ class UsersController < ApplicationController
     
     @user = @current_user
     @suggested_accounts = User.limit(5).order("RANDOM()")
+    @promoted_accounts = User.where("promoted = 't'").limit(5).order("RANDOM()")
   end
-     
+  
+  def followers_following
+    @current_user = current_user
+    
+    #getting list of friends
+    @my_friends = @current_user.friends
+    
+    @user = @current_user
+    @suggested_accounts = User.limit(5).order("RANDOM()")
+    @promoted_accounts = User.where("promoted = 't'").limit(5).order("RANDOM()")
+    if params[:display] == "followers"
+       @display_users = @current_user.followers
+    else
+       @display_users = @current_user.followed_users
+    end
+  end
+  
+  def public_notifications
+    
+    @current_user = current_user
+
+    #getting list of friends
+    @my_friends = @current_user.friends  
+    @user = @current_user
+    
+    @notifications = @current_user.notifications
+  end
+       
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

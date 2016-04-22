@@ -49,6 +49,26 @@ class WelcomeController < ApplicationController
     end
   end
   
+  def forgot_password
+  end
+  
+  def reset_password
+    #logger = Logger.new('logfile3.log')
+    @user = User.find_by_email(params[:email])
+    if !@user.nil?
+      @decoded_password = [*('A' .. 'Z')].sample(8).join
+      @user.password = @decoded_password
+      @user.password_confirmation = @decoded_password
+    end
+    if @user.save
+      PasswordMailer.reset_password(@user.email, @decoded_password).deliver
+      respond_to do |format|
+        format.html
+      end
+    end
+      #flash[:notice] = "Please enter a valid email"
+  end
+  
   private
   def allow_facebook_iframe
     response.headers['X-Frame-Options'] = 'ALLOW-FROM https://apps.facebook.com'

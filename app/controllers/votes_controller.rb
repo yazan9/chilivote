@@ -39,8 +39,9 @@ class VotesController < ApplicationController
     end
     
     #make sure the user is a friend of the owner of the status
-    if !Friendship.exists?(current_user, @contribution.user)
-      redirect_to "/" and return
+    if !Friendship.exists?(current_user, @contribution.user) && @contribution.contribution_type == Chilivote::Application.config.privacy_friends_only
+      #hack attempt, exit
+      redirect_to "/" and return  
     end
       
     #make sure that the user did not vote before
@@ -69,7 +70,7 @@ class VotesController < ApplicationController
     end
     
     #make sure the user is a friend of the owner of the status
-    if !Friendship.exists?(current_user, @contribution.user)
+    if !Friendship.exists?(current_user, @contribution.user) && @contribution.contribution_type == Chilivote::Application.config.privacy_friends_only
       redirect_to "/" and return
     end
       
@@ -80,7 +81,7 @@ class VotesController < ApplicationController
     
     current_user.vote_status_down!(@contribution)
     n = Notification.new
-    n.notification_type = 1
+    n.notification_type = 9
     n.user_me = @contribution.user_id
     n.user_friend = current_user.id
     n.target_id = @contribution.id
