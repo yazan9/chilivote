@@ -73,8 +73,8 @@ module ApplicationHelper
     Like.find_all_by_target_id_and_like_type(contribution_id, Chilivote::Application.config.like_down).count
   end
   
-  def get_cvotes(contribution_id)
-    Like.find_all_by_target_id(contribution_id).count
+  def get_cvotes(contribution_id, cvote_id)
+    Like.find_all_by_target_id_and_group_id(contribution_id, cvote_id).count
   end
   
   def get_cstatus(user)

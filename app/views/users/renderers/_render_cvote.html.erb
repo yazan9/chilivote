@@ -15,7 +15,7 @@
     <li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">
       <%= cl_image_tag answer.image_id,:crop => 'fill', :width=> 168, :height => 168 %>
       <span class="muted text-center">
-        Votes:<%= render partial: "/votes/count_cvotes", :locals => {:answer => answer}%>
+        Votes:<%= render partial: "/votes/count_cvotes", :locals => {:answer => answer, :timeline_item => timeline_item}%>
       </span>
       <%if current_user.voted_on_cvote?(timeline_item)%>
         <%voted_answer = current_user.get_voted_answer_on_cvote(timeline_item)%>
