@@ -7,7 +7,7 @@ class Friendship < ActiveRecord::Base
   
   # Return true if the users are (possibly pending) friends.
   def self.exists?(user, friend)
-    not find_by_user_id_and_friend_id(user, friend).nil?
+    not find_by_user_id_and_friend_id_and_status(user, friend, 2).nil?
   end
   
   def self.following?(user, friend)
