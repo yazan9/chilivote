@@ -1,30 +1,38 @@
-<div class="full-background"></div>
-<ul class = "nav nav-pills pull-right">
+<div class="row">
+<div class="span2">
+  <%=cl_image_tag "v1401984216/stuff_new-01_caydpa"%>
+</div>
+<div class="span6">
+  <h3>Welcome to chilivote...</h3><br/>
+  <p>Connect with friends, people and the whole world in a new advanced way, where it is not just about like, follow and comment</p>
+  <p>Chilivote is also about competition, votes, making right choices, helping others to choose the best and organizing your social life</p>
+  <div id="confirmation_message"></div>
+</div>
+  
+<div class="span4">
+  <ul class = "nav nav-pills pull-right">
   <li class="active"><%= link_to "I HAVE A CODE", "/users/new"%></li>
 </ul>
-<br/><br/><br/>
-<div class="pull-right">
+  <div class="pull-right">
   <%= render partial: "/sessions/new"%>
   </div>
-<br/><br/><br/><br/><br/><br/><br/><br/><br/>
-<div style="position:absolute;top:50px;left:675px;">
-<%=cl_image_tag "v1401984216/stuff_new-01_caydpa"%>
-</div>
-<div style="text-align:center;width:100%;">
-  <h1 style="font-family: 'Comic Sans MS'">'The whole world together for better choices'</h1><br/>
-  <span>- Social Network -</span>
-</div>
-<div style="text-align:center;">
+  
+  <div class="pull-right well well-small">
+    <strong>New to Chilivote? </strong><br/>Enter your e-mail address and<br/>request and invitation!<br/><br/>
   <%= form_tag("/welcome/request_invitation/", method: "get", remote: true) do %>
 <%= text_field_tag(:email) %>
   <br/>
-  <%= submit_tag("Request Invitation", class:"btn btn-inverse ajaxified") %>
+  <div style="text-align:center"><%= submit_tag("Request Invitation", class:"btn btn-inverse ajaxified") %>
+    <div id = "ajax-spinner" class="ajax-spinner"><%=cl_image_tag("ajax-loader_xzmjon.gif")%></div>
+  </div>
 <% end %>
-<div id="confirmation_message">
 </div>
-  
-<div id = "ajax-spinner" class="ajax-spinner"><%=cl_image_tag("ajax-loader_xzmjon.gif")%></div>
 </div>
+
+
+<div class="full-background"></div>
+
+
 <script>
 $(document).ajaxStart(function() {
     $(".ajax-spinner").show();$(".ajaxified").hide();
@@ -32,4 +40,4 @@ $(document).ajaxStart(function() {
       $(".ajax-spinner").hide();
   });
 </script>
-<br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/>

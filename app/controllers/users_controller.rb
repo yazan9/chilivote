@@ -503,7 +503,7 @@ class UsersController < ApplicationController
     @my_friends = @current_user.friends  
     @user = @current_user
     
-    @notifications = @current_user.notifications
+    @notifications = @current_user.notifications.where(notification_type: [1,9,10])
   end
        
   private

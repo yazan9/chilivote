@@ -1,9 +1,11 @@
 <%@notifications.each do |notification|%>
 <div class="well well-small well-white notification_public">
   <% case notification.notification_type when 1%>
-		<div onclick="location.href='<%='/users/'+current_user.id.to_s+"#container_" + notification.target_id.to_s%>';$.ajax('/users/clear_notifications?id=<%=notification.id%>');"><%= user_avatar_one_line_no_link(notification.user).html_safe%> gave you <%=cl_image_tag Chilivote::Application.config.thumb_up_green%> for your status</div>
+		<div onclick="location.href='<%='/users/'+current_user.id.to_s+"#container_" + notification.target_id.to_s%>';$.ajax('/users/clear_notifications?id=<%=notification.id%>');"><%= user_avatar_one_line_no_link(notification.user).html_safe%> gave you <%=cl_image_tag Chilivote::Application.config.thumb_up_green%> for your status <small>- <%= time_ago_in_words notification.created_at%> ago</small></div>
   <% when 9 %>
-  <div onclick="location.href='<%='/users/'+current_user.id.to_s+"#container_" + notification.target_id.to_s%>';$.ajax('/users/clear_notifications?id=<%=notification.id%>');"><%= user_avatar_one_line_no_link(notification.user).html_safe%> gave you <%=cl_image_tag Chilivote::Application.config.thumb_down_red%> for your status</div>
+  <div onclick="location.href='<%='/users/'+current_user.id.to_s+"#container_" + notification.target_id.to_s%>';$.ajax('/users/clear_notifications?id=<%=notification.id%>');"><%= user_avatar_one_line_no_link(notification.user).html_safe%> gave you <%=cl_image_tag Chilivote::Application.config.thumb_down_red%> for your status <small>- <%= time_ago_in_words notification.created_at%> ago</small></div>
+  <% when 10 %>
+  <div onclick="location.href='<%='/users/'+notification.user_friend.to_s%>';$.ajax('/users/clear_notifications?id=<%=notification.id%>');"><%= user_avatar_one_line_no_link(notification.user).html_safe%> followed you <small>- <%= time_ago_in_words notification.created_at%> ago</small></div>
 	<% when 2 %>
 		<div onclick="location.href='<%='/users/'+notification.user_friend.to_s%>';$.ajax('/users/clear_notifications?id=<%=notification.id%>');"><%= user_avatar_one_line_no_link(notification.user).html_safe%> accepted you friend request</div>
 	<% when 3%>

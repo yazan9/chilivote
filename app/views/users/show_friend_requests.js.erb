@@ -1,6 +1,7 @@
 if(!$('#friend_requests').is(':visible')){
 $('#friend_requests').show();
 $("#friend_requests").html("<%=escape_javascript render partial: 'friend_requests'%>");
+$('#notifications_div').hide();
 }
 else
 {

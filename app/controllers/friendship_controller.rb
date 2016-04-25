@@ -57,6 +57,13 @@ class FriendshipController < ApplicationController
   def follow_user
     if !@user.followed_users.include?(@friend)
       Friendship.follow(@user, @friend)
+      
+      n = Notification.new
+      n.notification_type = 10
+      n.user_me = @friend.id
+      n.user_friend = @user.id
+      n.target_id = nil
+      n.save 
     end
     
      respond_to do |format|

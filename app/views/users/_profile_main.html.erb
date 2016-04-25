@@ -1,5 +1,17 @@
-
 <%= render partial: "user_widget"%>
 <%= render partial: "my_own_timeline"%>
-
-
+<script>
+$('body').click(function(evt) {
+    //if($(evt.target).parents('#notifications_div').length==0) {
+  if($(evt.target).attr('id') != 'notifications_div'){
+        $('#notifications_div').hide();
+    }
+});
+  
+  $('body').click(function(evt) {
+    //if($(evt.target).parents('#notifications_div').length==0) {
+  if($(evt.target).attr('id') != 'friend_requests'){
+        $('#friend_requests').hide();
+    }
+});
+</script>
