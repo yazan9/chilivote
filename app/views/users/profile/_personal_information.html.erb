@@ -1,0 +1,37 @@
+<div class="well well-small well-white">
+  <table margin="0" padding="0" border = "0" width = "100%">
+    <tr>
+      <td width="40%" rowspan="7">
+  <div>
+    <%if @viewed_user.profile_image%>
+		  <%= cl_image_tag @viewed_user.profile_image, :width=>168, :height => 168, :crop => :fill, :class => "img-polaroid" %>
+		<%else%>
+		  <%= cl_image_tag Chilivote::Application.config.default_profile_image, :width=>168, :height => 168, :crop => :fill, :class => "img-polaroid"%>
+		<%end%>	
+  </div>
+    </td>  
+    <td colspan="2"><strong><%=@viewed_user.first_name.capitalize + " " + @viewed_user.last_name.capitalize%></strong></td></tr>
+    <tr><td width="30%"><span class="red_color"><strong>C Status</strong></span> <%=get_cstatus(@viewed_user)%></td><td><span class="red_color"><strong>Rank</strong></span></td></tr>
+    <tr><td><span class="red_color"><strong>Followers</strong> </span><%=@viewed_user.followers.count%></td><td><span class="red_color"><strong>Following </strong></span><%=@viewed_user.followed_users.count%></td></tr> 
+    <tr><td><small class="red_color">About</small></td><td></td></tr>
+    <tr><td colspan="2"><small> <%=@viewed_user.about%></small></td></tr>
+    <tr><td valign="top" colspan="2"><small><span class="red_color">Location</span><br/><%= @viewed_user.country.nil? ? "Unknown" : @viewed_user.country.name%></small></td></tr>
+      <tr><td>
+      <div id="friendship_button">
+	    <%if @current_user!=@viewed_user%>
+        <%=render partial: "/users/friendship_button"%>
+        <%else%>
+        <%=link_to "edit", {:controller => 'users', :action => 'edit', :id => @current_user.id}%>
+        <%end%>
+        </div></td>
+         <td valign="top"><div class="follow_control_<%=@viewed_user.id.to_s%>">
+           <%if @current_user!=@viewed_user%>
+      <%=render partial: "/friendship/following_partial", :locals => {:user => @viewed_user}%>
+          
+           
+           <%end%>
+    </div>
+      </td>
+    </tr>
+  </table>
+</div>

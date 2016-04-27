@@ -35,14 +35,14 @@ class UsersController < ApplicationController
       #logger.info "timeline................."
       #logger.info @friend_ids
     else
-      @friendship = Friendship.find_by_user_id_and_friend_id(@current_user, @target_user)
+      #@friendship = Friendship.find_by_user_id_and_friend_id(@current_user, @target_user)
       #Scenario two: The timeline belongs to my friend
-      if !@friendship.nil?
-        @timeline_items = Contribution.where(user_id: @target_user).order(created_at: :desc)
-      else
-        render :show_other_user
-      end 
-      
+      #if !@friendship.nil?
+      #  @timeline_items = Contribution.where(user_id: @target_user).order(created_at: :desc)
+      #else
+      #  render :show_other_user
+      #end 
+      redirect_to :action => :show_profile, :id=>@target_user.id
     end
   end
   
@@ -142,7 +142,23 @@ class UsersController < ApplicationController
   end
 
   def show_profile
+    @current_user = current_user
+    @my_friends = @current_user.friends
+    @user = @current_user
     
+    @viewed_user = User.find(params[:id])
+    #@friendship = Friendship.find_by_user_id_and_friend_id(@current_user.id, @viewed_user.id)    
+    #setting flags
+    @is_friend = Friendship.exists?(@current_user, @viewed_user)
+    @is_friendship_requested = Friendship.requested?(@current_user, @viewed_user)
+    @is_friendship_request_received = Friendship.request_received(@current_user, @viewed_user)
+    
+    #Creating timeline
+    if @is_friend
+       @timeline_items = Contribution.where(user_id: @viewed_user.id).order(created_at: :desc)
+    else
+      @timeline_items = Contribution.where(user_id: @viewed_user.id, :privacy => Chilivote::Application.config.privacy_public).order(created_at: :desc)
+    end
   end
   # GET /users/1/edit
   def edit
@@ -177,7 +193,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to "/users/show_public", notice: 'Profile Updated' }
+        format.html { redirect_to "/users/show_profile/"+@user.id.to_s, notice: 'Profile Updated' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -514,7 +530,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :gender, :password, :password_confirmation, :image_id, :dob, :country_id, :confirmation_code)
+      params.require(:user).permit(:first_name, :last_name, :email, :gender, :password, :password_confirmation, :image_id, :dob, :country_id, :confirmation_code, :about)
     end
     
     def signed_in_user

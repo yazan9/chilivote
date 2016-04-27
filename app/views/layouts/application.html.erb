@@ -17,6 +17,21 @@
 	<% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>
     <% end %>
+  <script>
+$('body').click(function(evt) {
+    //if($(evt.target).parents('#notifications_div').length==0) {
+  if($(evt.target).attr('id') != 'notifications_div'){
+        $('#notifications_div').hide();
+    }
+});
+  
+  $('body').click(function(evt) {
+    //if($(evt.target).parents('#notifications_div').length==0) {
+  if($(evt.target).attr('id') != 'friend_requests'){
+        $('#friend_requests').hide();
+    }
+});
+</script>
 	<%= yield %>
 </div>
 <%= render 'layouts/footer' %>

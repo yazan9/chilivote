@@ -1,20 +1,17 @@
-	<%if !@friendship.nil?%>
-		<%case @friendship.status%>
-			<%when 0%>
-				<%= "<p><i class='icon-ok'></i> <strong> Friend request sent</strong></p>".html_safe %>
-			<%when 1%>
-				<div class="row alert alert-info" id="friend_request_<%=@user.id.to_s%>_big">
-					<div class="span5"><%= "<p><i class='icon-ok icon-white'></i> <strong>".html_safe + @user.first_name + " " + @user.last_name + " sent you a friend request </strong></p>".html_safe %> </div>
-					<div class="span1"><%= button_to "Accept", {:controller => 'friendship', :action => 'accept', :id => @user.id}, :class=>"btn btn-primary", :remote => true%></div>
-					<div class="span1"><%= button_to "Decline", {:controller => 'friendship', :action => 'decline', :id => @user.id}, :class=>"btn btn-default", :remote => true%></div>
-				</div>		
-			<%when 2%>
-				<%= button_to ({:controller => 'friendship', :action => 'unfriend', :id => @user.id}), {:class=>"btn btn-primary", :remote => true} do %>
-					<i class='icon-white icon-remove'></i> Unfriend
-				<%end%>
-		<%end%>
-	<%else%>
-		<%= button_to ({:controller => 'friendship', :action => 'create', :id => @user.id}), {:class=>"btn btn-success", :remote => true} do %>
+<% if @is_friend%>
+  <%= button_to ({:controller => 'friendship', :action => 'unfriend', :id => @viewed_user.id}), {:class=>"btn btn-primary btn-mini", :remote => true} do %>
+    <i class='icon-white icon-remove'></i> Unfriend
+	<%end%>
+<%elsif @is_friendship_requested%>
+<%= "<p><i class='icon-ok'></i> <small>Friend request sent</small></p>".html_safe %>
+<%elsif @is_friendship_request_received%>
+<div class="pull-left" style="width:100%;" id="friend_request_<%=@viewed_user.id.to_s%>_big">
+					
+					<div style="width:40%;" class="pull-left"><%= button_to "Accept", {:controller => 'friendship', :action => 'accept', :id => @viewed_user.id}, :class=>"btn btn-primary btn-mini", :remote => true%></div>
+					<div style="width:40%;" class="pull-left"><%= button_to "Decline", {:controller => 'friendship', :action => 'decline', :id => @viewed_user.id}, :class=>"btn btn-default btn-mini", :remote => true%></div>
+				</div>
+<%else%>
+<%= button_to ({:controller => 'friendship', :action => 'create', :id => @viewed_user.id}), {:class=>"btn btn-success btn-mini", :remote => true} do %>
 			<i class='icon-white icon-plus'></i> Add Friend
 		<%end%>
-	<%end%>
+<%end%>

@@ -1,0 +1,8 @@
+<% @timeline_items.each do |timeline_item|%>
+  <% if timeline_item.contribution_type == Chilivote::Application.config.contribution_type_status%>
+<%=render partial: "/users/renderers/render_status", :locals=>{:timeline_item => timeline_item}%>
+  <%elsif timeline_item.contribution_type == Chilivote::Application.config.contribution_type_poll%>
+  <%elsif timeline_item.contribution_type == Chilivote::Application.config.contribution_type_cvote%>
+<%=render partial: "/users/renderers/render_cvote", :locals=>{:timeline_item => timeline_item}%>
+  <%end%>
+<%end%>

@@ -5,7 +5,7 @@ class Friendship < ActiveRecord::Base
   validates_presence_of :user_id, :friend_id
   
   
-  # Return true if the users are (possibly pending) friends.
+  # Return true if the users are friends.
   def self.exists?(user, friend)
     not find_by_user_id_and_friend_id_and_status(user, friend, 2).nil?
   end
@@ -14,9 +14,17 @@ class Friendship < ActiveRecord::Base
     not find_by_user_id_and_friend_id_and_status(user,friend,3).nil?
   end
   
+  def self.requested?(user, friend)
+    not find_by_user_id_and_friend_id_and_status(user, friend, 0).nil?
+  end
+  
+  def self.request_received(user, friend)
+    not find_by_user_id_and_friend_id_and_status(user, friend, 1).nil?
+  end
+  
   #Record a pending friend request
   def self.request(user,friend)
-    unless user == friend or Friendship.exists?(user,friend)
+    unless user == friend or Friendship.exists?(user,friend) or Friendship.requested?(user,friend)
       transaction do
         @user_to_friend = create(:user=>user, :friend => friend, :status => 0)
         create(:user=>friend, :friend => user, :status => 1)

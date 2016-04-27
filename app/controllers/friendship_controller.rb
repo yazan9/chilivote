@@ -7,6 +7,7 @@ class FriendshipController < ApplicationController
     @friendship = Friendship.request(@user, @friend)
     respond_to do |format|
       if !@friendship.nil?
+        @is_friendship_requested = true
         format.js
       else
         format.js {render "an error occured"}
@@ -20,7 +21,7 @@ class FriendshipController < ApplicationController
       Friendship.breakup(@user, @friend)
     end
     @friendship = nil
-    
+    @viewed_user = @friend
     respond_to do |format|
       format.js
     end

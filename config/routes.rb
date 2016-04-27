@@ -34,7 +34,7 @@ Chilivote::Application.routes.draw do
   get 'users/add_photo_to_status' => 'users#add_photo_to_status'
   get 'users/show_friend_requests' => 'users#show_friend_requests'
   get 'users/advanced_data' => 'users#advanced_data'
-  get 'users/show_profile' => 'users#show_profile'
+  get 'users/show_profile/:id' => 'users#show_profile'
   get 'users/show_public' => 'users#show_public'
   get 'svotes/vote_status_up' => 'svotes#vote_status_up'
   get 'svotes/vote_status_down' => 'svotes#vote_status_down'
@@ -70,6 +70,7 @@ Chilivote::Application.routes.draw do
     get :suggestions
     get :followers_following
     get :public_notifications
+    get :show_profile
   end
   
   resources :friendship do

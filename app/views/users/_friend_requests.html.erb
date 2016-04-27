@@ -1,10 +1,11 @@
 <% @current_user = current_user%>
 <% if !@current_user.requested_friends.empty? then %>
 	<% @current_user.requested_friends.each do |requester|%>
-		<div id="friend_request_<%=requester.id.to_s%>" class="avatar span5">
-			<div class="span2"><%= user_avatar(requester).html_safe %></div>
-			<div class="span1"><%= button_to "Accept", {:controller => 'friendship', :action => 'accept', :id => requester.id}, :class=>"btn btn-primary btn-small", :remote => true %></div>
-			<div class="span1"><%= button_to "Decline",{:controller => 'friendship', :action => 'decline', :id => requester.id}, :class=>"btn btn-defalut btn-small", :remote => true %></div>
+		<div id="friend_request_<%=requester.id.to_s%>" class="pull-left" style="width:100%;">
+			<div class="pull-left"><%= user_avatar_one_line_small(requester).html_safe %>
+        <small>sent you a friend request</small>
+      </div>
+			
 		</div>
 	<%end%>
 <%else%>
