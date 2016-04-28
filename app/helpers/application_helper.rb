@@ -87,4 +87,20 @@ module ApplicationHelper
     end
     return up-down
   end
+  
+  def get_rank(user)
+    Rails.cache.fetch("users_ranks", :expires_in => 5.minutes) do
+    #logger = Logger.new('logfile2.log')
+    #logger.info "inside the block"
+    @users = User.all
+    @h = Hash.new
+    @users.each do |u|
+      @h.store(u.id, get_cstatus(u))
+    end
+    @sorted_hash = Hash[@h.sort_by{|k, v| v}.reverse]
+    @sorted_array = @sorted_hash.keys
+  end
+    #@rank = @sorted_array.find_index(user.id) + 1
+    @rank = Rails.cache.fetch("users_ranks").find_index(user.id) + 1
+  end
 end

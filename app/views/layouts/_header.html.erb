@@ -45,7 +45,7 @@
                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span style="color:black;text-shadow:none;"><%=(current_user.first_name + " " + current_user.last_name).titleize%> <b class="caret"></b></span></a>
                <%end%>
                 <ul class="dropdown-menu">
-                  <li><a href="#">My Profile</a></li>
+                  <li><a href="/users/show_profile/<%=current_user.id.to_s%>">My Profile</a></li>
                   <li><a href="/friends">My Friends</a></li>
                   <li><a href="/users/followers_following?display=followers">Following/Followers</a></li>
                   <li class="divider"></li>
