@@ -20,7 +20,7 @@ module Chilivote
     # config.i18n.default_locale = :de
     config.assets.initialize_on_precompile = false
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
-    config.default_profile_image = "v1401984216/ic_red_background_-_Copy_pqoudp.png"
+    config.default_profile_image = "v1461950444/profile-placeholder2_lnm88b.jpg"
     
     #defined constants
     config.contribution_type_cvote = 1
