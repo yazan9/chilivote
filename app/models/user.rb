@@ -161,7 +161,7 @@ class User < ActiveRecord::Base
   end
   
   def self.search(q)
-    User.where(['first_name LIKE ? OR last_name LIKE ?', "%#{q}%", "%#{q}%"])
+    User.where(['lower(first_name) LIKE ? OR lower(last_name) LIKE ?', "%#{q}%", "%#{q}%"])
   end
 
   private
