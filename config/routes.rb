@@ -10,6 +10,12 @@ Chilivote::Application.routes.draw do
       get :list_categories
     end
   end
+  
+  resources :search do
+    collection do
+      get :index
+    end
+  end
 
   resources :posts do
     collection do

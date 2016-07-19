@@ -1,0 +1,40 @@
+<div class="well well-small well-white no-bottom-space margin-bottom-10">
+  <h3>Users</h3>
+  <%@users_results.each do |result|%>
+  <small><%=user_avatar_one_line(result).html_safe %></small><br/><br/>
+  <%end%>
+</div>
+<div class="well well-small well-white no-bottom-space margin-bottom-10">
+  <h3>Chilivotes</h3>
+  <%@chilivotes_results.each do |result|%>
+    <div>
+    <%=user_avatar_one_line_small(result.user).html_safe%>
+    <small>- <%= time_ago_in_words result.created_at%> ago</small>
+  </div>
+  <div class="status_text no-bottom-space">
+    <div><h6>
+      <a href="<%='/users/'+result.user.id.to_s + "#container_" + result.id.to_s%>">
+        <%= result.title %>
+        </a>
+      </h6></div>
+  </div>
+  <br/>
+  <%end%>
+</div>
+  <div class="well well-small well-white no-bottom-space margin-bottom-10">
+  <h3>Contributions</h3>
+  <%@statuses_results.each do |result|%>
+    <div>
+    <%=user_avatar_one_line_small(result.user).html_safe%>
+    <small>- <%= time_ago_in_words result.created_at%> ago</small>
+  </div>
+  <div class="status_text no-bottom-space">
+    <div><h6>
+      <a href="<%='/users/'+result.user.id.to_s + "#container_" + result.id.to_s%>">
+        <%= result.body %>
+        </a>
+      </h6></div>
+  </div>
+  <br/>
+  <%end%>
+</div>

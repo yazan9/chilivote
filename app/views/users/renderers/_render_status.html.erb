@@ -13,7 +13,7 @@
   </div>
   <%if !timeline_item.image_id.nil?%>
   <div class="status_text">
-    <%= cl_image_tag timeline_item.image_id, :crop => 'fill', :width=> 500, :height => 300%>
+    <%= cl_image_tag timeline_item.image_id, :crop => 'pad', :width=> 500, :height => 300%>
   </div>
   <%end%>
   <%if !current_user.owner_of_contribution?(timeline_item)%>

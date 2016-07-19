@@ -36,9 +36,9 @@
               <li style="margin-left:100px;"><a href="/users/show_public" style="text-shadow:none"><i class="icon-random"></i><span class="red_color"><strong>PUBLIC</strong></span></a></li>
               
               <li style="margin-left:150px;">
-                <form class="navbar-form">
-                  <input class="span2" type="text" placeholder="Search">
-                </form>
+                <%= form_tag("/search", method: "get", class: "navbar-form") do%>
+                <%= text_field_tag(:q, nil,{:class=>"span2", :placeholder =>"Search"}) %>  
+                <%end%>
               </li>
               
                <li class="dropdown pull-right">

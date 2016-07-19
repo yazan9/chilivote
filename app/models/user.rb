@@ -159,6 +159,10 @@ class User < ActiveRecord::Base
     @users = User.find_all_by_country_id(country.id)
     @users.collect(&:id)
   end
+  
+  def self.search(q)
+    User.where(['first_name LIKE ? OR last_name LIKE ?', "%#{q}%", "%#{q}%"])
+  end
 
   private
 
