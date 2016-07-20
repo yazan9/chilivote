@@ -5,7 +5,7 @@
 	<div id="cvote_answers_uploaders">
 	<ul class="thumbnails">
     	<li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">
-        	<div id="cvote_image1"><a href="javascript: void(0);" id="upload_widget_opener1"><%= cl_image_tag "placeholder2_mgcflo"%></a></div>
+        	<div id="cvote_image1"><a href="javascript: void(0);" id="upload_widget_opener1"><%= cl_image_tag "placeholder2_mgcflo"%></a></div> 
         </li>
         <li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">
         	<div id="cvote_image2"><a href="javascript: void(0);" id="upload_widget_opener2"><%= cl_image_tag "placeholder_d1tsdk"%></a></div>
@@ -15,6 +15,19 @@
         </li>
    </ul>
    </div>
+  <div id="description_group">
+    <ul class="thumbnails">
+    	<li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">
+        	<%= text_field_tag(:title1, nil,{:class=>"span2", :placeholder =>"Description"}) %> 
+        </li>
+        <li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">
+            <%= text_field_tag(:title2, nil,{:class=>"span2", :placeholder =>"Description"}) %> 
+        </li>
+        <li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">
+        	<%= text_field_tag(:title3, nil,{:class=>"span2", :placeholder =>"Description"}) %> 
+        </li>
+   </ul>
+    </div>
   <div class="btn-group" id="privacy_select2">
     <%= render partial: "/users/toggle_privacy"%>
   </div>

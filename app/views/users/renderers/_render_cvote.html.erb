@@ -14,6 +14,7 @@
     <% timeline_item.options.each do |answer|%>
     <li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">
       <%= cl_image_tag answer.image_id,:crop => 'fill', :width=> 168, :height => 168 %>
+      <span class="text-center"><%=answer.title%></span><br/>
       <span class="muted text-center">
         Votes:<%= render partial: "/votes/count_cvotes", :locals => {:answer => answer, :timeline_item => timeline_item}%>
       </span>

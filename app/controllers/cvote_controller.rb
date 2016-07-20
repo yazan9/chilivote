@@ -33,16 +33,19 @@ class CvoteController < ApplicationController
     if session[:answer1]
       @answer1 = @cvote.options.build
       @answer1.image_id = session[:answer1]
+      @answer1.title = params[:title1]
     end
     
     if session[:answer2] 
       @answer2 = @cvote.options.build
       @answer2.image_id = session[:answer2]
+      @answer2.title = params[:title2]
     end
     
     if session[:answer3] 
       @answer3 = @cvote.options.build
       @answer3.image_id = session[:answer3]
+      @answer3.title = params[:title3]
     end 
     
     #saving
