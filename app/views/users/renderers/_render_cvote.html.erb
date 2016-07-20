@@ -11,10 +11,12 @@
   <div class="status_text no-bottom-space">
     <div><h6><%= timeline_item.title %></h6></div>
     <ul class="thumbnails no-bottom-space no-bottom-margin">
+      <%@offset = 2%>
+      <%if timeline_item.options.count == 2 then @offset = 3 end%>
     <% timeline_item.options.each do |answer|%>
-    <li class="span2 text-center thumbnail_custom" style="margin-bottom: 0">
+    <li class="span<%=@offset%> text-center thumbnail_custom" style="margin-bottom: 0">
       <%= cl_image_tag answer.image_id,:crop => 'fill', :width=> 168, :height => 168 %>
-      <span class="text-center"><%=answer.title%></span><br/>
+      <br/><span class="text-center"><%=answer.title%></span><br/>
       <span class="muted text-center">
         Votes:<%= render partial: "/votes/count_cvotes", :locals => {:answer => answer, :timeline_item => timeline_item}%>
       </span>
