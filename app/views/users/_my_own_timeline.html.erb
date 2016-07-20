@@ -3,6 +3,7 @@
   <% if timeline_item.contribution_type == Chilivote::Application.config.contribution_type_status%>
 <%=render partial: "/users/renderers/render_status", :locals=>{:timeline_item => timeline_item}%>
   <%elsif timeline_item.contribution_type == Chilivote::Application.config.contribution_type_poll%>
+  <%=render partial: "/polls/poll_body_small", :locals => {:poll => Poll.find(timeline_item.parent_id)}%>
   <%elsif timeline_item.contribution_type == Chilivote::Application.config.contribution_type_cvote%>
 <%=render partial: "/users/renderers/render_cvote", :locals=>{:timeline_item => timeline_item}%>
   <%end%>

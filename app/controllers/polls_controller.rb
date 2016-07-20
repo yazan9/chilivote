@@ -58,6 +58,11 @@ class PollsController < ApplicationController
     @poll = Poll.new(poll_params)
     @poll.user_id = current_user.id
     if @poll.save
+      c = Contribution.new
+      c.user_id = current_user.id
+      c.contribution_type = Chilivote::Application.config.contribution_type_poll
+      c.parent_id = @poll.id
+      c.save
       current_user.friends.each do |my_friend|
           n = Notification.new
           n.notification_type = 6

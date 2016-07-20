@@ -31,6 +31,9 @@ class UsersController < ApplicationController
       @friend_ids << @current_user.id
       
       @timeline_items = Contribution.where(user_id: @friend_ids).order(created_at: :desc)
+      #@timeline_items = Contribution.where(user_id: @friend_ids)
+      #@timeline_items = Poll.where(user_id: @friend_ids)
+      #@timeline_items.sort_by { |obj| obj.created_at }.reverse!
       #logger = Logger.new('logfile2.log')
       #logger.info "timeline................."
       #logger.info @friend_ids
