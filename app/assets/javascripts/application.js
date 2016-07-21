@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.effect-slide
+//= require jquery-ui
 //= require bootstrap
 //= require turbolinks
 //= require social-share-button

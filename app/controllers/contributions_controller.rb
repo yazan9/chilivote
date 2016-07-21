@@ -67,8 +67,8 @@ class ContributionsController < ApplicationController
       @likes =  @contribution.likes
       @comments = @contribution.comments
       @options = @contribution.options
-      @likes.delete_all
-      @comments.delete_all
+      @likes.destroy_all
+      @comments.destroy_all
       @options.each do |option|
         option.destroy
       end
