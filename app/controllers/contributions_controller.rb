@@ -64,8 +64,15 @@ class ContributionsController < ApplicationController
   # DELETE /contributions/1.json
   def destroy
     if @contribution.user.id == current_user.id
-      
-      @contribution.destroy
+      @likes =  @contribution.likes
+      @comments = @contribution.comments
+      @options = @contribution.options
+      @likes.delete_all
+      @comments.delete_all
+      @options.each do |option|
+        option.destroy
+      end
+      @contribution.destroy!
     end
     
     respond_to do |format|
