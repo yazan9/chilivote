@@ -37,6 +37,7 @@ class UsersController < ApplicationController
       #logger = Logger.new('logfile2.log')
       #logger.info "timeline................."
       #logger.info @friend_ids
+      @best_friends = @current_user.best_friends
     else
       #@friendship = Friendship.find_by_user_id_and_friend_id(@current_user, @target_user)
       #Scenario two: The timeline belongs to my friend
@@ -162,6 +163,7 @@ class UsersController < ApplicationController
     else
       @timeline_items = Contribution.where(user_id: @viewed_user.id, :privacy => Chilivote::Application.config.privacy_public).order(created_at: :desc)
     end
+    @best_friends = @viewed_user.best_friends
   end
   # GET /users/1/edit
   def edit

@@ -3,11 +3,11 @@
   <%if !@best_friends.nil? and @best_friends.count!=0%>
   <%@best_friends.each do |best_friend|%>
     <div class = "alert">
-	    <%=user_avatar(User.find(best_friend[0])).html_safe %>
+	    <%=user_avatar_one_line_small(User.find(best_friend[0])).html_safe %><br/>
 	    <small>with <%=best_friend[1]%> correct answers</small>
     </div>
   <%end%>
-  <%=link_to "more...", {:controller=>"users", :action => "best_friends", :id => params[:id]}, style: "color:#b1110e"%>
+  <%#=link_to "more...", {:controller=>"users", :action => "best_friends", :id => params[:id]}, style: "color:#b1110e"%>
   <%else%>
   <%= "None yet :("%>
   <%end%>

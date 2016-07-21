@@ -1,5 +1,6 @@
 class Friendship < ActiveRecord::Base
-  #status of the relationship: 0 means pending, 1 means requested, 2 means accepted
+  #status of the relationship: 0 means pending, 1 means requested, 2 means accepted, 3 means following, 4 means followed by
+  #if two users are friends, there is no follow relationship, there cannot be one
   belongs_to :user
   belongs_to :friend, :class_name => "User", :foreign_key => "friend_id"
   validates_presence_of :user_id, :friend_id
