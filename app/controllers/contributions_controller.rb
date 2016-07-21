@@ -64,6 +64,7 @@ class ContributionsController < ApplicationController
   # DELETE /contributions/1.json
   def destroy
     if @contribution.user == current_user
+      
       @contribution.destroy
     end
     
