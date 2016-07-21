@@ -15,9 +15,9 @@ class PostsController < ApplicationController
     when '1'
       @posts = Post.paginate page: params[:page], :per_page => 10
     when '2'
-      @posts = Post.paginate page: params[:page], :per_page => 10, :conditions => ["active = ?", true]
+      #@posts = Post.paginate page: params[:page], :per_page => 10, :conditions => ["active = ?", true]
     when '3'
-      @posts = Post.paginate page: params[:page], :per_page => 10, :conditions => ["active = ?", false]
+      #@posts = Post.paginate page: params[:page], :per_page => 10, :conditions => ["active = ?", false]
     else
       @posts = Post.paginate page: params[:page], :per_page => 10
     end

@@ -209,7 +209,7 @@ class User < ActiveRecord::Base
     end
     
     @best_friends_sorted = counts.sort_by { |user_id, occurance| occurance }.reverse
-    return @best_friends_sorted
+    return @best_friends
   end
 
   private
