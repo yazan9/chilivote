@@ -1,4 +1,6 @@
-<% if !Friendship.following?(current_user, user)%>
+<% if Friendship.exists?(current_user, user)%>
+<i class="icon-ok"></i> Friends
+<% elsif !Friendship.following?(current_user, user)%>
 <%=link_to "Follow", {:controller => 'friendship', :action => 'follow_user', :id => user.id}, {:class => 'btn btn-mini btn-danger btn-white', :remote => true }%>
 <%else%>
 <%=link_to "Unfollow", {:controller => 'friendship', :action => 'unfollow_user', :id => user.id}, {:class => 'btn btn-mini btn-primary btn-white', :remote => true }%>

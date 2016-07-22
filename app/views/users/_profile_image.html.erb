@@ -30,7 +30,7 @@
     <%= link_to "<i class='icon-star'></i>".html_safe+"True Friends", '/polls/'%>
   </li>
   <li>
-    <%= link_to "<i class='icon-bell'></i>".html_safe+"Notifications", '/users/public_notifications'%>
+    <%= link_to "<i class='icon-bell'></i>".html_safe+"Notifications ("+@notifications_count.to_s + ")", '/users/public_notifications'%>
   </li> 
   <li>
     <%= link_to "<i class='icon-search'></i>".html_safe+"Find Friends", '/friends'%>

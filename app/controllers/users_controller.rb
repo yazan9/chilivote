@@ -38,6 +38,7 @@ class UsersController < ApplicationController
       #logger.info "timeline................."
       #logger.info @friend_ids
       @best_friends = @current_user.best_friends
+      @notifications_count = @current_user.notifications.where(notification_type: [1,9,10]).count
     else
       #@friendship = Friendship.find_by_user_id_and_friend_id(@current_user, @target_user)
       #Scenario two: The timeline belongs to my friend
@@ -362,6 +363,8 @@ class UsersController < ApplicationController
     end
     @current_user = current_user
     @user = @current_user
+    @best_friends = @current_user.best_friends
+    @notifications_count = @current_user.notifications.where(notification_type: [1,9,10]).count
     render '/users/public_views/show_public'
   end
   
@@ -524,7 +527,9 @@ class UsersController < ApplicationController
     @my_friends = @current_user.friends  
     @user = @current_user
     
-    @notifications = @current_user.notifications.where(notification_type: [1,9,10])
+    @notifications = @current_user.notifications.where(notification_type: [1,9,10]).order(created_at: :desc)
+    @notifications_count = @notifications.count
+    @best_friends = @current_user.best_friends
   end
        
   private
