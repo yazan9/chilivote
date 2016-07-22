@@ -160,6 +160,14 @@ class User < ActiveRecord::Base
     @users.collect(&:id)
   end
   
+  def private_notifications
+    notifications.where(notification_type: [1,2,3,4,5,6,7,8,9]).order(created_at: :desc)
+  end
+  
+  def private_notifications_not_viewed_count
+    notifications.where(notification_type: [1,2,3,4,5,6,7,8,9], viewed: false).order(created_at: :desc).count
+  end
+  
   def self.search(q)
     User.where(['lower(first_name) LIKE ? OR lower(last_name) LIKE ?', "%#{q}%", "%#{q}%"])
   end

@@ -165,6 +165,7 @@ class UsersController < ApplicationController
       @timeline_items = Contribution.where(user_id: @viewed_user.id, :privacy => Chilivote::Application.config.privacy_public).order(created_at: :desc)
     end
     @best_friends = @viewed_user.best_friends
+    @notifications_count = @current_user.notifications.where(notification_type: [1,9,10]).count
   end
   # GET /users/1/edit
   def edit

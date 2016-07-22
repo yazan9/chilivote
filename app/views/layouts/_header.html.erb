@@ -24,7 +24,7 @@
               <li>
                 <%=link_to "<i class='icon-bell'></i>".html_safe, :controller => :users, :action => :show_notifications, :remote => :true %>
                 <%if !current_user.notifications.empty?%>
-                  <div class="notification-bubble badge badge-warning"><%=current_user.notifications.where(viewed: false).count%></div>
+                  <div class="notification-bubble badge badge-warning"><%=current_user.private_notifications_not_viewed_count%></div>
                 <%end%>
 <div id="notifications_div" style="display:none" class="well well-white notification-box"></div>
           </li>
