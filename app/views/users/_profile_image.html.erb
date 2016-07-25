@@ -15,7 +15,7 @@
     </table>
   <hr>
 </div>
- 
+<%if @notifications_count.nil? then @notifications_count = current_user.notifications.where(notification_type: [1,9,10]).count end%> 
 <div class="sidebar-nav">
 <ul class="nav nav-list" style="text-align:left;margin-top:10px">
   <%if current_user != @user%>

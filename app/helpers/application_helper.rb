@@ -88,6 +88,10 @@ module ApplicationHelper
     return up-down
   end
   
+  def set_profile_image_variables
+    
+  end
+  
   def get_rank(user)
     Rails.cache.fetch("users_ranks", :expires_in => 5.minutes) do
     #logger = Logger.new('logfile2.log')

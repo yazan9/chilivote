@@ -1,3 +1,4 @@
+<%if @best_friends.nil? then @best_friends = current_user.best_friends end%>
 <div style="text-align: left">
 <h5><b>TOP 5 FRIENDS</b></h5>
   <%if !@best_friends.nil? and @best_friends.count!=0%>
