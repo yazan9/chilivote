@@ -2,4 +2,4 @@
 	$("#button_<%=answer.id%>").html("");
 <%end%>
 $("#button_<%=@answer.id%>").html("<br/><i class='icon-ok'></i>");
-$("#votes_for_answer_<%=@answer.id%>").html("<%= get_cvotes(@answer.id)%>");
+$("#votes_for_answer_<%=@answer.id%>").html("<%= get_cvotes(@answer.id, @contribution.id)%>");
