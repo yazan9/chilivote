@@ -93,26 +93,26 @@ class VotesController < ApplicationController
   end
   
   def vote_on_cvote
-    logger = Logger.new('logfile2.log')
-    logger.info "inside vote on cvote !!!!!!!!!!!"
+    #logger = Logger.new('logfile2.log')
+    #logger.info "inside vote on cvote !!!!!!!!!!!"
     #make sure the contribution exists
     @contribution = Contribution.find(params[:cvote_id])
     @answer = Contribution.find(params[:answer_id])
     if @contribution.nil? or @answer.nil?
       redirect_to "/" and return
     end
-    logger.info "passed 1"
+    #logger.info "passed 1"
     #make sure the user is a friend of the owner of the cvote
     if !Friendship.exists?(current_user, @contribution.user) and @contribution.privacy == Chilivote::Application.config.privacy_friends_only
       redirect_to "/" and return
     end
-    logger.info "passed 2"
+    #logger.info "passed 2"
       
     #make sure that the user did not vote before
     if current_user.voted_on_cvote?(@contribution)
       redirect_to "/" and return
     end
-    logger.info "passed 3"
+    #logger.info "passed 3"
     
     
     current_user.place_vote_on_cvote!(@contribution, @answer)

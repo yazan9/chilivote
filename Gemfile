@@ -66,6 +66,8 @@ gem 'social-share-button', '~> 0.1.6'
 gem 'mailboxer'
 gem 'chosen-rails'
 
+ruby "2.1.5"
+
 group :production do
   gem 'pg', '0.15.1'
   gem 'rails_12factor', '0.0.2'
