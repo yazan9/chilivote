@@ -11,32 +11,39 @@
   
 </head>
 <body style="background-color:#e9e9e9">
-<%= render 'layouts/header' %>
+<div style="background-color:white;margin-top:0px;position:absolute; top:0px;left:0px;width:100%;height:30px;text-align:center">
+  <%= cl_image_tag "http://res.cloudinary.com/hgqr8qyb1/image/upload/v1461599347/CV_LOGOo_1_fpudn3.png" %>
+</div>
+<div style="position:absolute; top:30px;left:0px;width:100%;">
+  <div class="landing-background" style="">
+    <div style="margin:30px;" class="pull-right">
+      <ul class = "nav nav-pills">
+        <li class="active"><%= link_to "I HAVE A CODE", "/users/new"%></li>
+      </ul>
+    
+      <div class="">
+        <%= render partial: "/sessions/new"%>
+      </div>
+      
+      <div class="well well-small">
+        <strong>New to Chilivote? </strong><br/>Enter your e-mail address and<br/>request an invitation!<br/><br/>
+        <%= form_tag("/welcome/request_invitation/", method: "get", remote: true) do %>
+        <%= text_field_tag(:email) %>
+        <br/>
+        <div style="text-align:center"><%= submit_tag("Request Invitation", class:"btn btn-inverse ajaxified") %>
+          <div id = "ajax-spinner" class="ajax-spinner"><%=cl_image_tag("ajax-loader_xzmjon.gif")%></div>
+        </div>
+        <div class="">
+   <div id="confirmation_message"></div>
+</div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
-<div class="container">	
-	<% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
-    <% end %>
-	<div class="full-background"></div>
-<ul class = "nav nav-pills pull-right">
-  <li class="active"><%= link_to "LOG IN", "/sessions/new"%></li>
-  <li class="active"><%= link_to "I HAVE A CODE", "/users/new"%></li>
-</ul>
-<br/><br/><br/><br/><br/>
-<div style="text-align:center;width:100%;">
-  <h1>BE IN THE SOCIAL NETWORK OF THE FUTURE</h1>
-</div>
-<div style="text-align:center;">
-  <%= form_tag("/welcome/request_invitation/", method: "get", remote: true) do %>
-<%= text_field_tag(:email) %>
-  <br/>
-  <%= submit_tag("Request Invitation", class:"btn btn-inverse ajaxified") %>
-<% end %>
-<div id="confirmation_message">
-</div>
-  
-<div id = "ajax-spinner" class="ajax-spinner"><%=cl_image_tag("ajax-loader_xzmjon.gif")%></div>
-</div>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <script>
 $(document).ajaxStart(function() {
     $(".ajax-spinner").show();$(".ajaxified").hide();
@@ -44,11 +51,7 @@ $(document).ajaxStart(function() {
       $(".ajax-spinner").hide();
   });
 </script>
-<br/><br/><br/><br/><br/>
-</div>
-<%= render 'layouts/footer' %>
-
-<%= debug(params) if Rails.env.development? %>
+<br/><br/><br/><br/><br/><br/>
 
 
 </body>

@@ -5,6 +5,7 @@
 	<div class="span7">
 		<%#= render partial: "profile_main"%>
     <%= render partial: "/users/public_views/default_public_view"%>
+    <%=will_paginate @timeline_items%>
 	</div>
 	<div class="span2 friends_box_right">
     <div class="well well-small well-white">
