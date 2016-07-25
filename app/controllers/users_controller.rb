@@ -200,7 +200,8 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to "/users/show_profile/"+@user.id.to_s, notice: 'Profile Updated' }
+        #format.html { redirect_to "/users/show_profile/"+@user.id.to_s, notice: 'Profile Updated' }
+        format.html { redirect_to "/users/show_public", notice: 'Profile Updated' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
