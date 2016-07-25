@@ -97,7 +97,7 @@ class VotesController < ApplicationController
     #logger.info "inside vote on cvote !!!!!!!!!!!"
     #make sure the contribution exists
     @contribution = Contribution.find(params[:cvote_id])
-    @answer = Contribution.find(params[:answer_id])
+    @answer = Option.find(params[:answer_id])
     if @contribution.nil? or @answer.nil?
       redirect_to "/" and return
     end
