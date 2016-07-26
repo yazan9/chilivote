@@ -105,7 +105,9 @@ module ApplicationHelper
     @sorted_array = @sorted_hash.keys
   end
     #@rank = @sorted_array.find_index(user.id) + 1
-    @rank = Rails.cache.fetch("users_ranks").find_index(user.id) + 1
+    @rank = Rails.cache.fetch("users_ranks").find_index(user.id)
+  
+  #attemtping to rescue from nil
   if @rank.nil?
      @users = User.all
     @h = Hash.new
@@ -114,7 +116,10 @@ module ApplicationHelper
     end
     @sorted_hash = Hash[@h.sort_by{|k, v| v}.reverse]
     @sorted_array = @sorted_hash.keys
+    @rank = @sorted_array.find_index(user.id)
+    return @rank + 1
+  else
+    return @rank + 1
   end
-  return @rank
   end
 end
