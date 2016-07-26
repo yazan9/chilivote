@@ -16,7 +16,7 @@ class Friendship < ActiveRecord::Base
   end
   
   def self.requested?(user, friend)
-    not find_by_user_id_and_friend_id_and_status(user, friend, 0).nil?
+    not find_by_user_id_and_friend_id_and_status(user, friend, 0).nil? and find_by_user_id_and_friend_id_and_status(friend, user, 0).nil?
   end
   
   def self.request_received(user, friend)
