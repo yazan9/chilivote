@@ -342,7 +342,7 @@ class UsersController < ApplicationController
   
   def show_public
     if params[:view] == "public" or params[:view].nil?
-      @timeline_items = Contribution.where(privacy: Chilivote::Application.config.privacy_public).order(created_at: :desc).paginate(:page => params[:page], :per_page => 20)
+      @timeline_items = Contribution.where(privacy: Chilivote::Application.config.privacy_public).order(created_at: :desc)
       #@users = @timeline_items.group_by { |r| r.created_at.to_date }
     elsif params[:view] == "followees"
       @timeline_items = Contribution.where("privacy = ? AND user_id IN (?)", Chilivote::Application.config.privacy_public, current_user.followed_users.pluck(:id)).order(created_at: :desc)
@@ -364,6 +364,7 @@ class UsersController < ApplicationController
     else
       @timeline_items = {}
     end
+    @timeline_items = @timeline_items.paginate(:page => params[:page], :per_page => 30)
     @current_user = current_user
     @user = @current_user
     @best_friends = @current_user.best_friends
