@@ -15,7 +15,7 @@
       <%if timeline_item.options.count == 2 then @offset = 3 end%>
     <% timeline_item.options.each do |answer|%>
     <li class="span<%=@offset%> text-center thumbnail_custom" style="margin-bottom: 0">
-      <%= cl_image_tag answer.image_id,:crop => 'fill', :width=> 168, :height => 168 %>
+      <%= cl_image_tag answer.image_id,:crop => 'fill', :width=> 168, :height => 168, :class=>"custom_preview" %>
       <br/><span class="text-center"><%=answer.title%></span><br/>
       <span class="muted text-center">
         Votes:<%= render partial: "/votes/count_cvotes", :locals => {:answer => answer, :timeline_item => timeline_item}%>
@@ -39,3 +39,25 @@
   <hr class="thin-line">
   <%= render partial: "comments", :locals => {:contribution => timeline_item}%>  	
 </div>
+<div id="preview_div" class="preview_div" style="position:absolute;display:none;padding:5px;"><small></small>
+  <img id="preview_image" class="preview_image">
+</div>
+<script>
+$(document).ready(setTimeout(function(){
+ $('.custom_preview').hover(function(e){
+ var top = e.pageY+'px';
+ var left = e.pageX+'px';   
+ //$.ajax($(this).data('url'));
+ $('#preview_div').css({position:'absolute',top:top,left:left}).show();
+ //$('#preview_div').html(this.src + "hghghghgh"); 
+   var s = this.src
+   s = s.replace("c_fill,h_168,w_168/","c_pad,h_300,w_500/");
+   //s = s.replace("w_168", "");
+   $('.preview_image').attr('src', s);
+  }, function() {
+    $("#preview_div").hide();
+    //$("#preview_div").html("Loading ...");
+});
+}),3000);
+
+</script>
