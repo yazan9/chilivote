@@ -110,6 +110,8 @@ Chilivote::Application.routes.draw do
       get :request_invitation
       get :forgot_password
       get :reset_password
+      get :request_invitation_from_fb
+      get :thank_you
     end
   end
   

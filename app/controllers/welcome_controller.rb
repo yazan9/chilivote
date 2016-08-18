@@ -49,6 +49,16 @@ class WelcomeController < ApplicationController
     end
   end
   
+  def request_invitation_from_fb
+    if !current_user.nil?
+      redirect_to "/users/show_public"
+    end
+  end
+  
+  def thank_you
+    
+  end
+  
   def forgot_password
   end
   
