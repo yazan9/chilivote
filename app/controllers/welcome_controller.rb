@@ -38,12 +38,13 @@ class WelcomeController < ApplicationController
     if @n.save
       UserMailer.welcome_email(params[:email], @n.code).deliver
       respond_to do |format|
+        format.html {redirect_to :action => :thank_you, :code => @n.code}
         format.js
       end
     else
       #flash[:notice] = "Please enter a valid email"
       respond_to do |format|
-        format.html {redirect_to :action => :index}
+        format.html {redirect_to :action => :thank_you, :code => @n.code}
         format.js
       end
     end
@@ -56,7 +57,7 @@ class WelcomeController < ApplicationController
   end
   
   def thank_you
-    
+    @code = params[:code]
   end
   
   def forgot_password
