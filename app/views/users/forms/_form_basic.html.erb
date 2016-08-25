@@ -10,6 +10,17 @@
       </ul>
     </div>
   <% end %>
+
+<div style="color:red">
+	<small>
+		<%if !@errors.nil?%>
+		<%@errors.each do |err|%>
+			<%= err %><br>
+		<%end%>
+		<%end%>
+	</small>
+</div>
+
   <div class="center">
   <h3>Enter basic information</h3> 
     <br>
@@ -28,6 +39,7 @@
   </div>
   <div class="actions">
     <%= f.submit 'Next', :class=> 'btn btn-info btn-large btn-block'%>
+    <br/>Page 1/2 - almost there!
   </div>
 </div>
 <% end %>

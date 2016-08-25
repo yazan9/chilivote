@@ -1,0 +1,6 @@
+<%if timeline_item.image_id.nil?%>
+<a href="https://www.facebook.com/sharer/sharer.php?u=www.chilivote.com&title=Posted+on+Chilivote.com&description=<%=timeline_item.body%>"><img src="http://res.cloudinary.com/hgqr8qyb1/image/upload/v1469571958/facebook-share-small-icon_pxboqf.gif"/></a>
+<%else%>
+<a href="https://www.facebook.com/sharer/sharer.php?u=www.chilivote.com&picture=http%3A%2F%2Fres.cloudinary.com%2Fhgqr8qyb1%2Fimage%2Fupload%2Fv1469572084%2F<%=timeline_item.image_id%>.jpg&title=Posted+on+Chilivote.com&description=<%=timeline_item.body%>"><img src="http://res.cloudinary.com/hgqr8qyb1/image/upload/v1469571958/facebook-share-small-icon_pxboqf.gif"/></a>
+<%end%>
+

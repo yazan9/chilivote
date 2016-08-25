@@ -1,0 +1,5 @@
+<%if @images_for_fb.size == 2%>
+<a href="https://www.facebook.com/sharer/sharer.php?u=www.chilivote.com&picture=<%=CGI.escape "http://res.cloudinary.com/hgqr8qyb1/image/upload/c_fill,h_140,w_220/c_fill,h_140,l_"+@images_for_fb[0] + ",w_220,x_220/c_crop,h_260,r_20,w_400/co_rgb:990C47,l_text:Parisienne_35_bold:Help%20me%20make%20a%20choice,y_155/e_shadow/"+@images_for_fb[1]%>&title=Chilivote&description=Help+your+friend+make+a+choice"><img src="http://res.cloudinary.com/hgqr8qyb1/image/upload/v1469571958/facebook-share-small-icon_pxboqf.gif"/></a>
+<%elsif @images_for_fb.size == 3%>
+<a href="https://www.facebook.com/sharer/sharer.php?u=www.chilivote.com&picture=<%=CGI.escape "http://res.cloudinary.com/hgqr8qyb1/image/upload/c_fill,h_140,w_220/c_fill,h_140,l_"+@images_for_fb[0] + ",w_220,x_220/a_10,h_200,l_"+@images_for_fb[1] + ",x_-10/c_crop,h_260,r_20,w_400/co_rgb:990C47,l_text:Parisienne_35_bold:Help%20me%20make%20a%20choice,y_155/e_shadow/"+@images_for_fb[2]%>&title=Chilivote&description=Help+your+friend+make+a+choice"><img src="http://res.cloudinary.com/hgqr8qyb1/image/upload/v1469571958/facebook-share-small-icon_pxboqf.gif"/></a>
+<%end%>

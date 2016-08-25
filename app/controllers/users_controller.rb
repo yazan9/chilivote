@@ -176,10 +176,24 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @invitation = Invitation.find_by_code(params[:confirmation_code])
-    @user.email = @invitation.email
+    if !@invitation.nil?
+      @user.email = @invitation.email
+    end
+    
+    #checking for errors
+    @errors = Array.new
+    if @user.first_name.nil? or @user.last_name.nil? or @user.password.nil? or @user.password_confirmation.nil?
+      @errors<<"Please fill in all the fields"
+      
+    elsif @user.first_name.strip()=="" or @user.last_name.strip()=="" or @user.password.strip()=="" or @user.password_confirmation.strip()==""
+      @errors<<"Please fill in all the fields"
+      
+    elsif @invitation.nil?
+        @errors<<"Sorry, confirmation code not found"
+    end
     
     respond_to do |format|
-      if @user.save
+      if @errors.size == 0 and @user.save
         #make chilivote friends with everybody
         #Friendship.request(User.find(@user.id), User.find(3))
         #Friendship.accept(User.find(@user.id), User.find(3))
@@ -189,8 +203,8 @@ class UsersController < ApplicationController
         format.html { redirect_to @user, notice: 'Well Done ! You can now live the chilivote experience !' }
         format.json { render action: 'show', status: :created, location: @user }
       else
-        format.html { render action: 'form_basic' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.html { render '/users/forms/form_basic' }
+        #format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -201,7 +215,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         #format.html { redirect_to "/users/show_profile/"+@user.id.to_s, notice: 'Profile Updated' }
-        format.html { redirect_to "/users/show_public", notice: 'Profile Updated' }
+        format.html { redirect_to "/users/show_public?new_user=true", notice: 'Profile Updated' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

@@ -73,17 +73,27 @@ module ApplicationHelper
     Like.find_all_by_target_id_and_like_type(contribution_id, Chilivote::Application.config.like_down).count
   end
   
+  #count votes for answers individually
   def get_cvotes(contribution_id, cvote_id)
     Like.find_all_by_target_id_and_group_id(contribution_id, cvote_id).count
   end
   
+  #count all votes for a chilivote regardless of which answer
+  def count_votes_for_chilivote(contribution_id)
+    Like.find_all_by_group_id(contribution_id).count
+  end
+  
   def get_cstatus(user)
-    logger = Logger.new('logfile3.log')
+    #logger = Logger.new('logfile3.log')
     contributions = user.contributions
     up = down = 0
     contributions.each do |contribution|
+      if contribution.contribution_type == Chilivote::Application.config.contribution_type_status
       up = up + get_votes_up(contribution.id)
       down = down + get_votes_down(contribution.id)
+      elsif contribution.contribution_type == Chilivote::Application.config.contribution_type_cvote
+        up = up + count_votes_for_chilivote(contribution.id)
+      end 
     end
     return up-down
   end

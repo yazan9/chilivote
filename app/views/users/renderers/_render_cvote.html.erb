@@ -12,9 +12,13 @@
     <div><h6><%= timeline_item.title %></h6></div>
     <ul class="thumbnails no-bottom-space no-bottom-margin">
       <%@offset = 2%>
+      <%#next array is for facebook image%>      
+      <%@images_for_fb = Array.new%>
+      
       <%if timeline_item.options.count == 2 then @offset = 3 end%>
     <% timeline_item.options.each do |answer|%>
     <li class="span<%=@offset%> text-center thumbnail_custom" style="margin-bottom: 0">
+      <%@images_for_fb << answer.image_id%>
       <%= cl_image_tag answer.image_id,:crop => 'fill', :width=> 168, :height => 168, :class=>"custom_preview" %>
       <br/><span class="text-center"><%=answer.title%></span><br/>
       <span class="muted text-center">
@@ -36,7 +40,8 @@
     <%end%>
     </ul>
   </div>
-  <a href="https://www.facebook.com/sharer/sharer.php?u=www.chilivote.com&picture=http%3A%2F%2Fres.cloudinary.com%2Fhgqr8qyb1%2Fimage%2Fupload%2Fv1469572084%2F13615468_1754533081466724_3230440533150150676_n_1_kl4b9w.jpg&title=Chilivote&description=Help+your+friend+make+a+choice"><img src="http://res.cloudinary.com/hgqr8qyb1/image/upload/v1469571958/facebook-share-small-icon_pxboqf.gif"/></a>
+  <%= render partial: "/users/renderers/generate_fb_share_cvote", :locals => {:timeline_item => timeline_item}%>
+
   <hr class="thin-line">
   <%= render partial: "comments", :locals => {:contribution => timeline_item}%>  	
 </div>
