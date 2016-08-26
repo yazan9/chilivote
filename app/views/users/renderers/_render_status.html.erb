@@ -1,3 +1,4 @@
+<div id="voters_div" class="voters_div" style="position:absolute;display:none;background-color:black;color:white;padding:5px;"><small>Loading...</small></div>
 <div class="well well-small well-white margin-bottom-10" id="container_<%=timeline_item.id%>">
   <div class="pull-right">
     <%= link_to "<i class='icon-chevron-down'></i>".html_safe, :controller => :users, :action => :show_options_bubble, :id => timeline_item.id, :remote => "true"%>
@@ -28,8 +29,9 @@
         <%=link_to (cl_image_tag Chilivote::Application.config.thumb_up_black), "/votes/vote_status_up"+"?id=" + timeline_item.id.to_s, :remote => true%>
       <%end%>
     </span>
-    <span class="votes_count" id="status_votes_up_<%=timeline_item.id.to_s%>">
-      <%= render partial: "/votes/count_votes_up", :locals => {:status => timeline_item}%>
+    <span class="votes_count some_trigger" id="status_votes_up_<%=timeline_item.id.to_s%>">
+      <%=link_to (render partial: "/votes/count_votes_up", :locals => {:status => timeline_item}), {action: 'list_voters', id: timeline_item.id, vote_type: Chilivote::Application.config.like_up}, :remote => true %>
+      <%#= render partial: "/votes/count_votes_up", :locals => {:status => timeline_item}%>
     </span>
     <span class="" id="vote_down_face_<%=timeline_item.id.to_s%>" style="margin-left:30px;">
        <%if !voted_on_status.nil? and voted_on_status.like_type == Chilivote::Application.config.like_up%>
@@ -40,8 +42,9 @@
         <%=link_to (cl_image_tag Chilivote::Application.config.thumb_down_black), "/votes/vote_status_down"+"?id=" + timeline_item.id.to_s, :remote => true%>
       <%end%>
     </span>
-    <span class="votes_count" id="status_votes_down_<%=timeline_item.id.to_s%>">
-      <%= render partial: "/votes/count_votes_down", :locals => {:status => timeline_item}%>
+    <span class="votes_count some_trigger" id="status_votes_down_<%=timeline_item.id.to_s%>">
+       <%=link_to (render partial: "/votes/count_votes_down", :locals => {:status => timeline_item}), {action: 'list_voters', id: timeline_item.id, vote_type: Chilivote::Application.config.like_down}, :remote => true %>
+      <%#= render partial: "/votes/count_votes_down", :locals => {:status => timeline_item}%>
     </span>
     <%if current_page?(action: 'show_public')%>
     <div class="pull-right follow_control_<%=timeline_item.user.id.to_s%>">
@@ -54,14 +57,16 @@
     <span>
       <%=cl_image_tag Chilivote::Application.config.thumb_up_black%>
     </span>
-    <span class="votes_count" id="status_votes_up_<%=timeline_item.id.to_s%>">
-      <%= render partial: "/votes/count_votes_up", :locals => {:status => timeline_item}%>
+     <span class="votes_count some_trigger" id="status_votes_up_<%=timeline_item.id.to_s%>">
+      <%=link_to (render partial: "/votes/count_votes_up", :locals => {:status => timeline_item}), {action: 'list_voters', id: timeline_item.id, vote_type: Chilivote::Application.config.like_up}, :remote => true %>
+      <%#= render partial: "/votes/count_votes_up", :locals => {:status => timeline_item}%>
     </span>
     <span style="margin-left:30px;">
      <%=cl_image_tag Chilivote::Application.config.thumb_down_black%>
     </span>
-    <span class="votes_count" id="status_votes_down_<%=timeline_item.id.to_s%>">
-      <%= render partial: "/votes/count_votes_down", :locals => {:status => timeline_item}%>
+    <span class="votes_count some_trigger" id="status_votes_down_<%=timeline_item.id.to_s%>">
+       <%=link_to (render partial: "/votes/count_votes_down", :locals => {:status => timeline_item}), {action: 'list_voters', id: timeline_item.id, vote_type: Chilivote::Application.config.like_down}, :remote => true %>
+      <%#= render partial: "/votes/count_votes_down", :locals => {:status => timeline_item}%>
     </span>
     </div>
   <%end%>
@@ -69,3 +74,23 @@
   <hr class="thin-line">
   <%= render partial: "comments", :locals => {:contribution => timeline_item}%>  
 </div>
+<script>
+//script for voters div
+// $(document).ready(setTimeout(function(){
+// $('.some_trigger').mouseup(function(e){
+// var top = e.pageY+'px';
+// var left = e.pageX+'px';   
+// $.ajax($(this).data('url'));
+// $('#voters_div').css({position:'absolute',top:top,left:left}).show();    
+//  }, //function() {
+    //$("#voters_div").hide();
+    //$("#voters_div").html("");
+//});
+//}),3000);
+$('.some_trigger').mouseup(function(e){
+  var top = e.pageY+'px';
+  var left = e.pageX+'px';   
+	$('#voters_div').css({position:'absolute',top:top,left:left}).show(); 
+});
+
+</script>

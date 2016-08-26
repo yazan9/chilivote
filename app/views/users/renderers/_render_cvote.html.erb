@@ -1,3 +1,4 @@
+<div id="voters_div" class="voters_div" style="position:absolute;display:none;background-color:black;color:white;padding:5px;"><small>Loading...</small></div>
 <div class="well well-small well-white no-bottom-space margin-bottom-10" id="container_<%=timeline_item.id%>">
   <div class="pull-right">
     <%= link_to "<i class='icon-chevron-down'></i>".html_safe, :controller => :users, :action => :show_options_bubble, :id => timeline_item.id, :remote => "true"%>
@@ -21,8 +22,9 @@
       <%@images_for_fb << answer.image_id%>
       <%= cl_image_tag answer.image_id,:crop => 'fill', :width=> 168, :height => 168, :class=>"custom_preview" %>
       <br/><span class="text-center"><%=answer.title%></span><br/>
-      <span class="muted text-center">
-        Votes:<%= render partial: "/votes/count_cvotes", :locals => {:answer => answer, :timeline_item => timeline_item}%>
+      <span class="muted text-center some_trigger">
+        Votes:<%=link_to (render partial: "/votes/count_cvotes", :locals => {:answer => answer, :timeline_item => timeline_item}), {action: 'list_voters', id: answer.id, group: timeline_item.id}, :remote => true%>
+        <%#= render partial: "/votes/count_cvotes", :locals => {:answer => answer, :timeline_item => timeline_item}%>
       </span>
       <%if current_user.voted_on_cvote?(timeline_item)%>
         <%voted_answer = current_user.get_voted_answer_on_cvote(timeline_item)%>
@@ -65,5 +67,14 @@ $(document).ready(setTimeout(function(){
     //$("#preview_div").html("Loading ...");
 });
 }),3000);
+
+</script>
+<script>
+
+$('.some_trigger').mouseup(function(e){
+  var top = e.pageY+'px';
+  var left = e.pageX+'px';   
+	$('#voters_div').css({position:'absolute',top:top,left:left}).show(); 
+});
 
 </script>

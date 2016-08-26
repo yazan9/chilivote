@@ -420,10 +420,25 @@ class UsersController < ApplicationController
       end    
   end
   
-  def list_voters
+  def list_voters_deprecated
     
     respond_to do |format|
       @cvote_trackers = CvoteTracker.find_all_by_answer_id params[:answer_id]
+        format.js
+        format.html {render :nothing => true, :status => 200, :content_type => 'text/html'}
+    end
+  end
+  
+  def list_voters
+    #@voters = CvoteTracker.find_all_by_answer_id params[:answ]
+    if params[:vote_type].to_i == Chilivote::Application.config.like_up
+      @voters = Like.find_all_by_target_id_and_like_type(params[:id], Chilivote::Application.config.like_up)
+    elsif params[:vote_type].to_i == Chilivote::Application.config.like_down
+      @voters = Like.find_all_by_target_id_and_like_type(params[:id], Chilivote::Application.config.like_down)
+    else
+      @voters = Like.find_all_by_target_id_and_group_id(params[:id], params[:group])
+    end
+     respond_to do |format|
         format.js
         format.html {render :nothing => true, :status => 200, :content_type => 'text/html'}
     end

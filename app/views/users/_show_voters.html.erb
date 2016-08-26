@@ -1,7 +1,7 @@
-<%@cvote_trackers.each do |tracker|%>
-	<small><%= tracker.user.first_name%> <%=tracker.user.last_name%></small>
+<%@voters.each do |voter|%>
+	<small><%= voter.user.first_name%> <%=voter.user.last_name%></small>
 	<br>
 <%end%>
-<%if @cvote_trackers.count == 0%>
+<%if @voters.count == 0%>
 <small>No votes yet</small>
 <%end%>
