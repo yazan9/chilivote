@@ -39,7 +39,7 @@ class WelcomeController < ApplicationController
       UserMailer.welcome_email(params[:email], @n.code).deliver
       respond_to do |format|
         format.html {redirect_to :action => :thank_you, :code => @n.code}
-        format.js
+        format.js {render :js => "window.location = '/welcome/thank_you?code=#{@n.code}'"}
       end
     else
       #flash[:notice] = "Please enter a valid email"

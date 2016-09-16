@@ -78,3 +78,11 @@ $('.some_trigger').mouseup(function(e){
 });
 
 </script>
+
+<script>
+$(document).ready(function(){
+    $('a[href*="#"]').click(function(){
+        $($(this).attr("href")).effect("highlight", {}, 1500);
+    });
+});
+  </script>

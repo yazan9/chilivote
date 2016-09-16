@@ -5,14 +5,14 @@
   <div class="landing-background" style="">
     <div style="margin:30px;" class="pull-right">
       <ul class = "nav nav-pills">
-        <li class="active"><%= link_to "SIGN UP", "/users/new"%></li>
+        <li class="active"><%= link_to "SIGN UP", "/?new_to_chilivote=true"%></li>
       </ul>
     
       <div class="">
         <%= render partial: "/sessions/new"%>
       </div>
       
-      <div class="well well-small">
+      <div class="well well-small" id="new_to_chilivote">
         <strong>New to Chilivote? </strong><br/>Enter your e-mail address and<br/>request an invitation!<br/><br/>
         <%= form_tag("/welcome/request_invitation/", method: "get", remote: true) do %>
         <%= text_field_tag(:email) %>
@@ -39,3 +39,10 @@ $(document).ajaxStart(function() {
   });
 </script>
 <br/><br/><br/><br/><br/><br/>
+<%if !params[:new_to_chilivote].nil?%>
+<script>
+  $(document).ready(function(){
+        $("#new_to_chilivote").effect( "highlight", {color:"#b1110e"}, 3000 );
+    });
+</script>
+<%end%>
