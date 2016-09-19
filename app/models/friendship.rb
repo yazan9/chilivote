@@ -25,7 +25,7 @@ class Friendship < ActiveRecord::Base
   
   #Record a pending friend request
   def self.request(user,friend)
-    unless user == friend or Friendship.exists?(user,friend) or Friendship.requested?(user,friend)
+    unless user == friend or Friendship.exists?(user,friend) or Friendship.requested?(user,friend) or Friendship.request_received(friend,user)
       transaction do
         @user_to_friend = create(:user=>user, :friend => friend, :status => 0)
         create(:user=>friend, :friend => user, :status => 1)

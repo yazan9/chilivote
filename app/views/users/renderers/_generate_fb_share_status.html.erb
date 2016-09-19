@@ -1,9 +1,9 @@
 <small><strong>SHARE</strong></small>
 <%if timeline_item.image_id.nil?%>
-<a href="https://www.facebook.com/sharer/sharer.php?u=www.chilivote.com&title=Posted+on+Chilivote.com&description=<%=timeline_item.body%>&display=popup"><img src="http://res.cloudinary.com/hgqr8qyb1/image/upload/v1472506981/facebook_sf4anz.png"/></a>
-<a href="https://twitter.com/share?url=http%3A%2F%2Fchilivote.com&text=<%=timeline_item.body%>&via=Chilivote"><img src="http://res.cloudinary.com/hgqr8qyb1/image/upload/v1472506981/twitter_f8prky.png"/></a>
+<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=www.chilivote.com&title=Posted+on+Chilivote.com&description=<%=timeline_item.body%>&display=popup"><img src="http://res.cloudinary.com/hgqr8qyb1/image/upload/v1472506981/facebook_sf4anz.png"/></a>
+<a target="_blank" href="https://twitter.com/share?url=http%3A%2F%2Fchilivote.com&text=<%=timeline_item.body%>&via=Chilivote"><img src="http://res.cloudinary.com/hgqr8qyb1/image/upload/v1472506981/twitter_f8prky.png"/></a>
 <%else%>
-<a href="https://www.facebook.com/sharer/sharer.php?u=www.chilivote.com&picture=http%3A%2F%2Fres.cloudinary.com%2Fhgqr8qyb1%2Fimage%2Fupload%2Fv1469572084%2F<%=timeline_item.image_id%>.jpg&title=Posted+on+Chilivote.com&description=<%=timeline_item.body%>&display=popup"><img src="http://res.cloudinary.com/hgqr8qyb1/image/upload/v1472506981/facebook_sf4anz.png"/></a>
-<a href="https://twitter.com/share?url=http%3A%2F%2Fchilivote.com&picture=http%3A%2F%2Fres.cloudinary.com%2Fhgqr8qyb1%2Fimage%2Fupload%2Fv1469572084%2F<%=timeline_item.image_id%>.jpg&text=<%=timeline_item.body%>&via=Chilivote"><img src="http://res.cloudinary.com/hgqr8qyb1/image/upload/v1472506981/twitter_f8prky.png"/></a>
+<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=www.chilivote.com&picture=http%3A%2F%2Fres.cloudinary.com%2Fhgqr8qyb1%2Fimage%2Fupload%2Fv1469572084%2F<%=timeline_item.image_id%>.jpg&title=Posted+on+Chilivote.com&description=<%=timeline_item.body%>&display=popup"><img src="http://res.cloudinary.com/hgqr8qyb1/image/upload/v1472506981/facebook_sf4anz.png"/></a>
+<a target="_blank" href="https://twitter.com/share?url=http%3A%2F%2Fchilivote.com&picture=http%3A%2F%2Fres.cloudinary.com%2Fhgqr8qyb1%2Fimage%2Fupload%2Fv1469572084%2F<%=timeline_item.image_id%>.jpg&text=<%=timeline_item.body%>&via=Chilivote"><img src="http://res.cloudinary.com/hgqr8qyb1/image/upload/v1472506981/twitter_f8prky.png"/></a>
 <%end%>
 
