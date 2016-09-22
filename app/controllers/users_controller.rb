@@ -504,9 +504,9 @@ class UsersController < ApplicationController
     
     def activity
       @user = User.find(params[:user_id])
-      @cvotes = @user.cvotes
-      @posts = @user.posts
-      @polls = @user.polls
+      @cvotes = @user.contributions.where(contribution_type: Chilivote::Application.config.contribution_type_cvote).order(created_at: :desc)
+      @statuses = @user.contributions.where(contribution_type: Chilivote::Application.config.contribution_type_status).order(created_at: :desc)
+      @polls = @user.contributions.where(contribution_type: Chilivote::Application.config.contribution_type_poll).order(created_at: :desc)
     end
   
   def toggle_privacy

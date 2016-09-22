@@ -63,7 +63,7 @@ class ContributionsController < ApplicationController
   # DELETE /contributions/1
   # DELETE /contributions/1.json
   def destroy
-    if @contribution.user.id == current_user.id
+    if @contribution.user.id == current_user.id or current_user.admin == true
       @likes =  @contribution.likes
       @comments = @contribution.comments
       @options = @contribution.options
@@ -82,6 +82,7 @@ class ContributionsController < ApplicationController
     respond_to do |format|
       #format.html { head :no_content }
       format.js
+      format.html { redirect_to :controller => :users, :action => :activity, :user_id => @contribution.user.id}
     end
   end
   

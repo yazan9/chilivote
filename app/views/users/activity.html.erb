@@ -3,6 +3,34 @@ User <%=@user.first_name%> <%= @user.last_name%> signed up on <%=@user.created_a
 User Activity ---><br />
 
 This user created <%=@cvotes.count%> Chilivotes <br />
+This user creates <%=@statuses.count%> Statuses <br />
 This user created <%=@polls.count%> True Friends Questions <br />
-This user uploaded <%=@posts.count%> Photos in the main categories<br />
- 
+
+<h1>Chilivotes</h1>
+<%@cvotes.each do |cvote|%>
+<div class="well well-small well-white">
+Title: <%=cvote.title%>
+<ul class="thumbnails no-bottom-space no-bottom-margin">
+<%cvote.options.each do |option|%>
+<li class="span3 text-center thumbnail_custom" style="margin-bottom: 0">
+<%= cl_image_tag option.image_id,:crop => 'fill', :width=> 168, :height => 168, :class=>"custom_preview" %>
+<br/><span class="text-center"><%=option.title%></span><br/>
+<%end%>
+  </ul>
+  <small>- <%= time_ago_in_words cvote.created_at%> ago</small>
+  <br/><%= link_to "<i class='icon-remove'></i>".html_safe+"Delete Post", cvote, method: :delete%>
+  </div>
+<%end%>
+<br/>
+<h1>Statuses</h1>
+<%@statuses.each do |status|%>
+<div class="well well-small well-white">
+<%=status.body%><br/>
+<%if !status.image_id.nil?%>
+  <%= cl_image_tag status.image_id, :crop => 'pad', :width=> 200, :height => 200%>
+  <%end%>
+<br/>
+<small>- <%= time_ago_in_words status.created_at%> ago</small>
+  <br/><%= link_to "<i class='icon-remove'></i>".html_safe+"Delete Post", status, method: :delete%>
+  </div>
+<%end%>
