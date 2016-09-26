@@ -1,8 +1,10 @@
 <%@suggested_accounts.each do |suggested_account| %>
+<%if !@my_friends.include?(suggested_account) and !@my_friends.include?(@current_user) and !@my_followed_users.include?(suggested_account)%>
 <div class="well well-small well-white">
   <%=user_avatar_one_line(suggested_account).html_safe%>
    <div class="pull-right follow_control_<%=suggested_account.id.to_s%>">
       <%=render partial: "/friendship/following_partial", :locals => {:user => suggested_account}%>
     </div>
 </div>
+<%end%>
 <%end%>

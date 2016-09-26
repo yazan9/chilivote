@@ -365,7 +365,8 @@ class UsersController < ApplicationController
        elsif params[:view] == "country"
             @timeline_items = Contribution.where("privacy = ? AND user_id IN (?)", Chilivote::Application.config.privacy_public, current_user.compatriots).order(created_at: :desc)
       elsif params[:view] == "top"
-      most_active = Like.order("count_all desc").count(group: :target_id)
+      #most_active = Like.order("count_all desc").count(group: :target_id)
+      most_active = Like.all.group("group_id, target_id").order("count_id desc").count("id")
       @timeline_items = Array.new
       #logger = Logger.new('logfile3.log')
       #logger.info "provacyyyyyyyyyyyyyyyyyyyyyy"
@@ -530,7 +531,7 @@ class UsersController < ApplicationController
     
     #getting list of friends
     @my_friends = @current_user.friends
-    
+    @my_followed_users = @current_user.followed_users
     @user = @current_user
     @suggested_accounts = User.limit(5).order("RANDOM()")
     @promoted_accounts = User.where("promoted = 't'").limit(5).order("RANDOM()")
