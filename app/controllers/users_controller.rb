@@ -534,6 +534,9 @@ class UsersController < ApplicationController
     @my_followed_users = @current_user.followed_users
     @user = @current_user
     @suggested_accounts = User.limit(5).order("RANDOM()")
+    #sorting by followers
+    @suggested_accounts = @suggested_accounts.sort_by! { |x| x.followers.count }.reverse!
+    
     @promoted_accounts = User.where("promoted = 't'").limit(5).order("RANDOM()")
   end
   
