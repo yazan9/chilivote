@@ -635,7 +635,9 @@ footer ul li {
   height: 30px;
 }
 .landing-background{
-  background: url('http://res.cloudinary.com/hgqr8qyb1/image/upload/v1469132652/03-033_sdk772.jpg') no-repeat;
+  background: url('http://res.cloudinary.com/hgqr8qyb1/image/upload/v1476802100/landing_A_vrzanf.jpg') no-repeat;
   width:100%;
   height:927px;
+  z-index: -30000;
+  background-size:cover;
 }

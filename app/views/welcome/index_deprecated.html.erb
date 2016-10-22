@@ -1,0 +1,48 @@
+<div style="background-color:white;margin-top:0px;position:absolute; top:0px;left:0px;width:100%;height:30px;text-align:center">
+  <%= cl_image_tag "http://res.cloudinary.com/hgqr8qyb1/image/upload/v1461599347/CV_LOGOo_1_fpudn3.png" %>
+</div>
+<div style="position:absolute; top:30px;left:0px;width:100%;">
+  <div class="landing-background" style="">
+    <div style="margin:30px;" class="pull-right">
+      <ul class = "nav nav-pills">
+        <li class="active"><%= link_to "SIGN UP", "/?new_to_chilivote=true"%></li>
+      </ul>
+    
+      <div class="">
+        <%= render partial: "/sessions/new"%>
+      </div>
+      
+      <div class="well well-small" id="new_to_chilivote">
+        <strong>New to Chilivote? </strong><br/>Enter your e-mail address and<br/>request an invitation!<br/><br/>
+        <%= form_tag("/welcome/request_invitation/", method: "get", remote: true) do %>
+        <%= text_field_tag(:email) %>
+        <br/>
+        <div style="text-align:center"><%= submit_tag("Request Invitation", class:"btn btn-inverse ajaxified") %>
+          <div id = "ajax-spinner" class="ajax-spinner"><%=cl_image_tag("ajax-loader_xzmjon.gif")%></div>
+        </div>
+        <div class="">
+   <div id="confirmation_message"></div>
+</div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<script>
+$(document).ajaxStart(function() {
+    $(".ajax-spinner").show();$(".ajaxified").hide();
+  }).ajaxStop(function() {
+      $(".ajax-spinner").hide();
+  });
+</script>
+<br/><br/><br/><br/><br/><br/>
+<%if !params[:new_to_chilivote].nil?%>
+<script>
+  $(document).ready(function(){
+        $("#new_to_chilivote").effect( "highlight", {color:"#b1110e"}, 3000 );
+    });
+</script>
+<%end%>

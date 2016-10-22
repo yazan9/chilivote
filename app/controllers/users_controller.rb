@@ -175,10 +175,10 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    @invitation = Invitation.find_by_code(params[:confirmation_code])
-    if !@invitation.nil?
-      @user.email = @invitation.email
-    end
+    #@invitation = Invitation.find_by_code(params[:confirmation_code])
+    #if !@invitation.nil?
+    #  @user.email = @invitation.email
+    #end
     
     #checking for errors
     @errors = Array.new
@@ -187,9 +187,10 @@ class UsersController < ApplicationController
       
     elsif @user.first_name.strip()=="" or @user.last_name.strip()=="" or @user.password.strip()=="" or @user.password_confirmation.strip()==""
       @errors<<"Please fill in all the fields"
-      
-    elsif @invitation.nil?
-        @errors<<"Sorry, confirmation code not found"
+    elsif !User.find_by_email(@user.email).nil?
+      @errors<<"email address is already in use"
+    #elsif @invitation.nil?
+    #    @errors<<"Sorry, confirmation code not found"
     end
     
     respond_to do |format|
@@ -199,11 +200,12 @@ class UsersController < ApplicationController
         #Friendship.accept(User.find(@user.id), User.find(3))
         
         sign_in @user
-        redirect_to "/users/advanced_data" and return
-        format.html { redirect_to @user, notice: 'Well Done ! You can now live the chilivote experience !' }
-        format.json { render action: 'show', status: :created, location: @user }
+        #redirect_to "/users/advanced_data" and return
+        #format.html { redirect_to @user, notice: 'Well Done ! You can now live the chilivote experience !' }
+        format.html { redirect_to '/users/show_public', notice: 'Well Done ! You can now live the chilivote experience !' }
+        #format.json { render action: 'show', status: :created, location: @user }
       else
-        format.html { render '/users/forms/form_basic' }
+        format.html { render '/welcome/index' }
         #format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
