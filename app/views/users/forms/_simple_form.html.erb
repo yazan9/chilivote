@@ -22,24 +22,23 @@
 </div>
 
   <div class="center">
+  
   <div class="controls">
-    <%= f.text_field :first_name , placeholder: "First Name", :class=> "span3"%>
-  </div>
-  <div class="controls">
-    <%= f.text_field :last_name , placeholder: "Last Name", :class=> "span3"%>
+    <%= f.text_field :first_name , placeholder: "Name", :class=> "span3"%>
   </div>
   <div class="controls">
     <%= f.text_field :email , placeholder: "Email", :class=> "span3"%>
   </div>
   <div class="controls">
-    <%= f.password_field :password , placeholder: "Password", :class => "span3"%>
-  </div>
-  <div class="controls">
-    <%= f.password_field :password_confirmation , placeholder: "Confirm Password", :class => "span3" %>
+    <%= f.password_field :password , placeholder: "Create Password", :class => "span3"%>
   </div>
   
   <div class="actions controls">
     <%= f.submit 'Sign Up', :class=> 'btn btn-danger btn-large btn-block span3'%>
+  </div>
+    <hr broder="1" style="color:red;"/>
+    <div class="actions controls">
+    <%= cl_image_tag "Facebook_di5cq7"%>
   </div>
 </div>
 <% end %>

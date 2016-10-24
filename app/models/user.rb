@@ -27,8 +27,8 @@ class User < ActiveRecord::Base
   before_create :create_remember_token
   validates :first_name, presence: true, length: { maximum: 30 }
   #validates :last_name, presence: true, length: {maximum: 30}
-  #VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  #validates :email, presence: true, format: {with: VALID_EMAIL_REGEX}, uniqueness: { case_sensitive: false }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, presence: true, format: {with: VALID_EMAIL_REGEX}, uniqueness: { case_sensitive: false }
   #validates_inclusion_of :gender, :in => [true, false]
   has_secure_password
   acts_as_messageable

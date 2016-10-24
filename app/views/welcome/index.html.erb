@@ -1,12 +1,17 @@
-<div style="position:absolute; top:0px;left:0px;width:100%;z-index:-3000;">
-  <div class="landing-background" style=""></div>
+<div style="position:fixed; top:0px;left:0px;right:0px;width:100%;z-index:-3000;bottom:0px;max-height:100%;">
+  <%=cl_image_tag "pic_only_jdorqj"%>
   </div>
-<div style="margin:30px;" class="pull-right">
-      <ul class = "nav nav-pills">
-        <li class="active"><%= link_to "LOG IN", "/signin"%></li>
-      </ul>
-  </div>
-<div class="row" style="z-index:100;margin-top:30%;">     
+
+<div style="position:absolute;top:0px;left:0px;">
+    <%=cl_image_tag "logo_only_pw1tvy"%>
+    </div>
+<div style="position:absolute;top:5%;right:5%;">
+  <%= link_to "LOG IN", "/signin", {:class=>"btn btn-large" } %>
+</div>
+<div class="row" style="z-index:100;">     
+  <br/><br/><br/>
+    <h2 style="color:white">Because life is about good, better and the best</h2>
+  <br/><br/>
       <div class="span4"></div>
       <div class="span3">
       <%= render partial: '/users/forms/simple_form' %>

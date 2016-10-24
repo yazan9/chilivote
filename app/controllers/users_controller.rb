@@ -175,6 +175,19 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    if @user.first_name.split.length > 1
+    first_name = @user.first_name.split(' ',2).first
+    last_name = @user.first_name.split(' ',2).last
+    else
+      first_name = @user.first_name
+      last_name = ""
+    end
+    if last_name.nil?
+      last_name = ""
+    end
+    @user.first_name = first_name
+    @user.last_name = last_name
+    @user.password_confirmation = @user.password
     #@invitation = Invitation.find_by_code(params[:confirmation_code])
     #if !@invitation.nil?
     #  @user.email = @invitation.email
@@ -182,10 +195,10 @@ class UsersController < ApplicationController
     
     #checking for errors
     @errors = Array.new
-    if @user.first_name.nil? or @user.last_name.nil? or @user.password.nil? or @user.password_confirmation.nil?
+    if @user.first_name.nil? or @user.password.nil? or @user.email.nil?
       @errors<<"Please fill in all the fields"
       
-    elsif @user.first_name.strip()=="" or @user.last_name.strip()=="" or @user.password.strip()=="" or @user.password_confirmation.strip()==""
+    elsif @user.first_name.strip()=="" or @user.password.strip()=="" or @user.email.strip()==""
       @errors<<"Please fill in all the fields"
     elsif !User.find_by_email(@user.email).nil?
       @errors<<"email address is already in use"
@@ -579,7 +592,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :gender, :password, :password_confirmation, :image_id, :dob, :country_id, :confirmation_code, :about, :website)
+      params.require(:user).permit(:first_name, :last_name, :email, :gender, :password, :image_id, :dob, :country_id, :confirmation_code, :about, :website)
     end
     
     def signed_in_user
