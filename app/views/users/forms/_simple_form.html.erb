@@ -24,20 +24,22 @@
   <div class="center">
   
   <div class="controls">
-    <%= f.text_field :first_name , placeholder: "Name", :class=> "span3"%>
+    <%= f.text_field :first_name , placeholder: "Name", :class=> "span4"%>
   </div>
   <div class="controls">
-    <%= f.text_field :email , placeholder: "Email", :class=> "span3"%>
+    <%= f.text_field :email , placeholder: "Email", :class=> "span4"%>
   </div>
   <div class="controls">
-    <%= f.password_field :password , placeholder: "Create Password", :class => "span3"%>
+    <%= f.password_field :password , placeholder: "Create Password", :class => "span4"%>
   </div>
   
   <div class="actions controls">
-    <%= f.submit 'Sign Up', :class=> 'btn btn-danger btn-large btn-block span3'%>
+    <center>
+    <%= f.submit 'Sign Up', :class=> 'btn btn-danger btn-large btn-block'%>
+      </center>
   </div>
     <hr broder="1" style="color:red;"/>
-    <div class="actions controls">
+    <div class="actions controls" style="height:50%">
     
       <%= link_to (cl_image_tag "Facebook_di5cq7"), "/auth/facebook", id: "sign_in" %>
   </div>
