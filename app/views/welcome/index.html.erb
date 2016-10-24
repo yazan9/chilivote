@@ -2,15 +2,17 @@
   <%=cl_image_tag "pic_only_jdorqj"%>
   </div>
 
-<div style="position:absolute;top:0px;left:0px;">
-    <%=cl_image_tag "logo_only_pw1tvy"%>
-    </div>
+
 <div style="position:absolute;top:5%;right:5%;">
   <%= link_to "LOG IN", "/signin", {:class=>"btn btn-large" } %>
 </div>
 <div class="row" style="z-index:100;">     
-  <br/><br/><br/>
+  
+  <center>
+    <%=cl_image_tag "logo_only_pw1tvy"%>
     <h2 style="color:white">Because life is about good, better and the best</h2>
+    <h4 style="color:white">Join Chilivote for a better world by creating votes and voting for others</h4>
+    </center>
   <br/><br/>
       <div class="span4"></div>
       <div class="span3">
@@ -26,7 +28,7 @@ $(document).ajaxStart(function() {
       $(".ajax-spinner").hide();
   });
 </script>
-<br/><br/><br/><br/><br/><br/>
+<br/><br/><br/>
 <%if !params[:new_to_chilivote].nil?%>
 <script>
   $(document).ready(function(){
