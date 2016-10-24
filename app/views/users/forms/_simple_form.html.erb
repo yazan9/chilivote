@@ -38,7 +38,8 @@
   </div>
     <hr broder="1" style="color:red;"/>
     <div class="actions controls">
-    <%= cl_image_tag "Facebook_di5cq7"%>
+    
+      <%= link_to (cl_image_tag "Facebook_di5cq7"), "/auth/facebook", id: "sign_in" %>
   </div>
 </div>
 <% end %>
