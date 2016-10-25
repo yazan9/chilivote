@@ -112,7 +112,7 @@ class User < ActiveRecord::Base
       
       #slicing the full name
       full_name = auth.info.name
-      if full_name.slice.length > 1
+      if full_name.split.length > 1
       first_name = full_name.split(' ',2).first
       last_name = full_name.split(' ',2).last
       else
