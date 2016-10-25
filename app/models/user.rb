@@ -105,8 +105,10 @@ class User < ActiveRecord::Base
     user = User.find_by_email(auth.info.email)
 
     if user.nil?
-      logger = Logger.new('logfile3.log')
-      logger.info(auth)
+      #logger = Logger.new('logfile3.log')
+      #logger.info(auth)
+      puts "this is authhhhhh/////////////////////////////////////////////////////////"
+      puts auth
       user = User.new   
       user.first_name = auth.info.first_name
       user.last_name = auth.info.last_name
