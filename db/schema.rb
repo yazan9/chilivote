@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160427193709) do
+ActiveRecord::Schema.define(version: 20161025204811) do
 
   create_table "answers", force: true do |t|
     t.string   "name"
@@ -259,6 +259,8 @@ ActiveRecord::Schema.define(version: 20160427193709) do
     t.integer  "country_id"
     t.boolean  "promoted",        default: false
     t.string   "about"
+    t.string   "website"
+    t.boolean  "external",        default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -229,7 +229,11 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        #format.html { redirect_to "/users/show_profile/"+@user.id.to_s, notice: 'Profile Updated' }
+        #if the user supplied a password it means he joined the club and no longer an external
+        if !params[:password].nil?
+          @user.external = false
+          @user.save
+        end
         format.html { redirect_to "/users/show_public?new_user=true", notice: 'Profile Updated' }
         format.json { head :no_content }
       else

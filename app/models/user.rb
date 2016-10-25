@@ -107,8 +107,8 @@ class User < ActiveRecord::Base
     if user.nil?
       #logger = Logger.new('logfile3.log')
       #logger.info(auth)
-      puts "this is authhhhhh/////////////////////////////////////////////////////////"
-      puts auth
+      #puts "this is authhhhhh/////////////////////////////////////////////////////////"
+      #puts auth
       
       #slicing the full name
       full_name = auth.info.name
