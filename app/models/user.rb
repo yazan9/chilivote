@@ -109,9 +109,23 @@ class User < ActiveRecord::Base
       #logger.info(auth)
       puts "this is authhhhhh/////////////////////////////////////////////////////////"
       puts auth
+      
+      #slicing the full name
+      full_name = auth.info.name
+      if full_name.slice.length > 1
+      first_name = full_name.split(' ',2).first
+      last_name = full_name.split(' ',2).last
+      else
+      first_name = full_name
+      last_name = ""
+      end
+      if last_name.nil?
+      last_name = ""
+      end
+      
       user = User.new   
-      user.first_name = auth.info.first_name
-      user.last_name = auth.info.last_name
+      user.first_name = first_name
+      user.last_name = last_name
       user.profile_image = auth.info.image + "?type=large" 
       user.email = auth.info.email
       if auth.info.gender == "male"
