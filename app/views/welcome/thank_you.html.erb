@@ -1,11 +1,32 @@
-<div style="position:absolute;top:0px;left:0px;z-index:-100;max-width:1853px;">
-<%=cl_image_tag "http://res.cloudinary.com/hgqr8qyb1/image/upload/v1471989122/Thank_you_page_FINAL_2_jkl9dj.jpg"%>
+<div style="position:fixed; top:0px;left:0px;right:0px;width:100%;z-index:-3000;bottom:0px;max-height:100%;">
+  <%=cl_image_tag "pic_only_jdorqj"%>
   </div>
+
+<div class="row" style="z-index:100;">     
+  
+  <center>
+    <%=cl_image_tag "logo_only_pw1tvy"%>
+    <h2 style="color:white">Because life is about good, better and the best</h2>
+    <h4 style="color:white">Join Chilivote for a better world by creating votes and voting for others</h4>
+    <br/><br/><br/><br/><br/><br/>
+    <h4 style="color:white">Welcome to Chilivote</h4>
+    <br/><br/>
+    </center>
+  <div class="span2"></div>
+  <div class="span8">
+    <h5 style="color:white">Vote for others</h5> 
+    <h5 style="color:white"> Follow people and friends</h5> 
+    <h5 style="color:white">Create votes and let others help you make a choice</h5> 
+    <h5 style="color:white">Build a better world</h5>
+    </div>
+   <div class="span2"></div>
+</div>
 
 <script>
         var timer = setTimeout(function() {
-            window.location='http://www.chilivote.com/users/new?code=<%=@code%>'
-        }, 2000);
+            //window.location='http://www.chilivote.com/users/new?code=<%=@code%>'
+            window.location='http://www.chilivote.com/users/show_public'
+        }, 3000);
     </script>
 
 <!-- Facebook Pixel Code -->

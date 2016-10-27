@@ -58,7 +58,7 @@ class WelcomeController < ApplicationController
   end
   
   def thank_you
-    @code = params[:code]
+    #@code = params[:code]
   end
   
   def forgot_password

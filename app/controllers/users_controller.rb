@@ -211,15 +211,11 @@ class UsersController < ApplicationController
         #make chilivote friends with everybody
         #Friendship.request(User.find(@user.id), User.find(3))
         #Friendship.accept(User.find(@user.id), User.find(3))
-        
         sign_in @user
-        #redirect_to "/users/advanced_data" and return
-        #format.html { redirect_to @user, notice: 'Well Done ! You can now live the chilivote experience !' }
-        format.html { redirect_to '/users/show_public', notice: 'Well Done ! You can now live the chilivote experience !' }
-        #format.json { render action: 'show', status: :created, location: @user }
+        #format.html { redirect_to '/users/show_public', notice: 'Well Done ! You can now live the chilivote experience !' }
+        format.html { redirect_to '/welcome/thank_you/' }
       else
         format.html { render '/welcome/index' }
-        #format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
