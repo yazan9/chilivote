@@ -1,49 +1,100 @@
+
 <!DOCTYPE html>
 <html>
 <head>
   <title>Chilivote</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-  <%= render 'layouts/shim' %>
-  <link rel="shortcut icon" href="http://res.cloudinary.com/hgqr8qyb1/image/upload/v1400960779/2020_fgiana.png"/>
+  <link data-turbolinks-track="true" href="/assets/application-0a348ba1a6bda21479f3f66c5c38e415.css" media="all" rel="stylesheet" />
+  <script data-turbolinks-track="true" src="/assets/application-424d565f9b65155e71314d6e771ece43.js"></script>
+  <meta content="authenticity_token" name="csrf-param" />
+<meta content="3lxXtYX+H178+jReomoo+vYD0f7BlfWFmnc0IEeTIjM=" name="csrf-token" />
+  <!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  <link rel="shortcut icon" href="http://res.cloudinary.com/hgqr8qyb1/image/upload/v1474318849/stuff-01111111_gfvdfy.png"/>
   <meta name="google-site-verification" content="zKUUiVtXBD5-PAwkJ_NStVBgUqXxHiSlCt463kkvoyw" />
-  
+
 </head>
 <body style="background-color:#e9e9e9">
-<div style="background-color:white;margin-top:0px;position:absolute; top:0px;left:0px;width:100%;height:30px;text-align:center">
-  <%= cl_image_tag "http://res.cloudinary.com/hgqr8qyb1/image/upload/v1461599347/CV_LOGOo_1_fpudn3.png" %>
-</div>
-<div style="position:absolute; top:30px;left:0px;width:100%;">
-  <div class="landing-background" style="">
-    <div style="margin:30px;" class="pull-right">
-      <ul class = "nav nav-pills">
-        <li class="active"><%= link_to "I HAVE A CODE", "/users/new"%></li>
-      </ul>
+
+
+<div class="container">	
+  <script>
+$('body').click(function(evt) {
+    //if($(evt.target).parents('#notifications_div').length==0) {
+  if($(evt.target).attr('id') != 'notifications_div'){
+        $('#notifications_div').hide();
+    }
+});
+  
+  $('body').click(function(evt) {
+    //if($(evt.target).parents('#notifications_div').length==0) {
+  if($(evt.target).attr('id') != 'friend_requests'){
+        $('#friend_requests').hide();
+    }
+});
     
-      <div class="">
-        <%= render partial: "/sessions/new"%>
-      </div>
-      
-      <div class="well well-small">
-        <strong>New to Chilivote? </strong><br/>Enter your e-mail address and<br/>request an invitation!<br/><br/>
-        <%= form_tag("/welcome/request_invitation/", method: "get", remote: true) do %>
-        <%= text_field_tag(:email) %>
-        <br/>
-        <div style="text-align:center"><%= submit_tag("Request Invitation", class:"btn btn-inverse ajaxified") %>
-          <div id = "ajax-spinner" class="ajax-spinner"><%=cl_image_tag("ajax-loader_xzmjon.gif")%></div>
-        </div>
-        <div class="">
-   <div id="confirmation_message"></div>
-</div>
-        <% end %>
-      </div>
-    </div>
+     //$('body').click(function(evt) {
+    //if($(evt.target).parents('#notifications_div').length==0) {
+   //if ($('.voters_div').css('display') != 'none' ){
+     // $('.voters_div').hide();
+    //}
+//});
+</script>
+	<div style="position:fixed; top:0px;left:0px;right:0px;width:100%;z-index:-3000;bottom:0px;max-height:100%;">
+  <img alt="Pic only jdorqj" src="http://res.cloudinary.com/hgqr8qyb1/image/upload/pic_only_jdorqj" />
   </div>
+
+
+<div style="position:absolute;top:5%;right:5%;">
+  <a class="btn btn-large" href="/signin">LOG IN</a>
+</div>
+<div class="row" style="z-index:100;">     
+  
+  <center>
+    <img alt="Logo only pw1tvy" src="http://res.cloudinary.com/hgqr8qyb1/image/upload/logo_only_pw1tvy" />
+    <h2 style="color:white">Because life is about good, better and the best</h2>
+    <h4 style="color:white">Join Chilivote for a better world by creating votes and voting for others</h4>
+    </center>
+  <br/><br/>
+      <div class="span4"></div>
+      <div class="span4">
+      <form accept-charset="UTF-8" action="/users" class="new_user" id="new_user" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="3lxXtYX+H178+jReomoo+vYD0f7BlfWFmnc0IEeTIjM=" /></div>
+
+<div style="color:red">
+	<small>
+	</small>
 </div>
 
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+  <div class="center">
+  
+  <div class="controls">
+    <input class="span4" id="user_first_name" name="user[first_name]" placeholder="Name" type="text" />
+  </div>
+  <div class="controls">
+    <input class="span4" id="user_email" name="user[email]" placeholder="Email" type="text" />
+  </div>
+  <div class="controls">
+    <input class="span4" id="user_password" name="user[password]" placeholder="Create Password" type="password" />
+  </div>
+  
+  <div class="actions controls">
+    <center>
+    <input class="btn btn-danger btn-large btn-block" name="commit" type="submit" value="Sign Up" />
+      </center>
+  </div>
+    <hr broder="1" style="color:red;"/>
+    <div class="actions controls" style="">
+    
+      <a href="/auth/facebook" id="sign_in"><img alt="Facebook di5cq7" src="http://res.cloudinary.com/hgqr8qyb1/image/upload/Facebook_di5cq7" /></a>
+  </div>
+</div>
+</form>
+
+
+        </div>
+      <div class="span4"></div>
+</div>
+
 <script>
 $(document).ajaxStart(function() {
     $(".ajax-spinner").show();$(".ajaxified").hide();
@@ -51,7 +102,25 @@ $(document).ajaxStart(function() {
       $(".ajax-spinner").hide();
   });
 </script>
-<br/><br/><br/><br/><br/><br/>
+<br/><br/><br/>
+
+</div>
+<footer class="footer">
+  <small>
+    <a href="http://Chilivote.com/">Chilivote 2016</a>
+  </small>
+  <nav>
+    <ul>
+      <li><span class="label label-important"><a href="/welcome/about" style="color:white">About</a></span></li>
+      <li><span class="label label-important"><a href="/welcome/contact" style="color:white">Contact</a></span></li>
+      <li><span class="label label-important"><a href="/welcome/news" style="color:white">News</a></span></li>
+      <li><span class="label label-important"><a href="/welcome/help" style="color:white">Help</a></span></li>
+    </ul>
+  </nav>
+</footer>
+
+
+
 
 
 </body>
