@@ -26,7 +26,9 @@ class WelcomeController < ApplicationController
   end
   
   def from_fb
-    render layout: false
+    #render layout: false
+    @user = User.new
+    render :index
     #redirect_to '/'
   end
   
