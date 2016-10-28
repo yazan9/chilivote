@@ -200,14 +200,15 @@ class UsersController < ApplicationController
       
     elsif @user.first_name.strip()=="" or @user.password.strip()=="" or @user.email.strip()==""
       @errors<<"Please fill in all the fields"
-    elsif !User.find_by_email(@user.email).nil?
+    elsif !User.find_by_email(@user.email.downcase).nil?
       @errors<<"email address is already in use"
     #elsif @invitation.nil?
     #    @errors<<"Sorry, confirmation code not found"
     end
     
     respond_to do |format|
-      if @errors.size == 0 and @user.save
+      if @errors.size == 0
+        @user.save
         #make chilivote friends with everybody
         #Friendship.request(User.find(@user.id), User.find(3))
         #Friendship.accept(User.find(@user.id), User.find(3))
