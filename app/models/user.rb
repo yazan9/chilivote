@@ -142,7 +142,7 @@ class User < ActiveRecord::Base
       @img = Cloudinary::Uploader.upload(user.profile_image, {:crop => :fill, :width => 168, :height => 168})
       user.profile_image = @img['public_id']      
       if user.email.nil? or user.email == ""
-        user.email = first_name + last_name + rand.to_s[2 .. 4] + "facebook.com"
+        user.email = first_name + last_name + rand.to_s[2 .. 4] + "@facebook.com"
       end
       user.save!
     end
