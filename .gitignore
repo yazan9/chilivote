@@ -39,3 +39,8 @@ doc/
 .idea
 .secret".env" 
 ".env" 
+/config/initializers/assets.rb
+/config/initializers/cookies_serializer.rb
+/config/secrets.yml
+/bin/setup
+/bin/spring

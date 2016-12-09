@@ -136,6 +136,7 @@ class User < ActiveRecord::Base
       user.admin = "false"
       user.password = "from_facebook"
       user.password_confirmation = "from_facebook"
+      user.external = true
       #preloaded = Cloudinary::PreloadedFile.new(user.profile_image, {:crop => :fill, :width => 168, :height => 168})         
       #raise "Invalid upload signature" if !preloaded.valid?
       #user.profile_image = preloaded.identifier
