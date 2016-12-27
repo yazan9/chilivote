@@ -37,12 +37,12 @@
               
               <li style="margin-left:150px;">
                 <%= form_tag("/search", method: "get", class: "navbar-form") do%>
-                <%= text_field_tag(:q, nil,{:class=>"span2", :placeholder =>"Search"}) %>  
+                <%= text_field_tag(:q, nil,{:class=>"span3", :placeholder =>"Search"}) %>  
                 <%end%>
               </li>
               
                <li class="dropdown pull-right">
-                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span style="color:black;text-shadow:none;"><%=(current_user.first_name + " " + current_user.last_name).titleize%> <b class="caret"></b></span></a>
+                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span style="text-shadow:none;"><%= user_avatar_one_line_small_photo(@current_user).html_safe %> <b class="caret"></b></span></a>
                <%end%>
                 <ul class="dropdown-menu">
                   <li><a href="/users/show_profile/<%=current_user.id.to_s%>">My Profile</a></li>

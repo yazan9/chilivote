@@ -11,16 +11,16 @@
   </div>
   <div class="status_text no-bottom-space">
     <div><h6><%= timeline_item.title %></h6></div>
-    <ul class="thumbnails no-bottom-space no-bottom-margin">
-      <%@offset = 2%>
+    <ul class="thumbnails no-bottom-space no-bottom-margin" style="margin-left:0px;">
+      <%@width = 160%>
       <%#next array is for facebook image%>      
       <%@images_for_fb = Array.new%>
       
-      <%if timeline_item.options.count == 2 then @offset = 3 end%>
+      <%if timeline_item.options.count == 2 then @width = 244 end%>
     <% timeline_item.options.each do |answer|%>
-    <li class="span<%=@offset%> text-center thumbnail_custom" style="margin-bottom: 0">
+    <li class="text-center thumbnail_custom" style="margin-bottom: 0; margin-left:1px;">
       <%@images_for_fb << answer.image_id%>
-      <%= cl_image_tag answer.image_id,:crop => 'fill', :width=> 168, :height => 168, :class=>"custom_preview" %>
+      <%= cl_image_tag answer.image_id,:crop => 'pad', :width=> @width, :height => @width, :class=>"custom_preview" %>
       <br/><span class="text-center"><%=answer.title%></span><br/>
       <span class="muted text-center some_trigger">
         Votes:<%=link_to (render partial: "/votes/count_cvotes", :locals => {:answer => answer, :timeline_item => timeline_item}), {action: 'list_voters', id: answer.id, group: timeline_item.id}, :remote => true%>
@@ -51,6 +51,7 @@
   <img id="preview_image" class="preview_image">
 </div>
 <script>
+/*
 $(document).ready(setTimeout(function(){
  $('.custom_preview').hover(function(e){
  var top = e.pageY+'px';
@@ -67,7 +68,7 @@ $(document).ready(setTimeout(function(){
     //$("#preview_div").html("Loading ...");
 });
 }),3000);
-
+*/
 </script>
 <script>
 
