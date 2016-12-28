@@ -21,7 +21,7 @@
     <li class="text-center thumbnail_custom" style="margin-bottom: 0; margin-left:1px;">
       <%@images_for_fb << answer.image_id%>
       <%= cl_image_tag answer.image_id,:crop => 'pad', :width=> @width, :height => @width, :class=>"custom_preview" %>
-      <br/><span class="text-center"><%=answer.title%></span><br/>
+      <br/><span class="text-center"><%=truncate(answer.title, :length => 25, :separator => ' ')%></span><br/>
       <span class="muted text-center some_trigger">
         Votes:<%=link_to (render partial: "/votes/count_cvotes", :locals => {:answer => answer, :timeline_item => timeline_item}), {action: 'list_voters', id: answer.id, group: timeline_item.id}, :remote => true%>
         <%#= render partial: "/votes/count_cvotes", :locals => {:answer => answer, :timeline_item => timeline_item}%>
