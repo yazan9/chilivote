@@ -174,7 +174,22 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    puts "starting((((((((((((((((((((((((((((((((((((((((((((((((((((((((((("
+    logger = Logger.new('logfile2.log')
+    logger.info "starting((((((((((((((((((((((((((((((((((((((((((((((((((((((((((("
+    if request.format.json?
+      puts "FOR GODS SAKE======================================================================="
+      @user = User.new
+      @user.first_name = params[:first_name]
+      @user.email = params[:email]
+      @user.password = params[:password]
+   
+    else
+      puts "FOR GODS SAKE 4444======================================================================="
     @user = User.new(user_params)
+    end 
+    
+    #Modifying the name ############################
     if @user.first_name.split.length > 1
     first_name = @user.first_name.split(' ',2).first
     last_name = @user.first_name.split(' ',2).last
@@ -187,6 +202,7 @@ class UsersController < ApplicationController
     end
     @user.first_name = first_name
     @user.last_name = last_name
+    ################################################
     @user.password_confirmation = @user.password
     #@invitation = Invitation.find_by_code(params[:confirmation_code])
     #if !@invitation.nil?
@@ -215,8 +231,10 @@ class UsersController < ApplicationController
         sign_in @user
         #format.html { redirect_to '/users/show_public', notice: 'Well Done ! You can now live the chilivote experience !' }
         format.html { redirect_to '/welcome/thank_you/' }
+        format.json {render :text=> "success"}
       else
         format.html { render '/welcome/index' }
+        format.json {render :text=> "failed"}
       end
     end
   end

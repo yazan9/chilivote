@@ -11,13 +11,22 @@ class SessionsController < ApplicationController
       #render 'users/' + user.id.to_s
       #redirect_back_or user
       #redirect_to '/users/'+user.id.to_s
-      redirect_to '/users/show_public'
+      respond_to do |format|
+      format.html {redirect_to '/users/show_public'}
+      format.json {render json: user, :except=>  [:password_digest, :admin, :promoted, :external]}
+    end
       else
-        redirect_to "/"
+        respond_to do |format|
+        format.html {redirect_to "/"}
+        format.json {render :text => "failed"}
+      end
       end
     else
+      respond_to do |format|
       flash.now[:error] = 'Invalid email/password combination' # Not quite right!
-      render 'new'
+      format.html {render 'new'}
+      format.json {render :text => "failed"}
+    end
     end  
   end
   
