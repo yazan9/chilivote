@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
   skip_before_filter :verify_authenticity_token
   after_action :allow_facebook_iframe
-  
+  require "base64"  
   def index
     @user = User.new
     if !current_user.nil?
@@ -10,7 +10,16 @@ class WelcomeController < ApplicationController
   end
   
   def about
-    
+  #web_contents  = open('https://upload.wikimedia.org/wikipedia/en/a/a9/Example.jpg') {|f| f.read }
+  #encoded = Base64.encode64(web_contents)
+  #decoded_file = Base64.decode64(encoded)
+  #file = Tempfile.new("temp") 
+  #file.path
+  #file.binmode
+  #file.write decoded_file
+  #Cloudinary::Uploader.upload(file.path)
+  #file.close
+  #file.unlink
   end
   
   def help

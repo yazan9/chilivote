@@ -1,7 +1,20 @@
 Chilivote::Application.routes.draw do
   
+  #get '/api/mobile_users/:id/show' => 'api/mobile_users#show'
 
-
+#api
+  namespace "api" do
+    namespace "v1" do
+      resources :users do
+        collection do
+          post :create_status_m
+        end
+      end
+      resources :sessions
+    end
+  end
+  #match '/app/v1/login',  to: 'api/v1/sessions#create', via: 'post'
+  
   get 'auth/:provider/callback', to: 'sessions#create_from_fb'
   get 'auth/failure', to: redirect('/')
   
@@ -27,11 +40,12 @@ Chilivote::Application.routes.draw do
       get :list_voters
     end
   end
-
+  
   get 'users/clear_notifications' => 'users#clear_notifications'
   get 'users/search' => 'users#search'
   get 'users/create_comment' => 'users#create_comment'
   post 'users/create_comment' => 'users#create_comment'
+  post 'users/create_comment_m' => 'users#create_comment_m'
   post 'users/create_status' => 'users#create_status'
   get 'users/create_status' => 'users#create_status'
   get 'users/list_voters' => 'users#list_voters'
@@ -190,6 +204,8 @@ Chilivote::Application.routes.draw do
   get 'friendship/unfollow_user/:id' => 'friendship#unfollow_user'
   get 'cvote/manage_answers/:image_id' => 'cvote#manage_answers'
   get 'users/search/:q' => 'users#search'
+  
+  
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

@@ -174,18 +174,13 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    puts "starting((((((((((((((((((((((((((((((((((((((((((((((((((((((((((("
-    logger = Logger.new('logfile2.log')
-    logger.info "starting((((((((((((((((((((((((((((((((((((((((((((((((((((((((((("
     if request.format.json?
-      puts "FOR GODS SAKE======================================================================="
       @user = User.new
       @user.first_name = params[:first_name]
       @user.email = params[:email]
       @user.password = params[:password]
    
     else
-      puts "FOR GODS SAKE 4444======================================================================="
     @user = User.new(user_params)
     end 
     
@@ -352,11 +347,24 @@ class UsersController < ApplicationController
     end
   end
   
+  def create_comment_m
+    post_id = params[:PostId]
+    comment_body = params[:CommentBody]
+    access_token = request.headers["Access-Token"]
+    User.find_by_remember_token(access_token)
+    @comment = Comment.new
+    @contribution_id = params[:cid]
+    @comment.cvote_id = post_id.to_i
+    @comment.user_id = 1
+    @comment.text = comment_body
+    @comment.save!
+    respond_to do |format|
+      format.json {render :text => "success"}
+    end
+  end
+  
   #this is the latest create status
   def create_status
-   #  logger = Logger.new('logfile2.log')
-   #   logger.info "provacyyyyyyyyyyyyyyyyyyyyyy"
-   # logger.info params[:privacy]
     @status = Contribution.new
     @status.user_id = current_user.id
     @status.body = params[:status_text]
