@@ -9,6 +9,20 @@ class WelcomeController < ApplicationController
     end
   end
   
+  def test_json
+  web_contents  = open('https://upload.wikimedia.org/wikipedia/en/a/a9/Example.jpg') {|f| f.read }
+  encoded = Base64.encode64(web_contents)
+  #decoded_file = Base64.decode64(encoded)
+  #file = Tempfile.new("temp") 
+  #file.path
+  #file.binmode
+  #file.write decoded_file
+  #Cloudinary::Uploader.upload(file.path)
+  #file.close
+  #file.unlink
+  render :text => encoded, :layout => false
+  end
+  
   def about
   #web_contents  = open('https://upload.wikimedia.org/wikipedia/en/a/a9/Example.jpg') {|f| f.read }
   #encoded = Base64.encode64(web_contents)
@@ -20,6 +34,7 @@ class WelcomeController < ApplicationController
   #Cloudinary::Uploader.upload(file.path)
   #file.close
   #file.unlink
+  #render :text => encoded, :layout => false
   end
   
   def help

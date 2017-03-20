@@ -9,7 +9,15 @@ def create_status_m
   @status.contribution_type = Chilivote::Application.config.contribution_type_status
   @status.privacy = params[:privacy] if params[:privacy]
   if params[:image]
-    @status.image_id = params[:image]
+    decoded_file = Base64.decode64(params[:image])
+    file = Tempfile.new("temp")
+    file.path
+    file.binmode
+    file.write decoded_file
+    cloud_file = Cloudinary::Uploader.upload(file.path)
+    file.close
+    file.unlink
+    @status.image_id = cloud_file["public_id"]
   end
   @status.save!
   current_user.friends.each do |my_friend|
