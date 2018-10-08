@@ -25,7 +25,7 @@ Chilivote::Application.configure do
     :authentication => :plain,
     :enable_starttls_auto => true,
     :user_name => "admin@chilivote.com",
-    :password => "adminchilivote"
+    :password => "####"
     }
   
   # Print deprecation notices to the Rails logger.
